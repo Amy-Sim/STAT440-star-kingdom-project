@@ -1,0 +1,12 @@
+{
+  "G05": {
+    "sha256": "8590a908e9a81311f1d3c4eee31359fe4025c7f04e9bc52f0e8d6f55b14d69e4",
+    "uncovered_iron": 0,
+    "rows": 59118
+  },
+  "G13_iterative350": {
+    "sha256": "7bb9be1bf51d3dc43f0b5a0aef2689e52f342c82b63efc9151f9c9cef564db52",
+    "uncovered_iron": 0,
+    "rows": 59116
+  }
+}

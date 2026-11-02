@@ -1,0 +1,40 @@
+[
+  {
+    "rows": [
+      8116,
+      9735
+    ],
+    "year": 2031,
+    "expected_local_total_saving": 164.63364027821785,
+    "nominal_fixed_saving": 178.2090116322513,
+    "merged_circles": 2,
+    "new_radius_m": 21.483028581,
+    "old_radii_m": [
+      21.474833945,
+      3.868288735
+    ],
+    "new_surfaces": [
+      "grassland"
+    ],
+    "target_pipes": 7
+  },
+  {
+    "rows": [
+      6354,
+      7575
+    ],
+    "year": 2030,
+    "expected_local_total_saving": 113.65567557019028,
+    "nominal_fixed_saving": 123.5719017835147,
+    "merged_circles": 2,
+    "new_radius_m": 10.538598975,
+    "old_radii_m": [
+      1.896952502,
+      10.538598975
+    ],
+    "new_surfaces": [
+      "grassland"
+    ],
+    "target_pipes": 7
+  }
+]
