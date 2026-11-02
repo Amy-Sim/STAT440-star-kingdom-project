@@ -1,0 +1,3 @@
+candidate,submission_id,status,public_score,sha256,user_authorized_method_comparison,result_url,CAPEX,OPEX,delta_vs_G17,internal_mean_gain,internal_worst_setting_gain,internal_positive_settings,all_feasible
+G20_user_radius_NN_stack,SRRWz21keinx,complete,74260900.63,87cfd54c1c3e8155067372531a13e7fdd857ff52f9ad67a216faa9c52b431bc3,True,http://172.16.42.11:51238/static/output/8knotyeCJ3SEPEdPhLtmrZGd.txt,143885335.82,31853763.55,-4908028.25,-6171269.623834635,-6914809.915156249,0,True
+G21_candidate_NN_stack,S4tChfyye049,complete,64958612.21,e881f00932717f6594e526836423ef1a8b75e937d7d76647b6f17758a4edc6d9,True,http://172.16.42.11:51238/static/output/PDX7_pow07eh5Yl368C3gaz9.txt,151097553.08,33943834.71,-14210316.67,-15882357.23336914,-21945288.10875,0,True
