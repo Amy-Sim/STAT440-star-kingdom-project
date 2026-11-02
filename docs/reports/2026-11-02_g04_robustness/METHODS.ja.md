@@ -133,3 +133,14 @@ python docs/reports/2026-11-02_g04_robustness/evaluate.py --repo-root . --draws 
 ここで一方が優位でも過学習の不存在は証明できず、劣位でも過学習が原因とは断定できない。
 Private結果、または事前固定した未使用の実測将来での評価が必要。
 現時点ではG04のPublic最良を保存しつつ、AmyやShanaの候補も残す判断が妥当である。
+
+### 最終提出の判断
+
+現時点ではG04を最終提出として維持する。現行Publicが78.99096825Mで最良であり、
+内部Aでも強く、幾何カバー・予算条件に問題がないためである。
+[採点ルール](https://github.com/reinesana/STAT440-star-kingdom-project/blob/ca6cdae4b859782e7a30d543fce686a30d52354c/docs/assignment_2026-10-14.md)では、
+残した提出のうちPublic最高の計画のPrivate scoreが採点に使われる。
+内部BではAmyが優位であり、Shanaも有力なので、PrivateでG04が最良とは保証しない。
+Shanaの旧ルールPublicを現行Publicと直接比較して選び直すこともできない。
+Amy・Shanaの代替案は保存し、未使用の実データで別途比較できる余地を残す。
+この記述は提出の削除や撤回を実行する指示ではなく、今回そのような操作は行っていない。
