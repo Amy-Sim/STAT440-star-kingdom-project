@@ -14,7 +14,10 @@ Publicの観測結果による順位。内部評価とPrivateでの優位は別�
 |G07_wider250|79,167,182.01|
 |G05|79,150,812.58|
 |G06|79,150,351.83|
+|G22_Ryota_fixed3|78,027,592.07|
+|G23_Ryota_dynamic3|75,121,482.83|
 |G20_user_radius_NN_stack|74,260,900.63|
 |G18_user_radius_stacking|74,154,677.12|
+|G24_Amy_annualBCR|72,497,399.23|
 |G21_candidate_NN_stack|64,958,612.21|
 |G19_assistant_candidate_stacking|64,870,357.55|

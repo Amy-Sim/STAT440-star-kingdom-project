@@ -41,6 +41,7 @@ def main():
         'Amyの77.46M統合カバー案はRyotaの順序を継承している。G24の別ルールはAmyの最新full-pipelineノートブックの経済工事フェーズと必須進捗フェーズから移植した。担当者名は順序の出典であり、施工円はTakito/CodexのG17系列を共通使用する。','',
         '[Ryotaの元コード](https://github.com/reinesana/STAT440-star-kingdom-project/blob/ca6cdae4b859782e7a30d543fce686a30d52354c/submissions/2026-10-28_ryota_early3/early_three_years.py) / [Amyの元ノートブック](https://github.com/reinesana/STAT440-star-kingdom-project/blob/ca6cdae4b859782e7a30d543fce686a30d52354c/notebooks/Amy_Sim/star_kingdom_full_pipeline_AS.ipynb)','',
         '内部評価はG17を比較元に、2つの予測系統×漏水率3段階×費用ばらつき2段階×地域内相関2段階の24条件、各128乱数＝3,072シナリオ。新しい共通乱数202611027702でペア比較した。内部キーG05はコードの参照腕名で、実際の比較元はG17。これらは既存予測を前提とした感度分析であり、実際のPrivateの保証ではない。','',
+        '![予測前提ごとの内部評価](internal_forecast_comparison.png)','',
         '## 結論','']
     if Decimal(best['public_score'])>Decimal('79168928.88'):
         lines.append(f"今回のPublic最高は{best['candidate'].split('_')[0]}の{Decimal(best['public_score']):,.2f}ドル。G17から{Decimal(best['delta_vs_G17']):+,.2f}ドル。内部値も併記し、Publicの改善と未知データでの優位を区別する。")
