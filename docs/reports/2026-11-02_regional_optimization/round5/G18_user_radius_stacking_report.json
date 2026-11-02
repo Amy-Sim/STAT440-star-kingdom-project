@@ -1,0 +1,163 @@
+{
+  "method": "G18_user_radius_stacking",
+  "sha256": "29fc8499a9a2be4a8766e7c6a06130a812f5eb1c360dc6081a509d1e2931585b",
+  "baseline_sha256": "47a960a0cec73ee2abd1bb5df61891b66f64eca4a05f114e76a25e9b7a6dd86b",
+  "validation": {
+    "submission": "G18_user_radius_stacking.csv",
+    "work_unit_count": 82770,
+    "uncovered_iron_count": 0,
+    "completed_by_2051": true,
+    "completion_year": 2046,
+    "construction_cost": 192874924.13,
+    "no_future_leak_score": 57125075.870000005,
+    "skipped_units": 59117,
+    "scenario": "No future leaks; NOT an estimated official score",
+    "cost_model_version": "2026-10-26-area-exponent",
+    "annual_execution": [
+      {
+        "year": 2027,
+        "construction_cost": 9999106.72,
+        "executed_units": 2235,
+        "budget_balance": 893.28,
+        "remaining_units": 80535
+      },
+      {
+        "year": 2028,
+        "construction_cost": 9996431.19,
+        "executed_units": 2540,
+        "budget_balance": 4462.09,
+        "remaining_units": 77995
+      },
+      {
+        "year": 2029,
+        "construction_cost": 10003971.73,
+        "executed_units": 1687,
+        "budget_balance": 490.36,
+        "remaining_units": 76308
+      },
+      {
+        "year": 2030,
+        "construction_cost": 10000024.87,
+        "executed_units": 1912,
+        "budget_balance": 465.49,
+        "remaining_units": 74396
+      },
+      {
+        "year": 2031,
+        "construction_cost": 9994315.6,
+        "executed_units": 2202,
+        "budget_balance": 6149.89,
+        "remaining_units": 72194
+      },
+      {
+        "year": 2032,
+        "construction_cost": 9985553.03,
+        "executed_units": 1626,
+        "budget_balance": 20596.86,
+        "remaining_units": 70568
+      },
+      {
+        "year": 2033,
+        "construction_cost": 10016461.42,
+        "executed_units": 2268,
+        "budget_balance": 4135.44,
+        "remaining_units": 68300
+      },
+      {
+        "year": 2034,
+        "construction_cost": 9994318.74,
+        "executed_units": 1977,
+        "budget_balance": 9816.7,
+        "remaining_units": 66323
+      },
+      {
+        "year": 2035,
+        "construction_cost": 9984427.7,
+        "executed_units": 1442,
+        "budget_balance": 25389.0,
+        "remaining_units": 64881
+      },
+      {
+        "year": 2036,
+        "construction_cost": 9970161.65,
+        "executed_units": 952,
+        "budget_balance": 55227.35,
+        "remaining_units": 63929
+      },
+      {
+        "year": 2037,
+        "construction_cost": 10055180.13,
+        "executed_units": 837,
+        "budget_balance": 47.22,
+        "remaining_units": 63092
+      },
+      {
+        "year": 2038,
+        "construction_cost": 9983009.23,
+        "executed_units": 849,
+        "budget_balance": 17037.99,
+        "remaining_units": 62243
+      },
+      {
+        "year": 2039,
+        "construction_cost": 9989336.82,
+        "executed_units": 466,
+        "budget_balance": 27701.17,
+        "remaining_units": 61777
+      },
+      {
+        "year": 2040,
+        "construction_cost": 10007856.82,
+        "executed_units": 386,
+        "budget_balance": 19844.35,
+        "remaining_units": 61391
+      },
+      {
+        "year": 2041,
+        "construction_cost": 9973042.44,
+        "executed_units": 561,
+        "budget_balance": 46801.91,
+        "remaining_units": 60830
+      },
+      {
+        "year": 2042,
+        "construction_cost": 10021180.78,
+        "executed_units": 474,
+        "budget_balance": 25621.13,
+        "remaining_units": 60356
+      },
+      {
+        "year": 2043,
+        "construction_cost": 10018852.46,
+        "executed_units": 406,
+        "budget_balance": 6768.67,
+        "remaining_units": 59950
+      },
+      {
+        "year": 2044,
+        "construction_cost": 9999025.18,
+        "executed_units": 353,
+        "budget_balance": 7743.49,
+        "remaining_units": 59597
+      },
+      {
+        "year": 2045,
+        "construction_cost": 9976392.8,
+        "executed_units": 390,
+        "budget_balance": 31350.69,
+        "remaining_units": 59207
+      },
+      {
+        "year": 2046,
+        "construction_cost": 2906274.82,
+        "executed_units": 90,
+        "budget_balance": 7125075.87,
+        "remaining_units": 0
+      }
+    ],
+    "radius_margin_m": 1e-06,
+    "sha256": "29fc8499a9a2be4a8766e7c6a06130a812f5eb1c360dc6081a509d1e2931585b",
+    "exported_csv_reparsed": true
+  },
+  "public_score": null
+}

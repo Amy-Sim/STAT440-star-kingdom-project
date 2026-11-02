@@ -1,0 +1,16 @@
+{
+  "comparator": "G17",
+  "internal_reference_key": "G05",
+  "public_baseline": 79168928.88,
+  "seed": 202611025502,
+  "draws_per_setting": 128,
+  "settings": 24,
+  "user_authorized_both_method_submissions_even_if_internal_score_decreases": true,
+  "rule": "Both plans must satisfy geometry, annual budget/carry and completion by 2051. Internal score differences are reported, not hidden.",
+  "forecast_note": "Frozen forecast-based synthetic scenarios, not unseen real-world outcomes.",
+  "sha256": {
+    "G05": "47a960a0cec73ee2abd1bb5df61891b66f64eca4a05f114e76a25e9b7a6dd86b",
+    "G18_user_radius_stacking": "29fc8499a9a2be4a8766e7c6a06130a812f5eb1c360dc6081a509d1e2931585b",
+    "G19_assistant_candidate_stacking": "8b0262d74cd28f608e3178bf385dc557f7713a7f40e1e8e959dcbb69cf5f2184"
+  }
+}

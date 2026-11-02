@@ -1,0 +1,3 @@
+arm,mean_gain,worst_setting_gain,positive_settings,all_feasible,win_fraction,p05_gain,A_mean_gain,B_mean_gain,minimum_family_mc95_low,gate_pass
+G18_user_radius_stacking,-6191437.453105469,-6952775.6226562485,0,True,0.0,-7129345.961500002,-6723744.627558595,-5659130.278652344,-6754022.0690721935,False
+G19_assistant_candidate_stacking,-15816910.64211914,-21846348.422890626,0,True,0.0,-22621115.04549999,-13624531.964654949,-18009289.319583334,-18203256.195449788,False
