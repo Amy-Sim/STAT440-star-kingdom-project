@@ -1,0 +1,43 @@
+{
+  "seed": 2026110257,
+  "draws": 256,
+  "forecast_families": [
+    "A_CMS001_F168",
+    "B_fine_age_historical_cost"
+  ],
+  "hazard_scales": [
+    0.5,
+    1.0,
+    1.5
+  ],
+  "severity_cv": [
+    0.0,
+    1.5
+  ],
+  "spatial_rho": [
+    0.0,
+    0.35
+  ],
+  "spatial_cell_metres": 500,
+  "setting_count": 24,
+  "scenario_count": 6144,
+  "selection": "Post-selection robustness audit of already published/submitted frozen candidates; not an untouched holdout.",
+  "future_outcomes_used_in_candidate_or_forecast_fit": false,
+  "candidate_parameter_tuning": false,
+  "conditional_independence_note": "rho .35 adds a Gaussian-copula regional timing shock; marginal event probabilities are unchanged.",
+  "cvar_note": "Settings are sensitivity assumptions; equal weighting is descriptive and not a probability distribution over real futures.",
+  "input_sha256": {
+    "F168_curves_2027.npz": "ceb27cd2552da76574fdd1d11c5f72666ccc67d7cda64a36f7f37d2f92536cdc",
+    "CMS001_predictions_2027.csv": "01c194da1c12c3d76ad0c8744c63b36cfaa071659de14484496758dd57f2a422",
+    "pipes.csv": "f849cbede7693f1924f3dd03e1a522e87418d0dc6fe9527acb69d85483ea74a2",
+    "train.csv": "a062e6af1d13eade4c85edda2a1704f18b18a15ec5f1e80800769f8a48712189"
+  },
+  "candidate_sha256": {
+    "ryota_original": "63ae42529ac0a490df947db2f6dd68b6dc1825e10068fc97e5a2372c7331a8c9",
+    "ryota_coverage_repaired": "059f6c4106f3d6a140c68906e9a8ab77d9730f6fd7c4c5446706fa0d56e29222",
+    "amy_integrated": "fe3a108ca087fa89431a88ed53d7d93c6201b8381fccf270b02d12d208209f10",
+    "shana_20a": "bee3665ae61c51d829886ac8ca39cde77a0f479d009484a4236280c6d4dff86a",
+    "takito_g04": "3e240e4122be8e69e6f9ede23c7bb042c215a84d853815bd0d372d999aa5ecc4"
+  },
+  "algorithm_sha256": "963f5379b7b5e0e353f4347a5928478f30fe2dcdd05fd721160546d711ecc4cf"
+}
