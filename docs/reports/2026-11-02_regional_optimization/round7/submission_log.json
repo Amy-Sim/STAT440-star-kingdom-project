@@ -1,0 +1,38 @@
+[
+  {
+    "candidate": "G22_Ryota_fixed3",
+    "submission_id": "SIEJf7spa26u",
+    "status": "waiting_or_evaluating",
+    "public_score": null,
+    "sha256": "64e289d0e7a0fe745201e2e4635e6d87d21d7b6a7d546b1f4305bd29bb0b46e9",
+    "user_explicitly_authorized_all_four_comparison_submissions": true
+  },
+  {
+    "candidate": "G23_Ryota_dynamic3",
+    "submission_id": "SDRw1du2zs1l",
+    "status": "waiting_or_evaluating",
+    "public_score": null,
+    "sha256": "09808f6d7d01461c5d3cd41e96e88a9e2e09b0635172341870b23fbd48d1eaf1",
+    "user_explicitly_authorized_all_four_comparison_submissions": true
+  },
+  {
+    "candidate": "G24_Amy_annualBCR",
+    "submission_id": "Styrrgtq_7_w",
+    "status": "waiting_or_evaluating",
+    "public_score": null,
+    "sha256": "fe098704b83aff89686fe235260ecaa2234ff903f08eaef06b780fdb437f04b7",
+    "user_explicitly_authorized_all_four_comparison_submissions": true
+  },
+  {
+    "candidate": "G25_Amy_submitted_order",
+    "submission_id": "SWo4lb1_875e",
+    "status": "complete",
+    "public_score": "81154843.01",
+    "sha256": "6a25b2dac6813f68e22990b1b20a712f47ccecef072b79264343bfb2440dfc73",
+    "user_explicitly_authorized_all_four_comparison_submissions": true,
+    "CAPEX": "138108705.77",
+    "OPEX": "30736451.22",
+    "delta_vs_G17": "1985914.13",
+    "result_url": "http://172.16.42.11:51238/static/output/kZOHn7zOjWemF_glE0gkDTih.txt"
+  }
+]
