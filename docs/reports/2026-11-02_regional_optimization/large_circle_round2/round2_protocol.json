@@ -1,0 +1,47 @@
+{
+  "comparator": "G05",
+  "comparator_public_score": 79150812.58,
+  "development_draws": 48,
+  "confirmation_draws": 128,
+  "seed_development": 202611022201,
+  "seed_confirmation": 202611022202,
+  "settings": 24,
+  "hazard_scales": [
+    0.5,
+    1.0,
+    1.5
+  ],
+  "cost_cv": [
+    0.0,
+    1.5
+  ],
+  "spatial_rho": [
+    0.0,
+    0.35
+  ],
+  "cell_m": 250,
+  "gate": "All 24 setting mean gains > 0, all scenarios feasible, and each forecast-family mean paired MC95 lower bound >0; must pass development and fresh confirmation.",
+  "note": "Synthetic checks conditional on forecasts, not independent real-world validation. No candidate changes after confirmation.",
+  "sha256": {
+    "G05": "4fb91ec3820e39ed4861fe9ff127c7ea4ca3e675c6f252408ee4b820031a00cc",
+    "G07_wider250": "571647ad471d9666179bc3d4b76b9d53bc85cc7c0808f54f7b5d0b484bd839bf",
+    "G08_adaptive350": "8590a908e9a81311f1d3c4eee31359fe4025c7f04e9bc52f0e8d6f55b14d69e4",
+    "G10_neighbor_year350": "5e97e56b2e86d376d0af402ce62d940f82cdda41a9d94cc60ffc4da64bea12a6",
+    "G11_neighbor_year500": "842ee9374d0e4918d8ffb096c4032ec3fec6face2a3422978f9898d70b7acf62",
+    "G12_robust_year500": "90cf44ca1291d57dae29efbf98be29426e54339b9739846b41f4ac289f472e96"
+  },
+  "duplicate_aliases": {
+    "G09_adaptive500": "G08_adaptive350"
+  },
+  "forecast_input_sha256": {
+    "CMS001_predictions_2027.csv": "01c194da1c12c3d76ad0c8744c63b36cfaa071659de14484496758dd57f2a422",
+    "F168_curves_2027.npz": "ceb27cd2552da76574fdd1d11c5f72666ccc67d7cda64a36f7f37d2f92536cdc"
+  },
+  "code_sha256": {
+    "assess.py": "e3f173ec35f25ca9a08d6c58cf013162a4e9916e93225cfd504f79e1e6c44c61",
+    "fast_geometry.py": "6b90a6ddf848331306f9cf3ce639462c3ed93b8158c618ae86041748d51aee17",
+    "larger_circles.py": "1325d4efb45c43b19d8124e5f6c944861a6fd09145106e6ea3f23200d77314f6"
+  },
+  "evaluation_cost_rule": "round_to_cents(100 + sum(distinct all-contained surface rates)*area**0.85 + 200*unreplaced length)",
+  "future_public_annual_outcomes_used_as_forecast_inputs": false
+}

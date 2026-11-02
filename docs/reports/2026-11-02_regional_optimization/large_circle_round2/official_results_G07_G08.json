@@ -1,0 +1,34 @@
+[
+  {
+    "candidate": "G08_adaptive350",
+    "submission_id": "S5wT95ltz1pn",
+    "site_display_time": "'26-11-02 14:17",
+    "site_time_zone": "unspecified",
+    "sha256": "8590a908e9a81311f1d3c4eee31359fe4025c7f04e9bc52f0e8d6f55b14d69e4",
+    "upload_order": 1,
+    "status_at_recording": "complete",
+    "public_score": "79168805.32",
+    "source": "Visible completed submission row and saved official annual output; totals recomputed with Decimal.",
+    "CAPEX": "139702660.64",
+    "OPEX": "31128534.04",
+    "delta_vs_G05": "17992.74",
+    "delta_vs_G04": "177837.07",
+    "result_url": "http://172.16.42.11:51238/static/output/Plxjzj67LjZYhTrIKJwaLeM8.txt"
+  },
+  {
+    "candidate": "G07_wider250",
+    "submission_id": "S9bc5i01sybl",
+    "site_display_time": "'26-11-02 14:17",
+    "site_time_zone": "unspecified",
+    "sha256": "571647ad471d9666179bc3d4b76b9d53bc85cc7c0808f54f7b5d0b484bd839bf",
+    "upload_order": 2,
+    "status_at_recording": "complete",
+    "public_score": "79167182.01",
+    "source": "Visible completed submission row and saved official annual output; totals recomputed with Decimal.",
+    "CAPEX": "139704283.95",
+    "OPEX": "31128534.04",
+    "delta_vs_G05": "16369.43",
+    "delta_vs_G04": "176213.76",
+    "result_url": "http://172.16.42.11:51238/static/output/ysr21yEQwIJVyt_wksJdOUBY.txt"
+  }
+]
