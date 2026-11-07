@@ -1,14 +1,14 @@
 {
   "pages": [
     {
-      "title": "予測精度とPublic scoreによる最終提出の比較",
-      "subtitle": "2026-11-02 | 日本語版 | 作成・集計：Takito（AI補助）",
+      "title": "Comparison of submission plans using prediction accuracy and public scores",
+      "subtitle": "2026-11-02 | Historical comparison | Takito (AI-assisted)",
       "table": [
         [
-          "指標 / 作成者・候補",
+          "Metric / author and candidate",
           "Shana / 20a",
-          "Ryota / 縮小原案",
-          "Amy / 統合カバー",
+          "Ryota / reduced draft",
+          "Amy / integrated cover",
           "Takito / G04"
         ],
         [
@@ -19,115 +19,115 @@
           "78.9910"
         ],
         [
-          "修理金額RMSE ($)",
+          "Repair-cost RMSE ($)",
           "116,861.56",
           "117,750.96",
           "117,750.96",
           "115,810.35"
         ],
         [
-          "修理金額MAE ($)",
+          "Repair-cost MAE ($)",
           "22,947.17",
           "25,341.67",
           "25,341.67",
           "23,579.27"
         ],
         [
-          "最悪年のRMSE ($)",
+          "Worst-year RMSE ($)",
           "128,632.64",
           "129,206.19",
           "129,206.19",
           "126,966.13"
         ],
         [
-          "予測総額のずれ率 (%)",
+          "Total prediction bias (%)",
           "+1.58",
           "+19.51",
           "+19.51",
           "+10.78"
         ],
         [
-          "上位10%の費用捕捉率 (%)",
+          "Top-10% cost capture (%)",
           "73.22",
           "71.43",
           "71.43",
           "75.51"
         ]
       ],
-      "intro": "最終提出はG04を維持する。現行Publicが最高で、金額予測はRMSE・最悪年RMSE・高額費用の捕捉率が良好だった。一方、MAEと総額のずれ率はShanaの金額予測が良く、すべての指標でG04が最良という結果ではない。",
-      "table_note": "金額誤差はドル単位の実測値で、他案との差分ではない。Publicの1Mは100万ドル。* ShanaのPublicは旧評価ルールの参考値。** Ryota原案は幾何カバー不足があり、計画の採用比較から除く。",
+      "intro": "Historical comparison: the current final selection is G17. At that stage, G04 remained the final choice: it had the highest current-rule public score and favorable repair-cost RMSE, worst-year RMSE, and high-cost capture. Shana performed better on MAE and total bias, so G04 was not best on every metric.",
+      "table_note": "These are dollar prediction errors, not differences from another candidate. Public values in M represent millions of dollars. * Shana's public score is an old-rule reference. ** Ryota's original plan has incomplete geometric coverage and is excluded from adoption comparisons.",
       "sections": [
         {
-          "heading": "指標の読み方",
+          "heading": "Reading the metrics",
           "paragraphs": [
-            "RMSEは大きな予測ミスを強く反映し、MAEは1件当たりの絶対誤差の平均。どちらも小さいほど良い。最悪年RMSEは3年のうち最も誤差が大きかった年の値で、年が変わったときの安定性を見る（今回は全モデル2026年）。",
-            "予測総額のずれ率は、予測修理費の合計が実費合計から何％ずれたか。0に近いほど良く、プラスは過大予測。費用捕捉率は、予測額上位10％の案件が実際の修理費総額の何％を占めたかで、高いほど高額費用を捉えている。"
+            "RMSE gives greater weight to large errors; MAE is the mean absolute error per event. Lower is better for both. Worst-year RMSE is the largest annual RMSE across the three evaluation years; every model had its worst result in 2026.",
+            "Total prediction bias measures the percentage difference between summed predicted and actual repair costs; values near zero are better, and positive values indicate overprediction. Cost capture is the share of actual repair dollars belonging to the top 10% of events by predicted cost; higher values indicate better identification of costly repairs."
           ]
         },
         {
-          "heading": "同じ対象で比較した金額予測の精度",
+          "heading": "Repair-cost accuracy on a common evaluation population",
           "paragraphs": [
-            "2024〜2026年の同じ6,766修理を、各年より前のデータで作った予測と比較した。RMSE・MAEは全件から一括計算。Shanaは安定型アンサンブル、Amy・Ryotaは材質・地表別の過去平均、TakitoはCMS001を使用。AmyとRyotaは同じ予測法なので同じ誤差になる。",
-            "これらは修理金額予測の検証値で、円の場所や修理順序の精度そのものではない。過学習は指標一つで決めず、学習より後の年で誤差・総額のずれ・高額費用の捕捉を確認する。"
+            "Predictions for the same 6,766 repairs in 2024–2026 used only earlier-year training data. RMSE and MAE pool all events. Shana uses the stable ensemble, Amy and Ryota use historical material/surface means, and Takito uses CMS001. Amy and Ryota therefore have identical cost-prediction errors.",
+            "These validate conditional repair-cost predictions, not circle locations or work order. Assess overfitting through later-year errors, total bias, and high-cost capture rather than a single metric."
           ]
         },
         {
-          "heading": "結論 最終提出はG04を維持する",
+          "heading": "Conclusion: G04 retained as the final choice at that stage",
           "paragraphs": [
-            "G04は現行Public 78.991Mで最良、全鉄管カバーと予算条件も満たす。予測誤差の比較でも大きなミスや高額費用への対応は良好だったため、現時点の最終提出として維持する。",
-            "MAEと総額の校正ではShanaが優れるので、PrivateまでG04が最良とは断定しない。Amy・Shanaも比較候補として保存する。課題の採点対象は、残した提出のうちPublic最高案のPrivate scoreである。"
+            "G04 led this historical comparison with a public score of $78.991M and passed full iron-coverage and budget checks. Its lower large-error metrics and strong high-cost capture supported retaining it at that stage.",
+            "Shana had better MAE and total calibration, so the comparison did not establish G04 as best on private data. Amy and Shana were retained as comparison candidates. The assignment grades the private score of the highest-public-score retained submission."
           ]
         }
       ]
     },
     {
-      "title": "G04のアルゴリズムを処理順に説明する",
+      "title": "Explaining the G04 algorithm in order of processing",
       "sections": [
         {
-          "heading": "1 予測から工事の順番を作る",
+          "heading": "1 Create construction order based on predictions",
           "paragraphs": [
-            "CMS001から「漏水したときの修理費」、F168から「今後2年・25年までに漏水する確率」を受け取る。短期と長期の危険度を組み合わせ、修理費と管の長さ・交換費を補正して、各管の優先度を作る。高額かつ漏水しやすい管を先にする考え方である。",
-            "各候補円について、まだPUでない管の優先度を合計し、その時点の工事費で割り引く。別の重複円を工事不要にできる効果も小さく加点する。最初の順序に局所的な並べ替えを加え、年額1,000万ドルと繰越で予定年を計算し、その年の候補内で優先度が高い円を選び直す。",
-            "1円を選ぶたびに、その円の交換対象をPU扱いにし、重なる円の優先度と工事費を更新する。これを繰り返して固定の提出順序を作る。提出後に実際の漏水を見て並べ替える方式ではない。"
+            "CMS001 estimates repair cost conditional on a leak; F168 estimates cumulative leak probabilities over two and 25 years. Combine short- and long-term risks with repair severity, pipe length, and replacement costs to prioritize costly, leak-prone pipes.",
+            "For each candidate circle, sum priority over currently non-PU pipes and discount by its current construction cost. Add a small credit for making overlapping circles unnecessary. Apply local reordering to the seed order, replay the $10M annual budget with carryover to obtain scheduled years, then reselect high-priority circles within each year group.",
+            "After selecting a circle, mark its replacement targets as PU and update overlapping priorities and costs. Repeat to produce a fixed submission order; realized future leaks do not trigger online reordering."
           ]
         },
         {
-          "heading": "2 各円で新たに交換する管を決める",
+          "heading": "2 Identify each circle's new replacement targets",
           "paragraphs": [
-            "最初に、過去に漏水して交換された管と元からPUの管を「交換済み」にする。次にCSVを先頭から読み、円に両端が入る全管から交換済み管を除く。残った管だけが、その行で新たに交換する対象となる。",
-            "例：円AにP1・P2、円BにP2・P3が入り、P1が過去に交換済みなら、AではP2だけを交換する。その後Bを処理するときはP2も交換済みなので、BではP3だけを交換する。P2の長さや予防効果を二重計上しない。"
+            "Initially mark native PU and historically leaked/replaced pipes as replaced. Read the CSV in order; among all pipes with both endpoints in each circle, remove already replaced pipes. The remainder are newly replaced by that row.",
+            "Example: circle A contains P1/P2 and B contains P2/P3. If P1 was historically replaced, A replaces only P2. B then replaces only P3 because P2 is already replaced. Neither P2's length nor its preventive benefit is counted twice."
           ]
         },
         {
-          "heading": "3 中心と半径を変え 分割も比べる",
+          "heading": "3 Change the center and radius and compare the divisions",
           "paragraphs": [
-            "交換対象が1本なら、中点を通り管と直角の方向へ中心を動かす。近隣管の端が円に入る・外れる境界位置を計算し、その手前と直後を試す。複数本なら最小包含円・重心などを出発点に、中心を24方向・複数距離へ動かしてから細かく調整する。",
-            "中心を1つ決めるたびに、対象管の全端点までの最大距離＋0.000001mを半径とする。その円に完全に入る全物理管の地表種類を調べ、交換済み管の地表も含めて実際の工事費を計算する。予定外の未交換管を巻き込む候補は除く。",
-            "対象が複数本なら、1本ずつの小円や、x/y方向に並べて2組へ分けた小円も作る。小円ごとに位置を最適化し、固定費・地表費・交換長の合計が元の1円より安い場合に分割する。小さく分けるだけで採用するのではない。",
-            "実例：G04の前段G02では、水面＋建物の半径32.83mの円を動かし、同じ交換対象を水面だけの半径22.11mで囲んだ。地表単価が82から32へ下がり、この工事で約65,688ドルを削減した。"
+            "For a single target pipe, move the center along its perpendicular bisector. Calculate positions where neighboring endpoints enter or leave the circle and test positions on either side. For multiple targets, start from the minimum enclosing circle, centroid, and other seeds; test 24 directions and multiple distances, then refine locally.",
+            "For each proposed center, set the radius to the maximum distance to any target endpoint plus 0.000001 m. Find the distinct surface types of all wholly contained physical pipes, including replaced pipes, and calculate actual construction costs. Reject candidates that include unintended unreplaced pipes.",
+            "For multiple targets, also consider individual-pipe circles and two-way groups formed by sorting on x/y. Optimize each small circle's position and split only when total fixed charges, surface costs, and replacement-length costs are lower than for the original circle. Smaller groups are not accepted automatically.",
+            "Example from G02, before G04: move a 32.83 m circle containing water and structure surfaces to a 22.11 m water-only circle with identical replacement targets. The surface rate falls from 82 to 32, saving approximately $65,688 for that work."
           ]
         }
       ]
     },
     {
-      "title": "円の統合と末尾のカバー円",
+      "title": "Circle merging and the coverage suffix",
       "sections": [
         {
-          "heading": "4 同じ予定年の近隣円を統合する",
+          "heading": "4 Integrate neighboring circles with the same planned year",
           "paragraphs": [
-            "まず漏水なしで順序を再生し、各円の予定年と交換対象を求める。同じ予定年で中心が100m以内の近傍最大16円を調べ、2円の組と近い候補による3円の組を作る。G04は元の行間隔4,000以内、統合対象は最大10管に制限した。",
-            "対象管をすべて覆う新しい円を作り、前節と同じ位置探索で費用を下げる。統合と関係ない未交換管を巻き込む円は拒否する。固定部分（100ドル＋地表費）の節約が25ドル未満なら除外する。",
-            "次にF168で、予定年の開始時点で各管が漏水せず残る確率を求める。「円内の管がすべて漏水済みなら、その円は無料」と考え、工事が発生する確率×固定部分の費用を、別々の場合と統合した場合で比較する。空になる確率の計算では管ごとの漏水を独立と仮定している。",
-            "説明用の例：2円の固定費が各1,000ドルで、それぞれ工事が必要な確率が50％なら、別々の期待固定費は500＋500＝1,000ドル。統合円の固定費が1,500ドルでも、どちらかに未交換管が残る確率は75％なので、期待固定費は1,125ドルになる。単純な固定費は下がるが期待額は増えるため、この統合は採らない。",
-            "期待固定費の節約が10ドル以上の候補を、大きい順に採用する。同じ円を複数の統合には使わず、新しい円は組の最初の位置に置き、後の円を削除する。その後もう一度、中心・半径・分割を最適化する。統合選択段階では1,199組（3円統合366組）を採用した。"
+            "Replay the order without leaks to obtain each circle's scheduled year and replacement targets. Examine at most 16 neighbors within 100 m in the same scheduled year, forming pairs and nearby triples. G04 restricts the original row gap to 4,000 and the union of replacement targets to 10 pipes.",
+            "Build a new circle covering all target pipes and use the preceding position search to reduce costs. Reject unrelated unreplaced pipes. Discard candidates saving less than $25 in the fixed component ($100 plus surface costs).",
+            "Use F168 to estimate each pipe's survival probability at the start of the scheduled year. If all contained pipes have already leaked, the circle is free. Compare construction probability times fixed costs for separate and merged circles. This calculation assumes independent leaks within each circle.",
+            "Illustration: two circles each have $1,000 fixed costs and a 50% construction probability, so separate expected fixed costs total $1,000. If a merged circle costs $1,500 and has a 75% chance of retaining an unreplaced pipe, its expected fixed cost is $1,125. Although the nominal fixed cost falls, expected cost increases, so reject this merge.",
+            "Accept candidates saving at least $10 in expected fixed costs, largest first, without sharing a circle between merges. Place each merged circle at the group's earliest position and remove later members. Reoptimize center, radius, and splitting afterward. The merge selection accepted 1,199 groups, including 366 triples."
           ]
         },
         {
-          "heading": "5 末尾の円は被覆条件だけを満たす",
+          "heading": "5 The last circle satisfies only the covering condition",
           "paragraphs": [
-            "小さい施工円だけでは、過去に交換済みの元鉄管をすべて幾何的に覆うとは限らない。そこで元の37,314円を末尾に残し、全鉄管を円で覆う提出条件を満たす。G04の施工部分は前半の22,154円である。",
-            "再検査では、末尾で新たに交換される管は0本、工事費も0ドルだった。前半で幾何的に覆われていない鉄管10,826本は、すべて開始時点で交換済み。未修理管を取り残したわけではない。",
-            "したがって末尾を統合しても費用は下がらない。大きくまとめて前半で交換しない銅管などを新たに含めると、逆に工事費が発生する場合がある。費用改善の対象は、前半の実際に施工する円である。"
+            "Small construction circles may not geometrically cover every historically replaced original iron pipe. Retain the original 37,314 circles as a suffix to satisfy full original-iron coverage. G04's construction prefix contains 22,154 circles.",
+            "Rechecking found zero newly replaced pipes and zero construction costs in the suffix. All 10,826 original iron pipes not geometrically covered by the prefix were already replaced at project start; no unrepaired pipes were left behind.",
+            "Merging the suffix cannot reduce costs. Enlarging it to include copper or other pipes not replaced by the prefix can introduce new costs. Optimize the construction circles in the prefix instead."
           ]
         }
       ]

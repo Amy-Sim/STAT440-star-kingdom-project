@@ -1,6 +1,6 @@
 # 2027 ensemble leak probabilities
 
-Predictions generated for **28,909** pipes from **43,039** inventory pipes.
+Predictions generated for **28,909** pipes from**43,039** inventory pipes.
 Training uses **305,391** pipe-year observations from 2019–2026.
 
 Ensemble expected first leaks in 2027: **3,113.3**, before planned replacements.
@@ -41,9 +41,7 @@ There is a **difference of 17 pipes** with missing required inputs.
 | Installation date (age cannot be calculated) |     9 | P10869, P12275–P12282         |
 | Material                                     |     8 | P09986, P09987, P42036–P42041 |
 
-The nine pipes missing installation dates are wrought iron. None of the 17 appears in the historical leak records, so this exclusion is not evidence of leak-related replacement. **Their leak probabilities are unknown, not zero**.
-
-**NOTE**
+The nine pipes missing installation dates are wrought iron. None of the 17 appears in the historical leak records, so this exclusion is not evidence of leak-related replacement. **Their leak probabilities are unknown, not zero**.**NOTE**
 
 - All 28,909 predicted leakage IDs match the repair-cost prediction population. Joining from the cost table should preserve all 28,926 IDs and flag the 17 missing probabilities. An inner join would silently drop them. Do not fill their probabilities or expected losses with zero.
 

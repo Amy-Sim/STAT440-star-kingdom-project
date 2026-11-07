@@ -1,6 +1,6 @@
 # Shana Nursoo — Week 1 cost prediction
 
-My runs of the three models assigned to me: **Linear Regression** (with Anthony), **XGBoost** (with Takito)
+My runs of the three models assigned to me: **Linear Regression** (with Anthony),**XGBoost** (with Takito)
 and **CatBoost** (with Takito). Data: `data/train_predict_cost.csv` (14,107 leaks, 2019–2026). Seed 440.
 The leak year (`event_year`) is always a feature so the models can follow cost changes over time.
 
@@ -16,9 +16,7 @@ Means are equal-weight averages of the four years.
 |---|---|---:|---:|---:|---:|---:|
 | Linear Regression | log | 142,861 | 88,158 | 115,236 | 135,520 | **120,444** |
 | XGBoost | log + smearing | 160,409 | 100,341 | 113,616 | 131,796 | **126,540** |
-| CatBoost | raw | 163,078 | 99,183 | 115,578 | 130,288 | **127,032** |
-
-**MAE ($)** for the same rows
+| CatBoost | raw | 163,078 | 99,183 | 115,578 | 130,288 | **127,032** |**MAE ($)** for the same rows
 
 | Model | Target reported | 2023 | 2024 | 2025 | 2026 | Mean |
 |---|---|---:|---:|---:|---:|---:|

@@ -1,7 +1,6 @@
 # Expanded same-year mergers — public display $77.22M
 
-The user supplied a score screenshot showing **$77.22M**, versus the prior best
-**$77.07M**: **+$0.15M** using rounded displayed values. From the original $76.91M
+The user supplied a score screenshot showing **$77.22M**, versus the prior best**$77.07M**:**+$0.15M** using rounded displayed values. From the original $76.91M
 plan, the cumulative displayed gain is $0.31M. Private performance is unknown.
 CSV hashes and evidence provenance are in [official_results.json](official_results.json).
 
@@ -17,7 +16,7 @@ rules are unchanged. Only the same-planned-year search range was expanded:
 | Maximum CSV row separation | 160 | **320** |
 | Maximum union of original contained pipes | 12 | 12 |
 
-An additional **226 pairs** were merged, reducing **19,578 circles to 19,352**.
+An additional **226 pairs** were merged, reducing**19,578 circles to 19,352**.
 The previous 260-merger plan is the baseline; no model mixing or risk re-ranking
 is introduced. The merged circle goes at the earlier row, the later row is removed,
 and other circles retain relative order.

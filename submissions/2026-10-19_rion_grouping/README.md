@@ -28,6 +28,6 @@ The user submitted the CSV to the evaluator. GitHub upload is pending.
 
 ## Public evaluation — October 19, 2026
 
-Submitted by Rion at 15:52. The evaluator displayed **-$5.98M**, compared with **-$6.79M** for reference 09a: an improvement of approximately **$0.81M**, based on displayed rounded scores. Private performance is unknown. The public improvement includes both construction and repair costs; it must not be equated with the $716,902.04 no-future-leak construction saving.
+Submitted by Rion at 15:52. The evaluator displayed **-$5.98M**, compared with**-$6.79M** for reference 09a: an improvement of approximately**$0.81M**, based on displayed rounded scores. Private performance is unknown. The public improvement includes both construction and repair costs; it must not be equated with the $716,902.04 no-future-leak construction saving.
 
 Rion conducted this experiment using Codex to generate and validate the candidate. Existing leak and repair-cost prediction models were unchanged.

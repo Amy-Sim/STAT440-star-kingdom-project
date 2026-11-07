@@ -1,6 +1,6 @@
 # after second bug 10/26
 
-STAT 440 — Star Kingdom Pipe Replacement  
+STAT 440 — Star Kingdom Pipe Replacement
 Rion | October 26, 2026
 
 ## Summary
@@ -18,9 +18,7 @@ All scores and differences below are in millions of dollars (M$). “Before seco
 | 11b | approximately -19.00 | — | **+51.99** | — |
 | 11c | -9.69 | — | **+61.70** | — |
 | 12a | +22.50 | +69.54 | **+69.89** | +0.35 |
-| 13a | +23.29 | +69.60 | **+70.24** | +0.64 |
-
-**Important:** October 26 CSVs were rebuilt rather than merely rescoring the old files. For 09a, 10a, 11c, 12a and 13a, changes between phases combine evaluator changes with changed planning decisions. They cannot be attributed solely to a better algorithm or solely to the bug fix. 11b is the exception: its priority uses no construction-cost denominator, so its submission hash is unchanged; only its cost validation changed. Different evaluator versions must not be pooled for method comparisons.
+| 13a | +23.29 | +69.60 | **+70.24** | +0.64 |**Important:** October 26 CSVs were rebuilt rather than merely rescoring the old files. For 09a, 10a, 11c, 12a and 13a, changes between phases combine evaluator changes with changed planning decisions. They cannot be attributed solely to a better algorithm or solely to the bug fix. 11b is the exception: its priority uses no construction-cost denominator, so its submission hash is unchanged; only its cost validation changed. Different evaluator versions must not be pooled for method comparisons.
 
 The older 11b score was reported only as approximately -$19M. No post-October-21, pre-October-26 scores for 11b or 11c were found in the reviewed Doc section.
 
@@ -35,7 +33,7 @@ The older 11b score was reported only as approximately -$19M. No post-October-21
 | 12a | +69.89 | +4.49 | +0.00 |
 | 13a | +70.24 | +4.84 | +0.35 |
 
-Dynamic ordering outperformed the fixed-priority variants in these public results. The grouped dynamic candidate 13a exceeded ungrouped dynamic 12a by approximately **$0.35M**. Fixed grouping 10a exceeded fixed reference 09a by approximately **$0.38M**. These are comparisons of the tested candidates, not proof of global optimality. All differences use rounded displayed scores.
+Dynamic ordering outperformed the fixed-priority variants in these public results. The grouped dynamic candidate 13a exceeded ungrouped dynamic 12a by approximately **$0.35M**. Fixed grouping 10a exceeded fixed reference 09a by approximately**$0.38M**. These are comparisons of the tested candidates, not proof of global optimality. All differences use rounded displayed scores.
 
 ## Corrected formula
 

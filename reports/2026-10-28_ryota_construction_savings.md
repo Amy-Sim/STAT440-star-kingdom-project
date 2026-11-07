@@ -1,48 +1,48 @@
-# Ryota：予測を固定した工事費削減で$76.91M → $77.07M
+# Ryota: $76.91M → $77.07M in construction cost reduction with fixed forecast
 
-ユーザー提供の提出画面で **public表示$77.07M** を確認。
-前の最高点$76.91Mとの差は **+$0.16M（表示値で16万ドル）**。
-表示は0.01M単位であり、厳密な元スコアの差ではない。
+The user-provided submission screenshot confirms a **displayed public score of $77.07M**.
+Improvement over the previous $76.91M best: **+$0.16M ($160,000 at displayed precision)**.
+Displays are rounded to 0.01M; differences are not exact differences between underlying scores.
 
-## 前の最高点から何を変えたか
+## What have you changed since your previous high point?
 
-**漏水予測・修理費予測は固定し、同じ施工予定年の近隣円260組を統合した。**
+**Leak forecast and repair cost forecast were fixed, and 260 neighboring circles with the same scheduled construction year were integrated.**
 
-- 元の19,838円を19,578円へ削減。
-- 統合円は元の2円の対象管を全て覆い、含まれる全管の地表と交換費用を再計算。
-- 統合円は元の早い方の位置に置き、遅い方を削除。それ以外の円の相対順序は保持。
-- リスクの重み変更、予測モデルの混合、対象管の追加は行っていない。
-- 新たに含まれる未交換管が同年以降の予定なら、その候補は採用しない。
+- Reduced original 19,838 circles to 19,578 circles.
+- The integrated circle covers all target pipes of the original 2 circles, and recalculates the ground surface and replacement cost of all included pipes.
+- Place the integrated circle in its original earlier position and delete the later one. The relative order of other circles is preserved.
+- Risk weights, prediction models, and target pipes are unchanged.
+- If the newly included unreplaced pipes are scheduled for the same year or later, that candidate will not be adopted.
 
-「同じ年」は最高点CSVを未来漏水なしで実行した予定年を指す。
-実際の未来で常に同じ交換年になるという保証ではない。
+Same year refers to the scheduled year when replaying the best-scoring CSV without future leaks.
+This does not guarantee identical replacement years in every future scenario.
 
-| 比較 | 前の最高点 | 工事費削減版 |
+| Comparison | Previous best | Construction savings version |
 |---|---:|---:|
-| Public表示スコア | $76.91M | **$77.07M** |
-| 円数 | 19,838 | **19,578** |
-| 工事費・未来漏水なし | $180,664,606.53 | **$180,425,969.20** |
-| 完了年・同条件 | 2045 | 2045 |
+| Public display score | $76.91M | **$77.07M** |
+| Circle count | 19,838 | **19,578** |
+| Construction cost, no future leaks | $180,664,606.53 | **$180,425,969.20** |
+| Completion year and same conditions | 2045 | 2045 |
 
-同条件の工事費削減は **$238,637.33**。元の予定より交換年が遅れる管は0本、
-早まる管は189本。これはpublic評価の工事費差を測定したものではない。
-Publicスコアには修理費と実際の施工時期も影響する。
+Construction savings under the same conditions were **$238,637.33**. No pipe was delayed relative to the original schedule,
+189 pipes were advanced. This does not measure the official public evaluation's construction-cost difference.
+Public score is also affected by repair costs and actual construction time.
 
-## 保存した成果物
+## Saved artifacts
 
-- [今回の提出CSV](../submissions/2026-10-28_ryota_construction_savings/outputs/submission_construction_savings.csv)
-- [前の最高点CSV](../submissions/2026-10-28_ryota_early3/outputs_early3/early3_adaptive.csv)
-- [方法・制約・再実行手順](../submissions/2026-10-28_ryota_construction_savings/README.md)
-- [統合した260組の一覧](../submissions/2026-10-28_ryota_construction_savings/outputs/merges.csv)
-- [入力・出力ハッシュと検証結果](../submissions/2026-10-28_ryota_construction_savings/outputs/report.json)
-- [public表示の出典・対応CSVのハッシュ](../submissions/2026-10-28_ryota_construction_savings/official_results.json)
-- [提出画面](../submissions/2026-10-28_ryota_construction_savings/outputs/official_score_77_07m.png)
+- [This submission CSV](../submissions/2026-10-28_ryota_construction_savings/outputs/submission_construction_savings.csv)
+- [Previous highest point CSV](../submissions/2026-10-28_ryota_early3/outputs_early3/early3_adaptive.csv)
+- [Methods/Restrictions/Re-execution steps](../submissions/2026-10-28_ryota_construction_savings/README.md)
+- [List of 260 merged pairs](../submissions/2026-10-28_ryota_construction_savings/outputs/merges.csv)
+- [Input/output hash and verification result](../submissions/2026-10-28_ryota_construction_savings/outputs/report.json)
+- [public display source/corresponding CSV hash](../submissions/2026-10-28_ryota_construction_savings/official_results.json)
+- [Submission screen](../submissions/2026-10-28_ryota_construction_savings/outputs/official_score_77_07m.png)
 
-2つの漏水モデル・ハザード0.5/1/2倍・各30回の共通乱数比較で、全6条件の平均工事費と
-平均スコアが改善。平均スコア差は約+$0.131M〜+$0.299Mだった。
-予測モデルを条件とした試算と、今回報告されたpublic結果を混同しない。
-privateスコアは未確認。
+Two leak models, hazard 0.5/1/2 times, common random number comparison 30 times each, average construction cost and
+Mean scores improved by approximately +$0.131M to +$0.299M.
+Keep model-conditional simulations separate from the public results reported here.
+Private score is not confirmed.
 
-基準CSVから引き継ぐ歴史的交換済み鉄管の幾何学的カバーの留保は、方法READMEと
-共有検証JSONに明記。未交換鉄管のカバーと予算内完了を検証しており、
-全original ironの厳密なカバーに合格したとは記録しない。
+The inherited geometric-coverage limitation for historically replaced iron pipes is documented in the method README and
+This is explicit in the shared validation JSON. It verifies unreplaced-iron coverage and budget-feasible completion;
+Do not record a pass on strict coverage of every original iron pipe.

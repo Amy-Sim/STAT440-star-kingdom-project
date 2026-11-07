@@ -28,7 +28,7 @@ Let C be the construction cost for that circle and pipe state. The $200/m term i
 | 11b — net benefit only | Same circles as 09a | Initial B | No | Approximately -$19M | Approximately -$12.21M |
 | 11c — weaker cost weighting | Same circles as 09a | Initial B / sqrt(max(C, $1)) | No | -$9.69M | -$2.90M |
 | 12a — dynamic priority | Same circles as 09a | Remaining B / max(current C, $1) | Yes | +$22.50M | +$29.29M |
-| **13a — grouping + dynamic priority** | **Exactly the same circles as 10a** | **Remaining B / max(current C, $1)** | **Yes** | **+$23.29M** | **+$30.08M** |
+| **13a — grouping + dynamic priority** |**Exactly the same circles as 10a** |**Remaining B / max(current C, $1)** |**Yes** |**+$23.29M** |**+$30.08M** |
 
 Scores are user-reported evaluator results, including screenshot evidence for 10a, 12a and 13a. Differences use displayed, rounded scores; 11b was reported only as approximately -$19M. Candidate labels are experiment identifiers, not a claim that every intervening number was used.
 

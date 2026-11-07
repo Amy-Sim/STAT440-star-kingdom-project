@@ -158,7 +158,7 @@ The actual 2026 leak rate was:
 0.095095
 \]
 
-The raw XGBoost model assigned an average leak probability of approximately **14.41%**, substantially above the observed 2026 leak rate of approximately **9.51%**.
+The raw XGBoost model assigned an average leak probability of approximately **14.41%**, substantially above the observed 2026 leak rate of approximately**9.51%**.
 
 After sigmoid calibration, the average predicted probability became approximately **9.51%**.
 

@@ -7,7 +7,7 @@
     "sha256": "63ae42529ac0a490df947db2f6dd68b6dc1825e10068fc97e5a2372c7331a8c9"
   },
   "ryota_coverage_repaired": {
-    "author": "Ryota原案＋共通補修",
+    "author": "Ryota original plan + common repair",
     "file": "candidates/baseline_full_original_iron.csv",
     "public_score_M": null,
     "public_note": "Evaluation-only coverage repair; never officially submitted",

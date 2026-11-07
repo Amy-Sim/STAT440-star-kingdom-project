@@ -1,56 +1,56 @@
-> 提出後のユーザー提供結果：public表示 **$77.29M**。基準は3版とも元の$77.22M版。出典は `../official_results.json`。以下の試算記録に残る「未取得」は提出前時点の状態。
+> User provided results after submission: Public display **$77.29M**. The standard for all three editions is the original $77.22M edition. Source: `../official_results.json`. ``Not acquired'' in the trial calculation records below is the status as of before submission.
 
-# 前の工事でカバー済みの管を除いて後続の円を縮める版
+# Version that shrinks the subsequent circle excluding pipes covered by previous construction
 
-提出候補：**`submission_shrink_after_work.csv`**。
-基準は最高点$77.22M版。予測・円の数・順序は変えず、81個の円を小さくした。
-公式スコアは未取得。
+Submission candidate: **`submission_shrink_after_work.csv`**.
+The baseline is the best-scoring $77.22M version. Shrink 81 circles without changing predictions, circle count, or order.
+No official score was obtained.
 
-## 方法と安全条件
+## Method and safety conditions
 
-CSVを先頭から順に処理し、前の円ですでにカバーされた管を記録する。
-各円では、まだ前の円で覆われていない管をすべて含む小さな円を計算する。
-新円で新たに未交換の別の管を含まないこと、元の円と交換予定の管が完全一致することを確認。
-半径が小さくなり、費用が$1以上減る場合だけ採用する。
+Process the CSV sequentially from the beginning and record the pipes already covered by the previous circle.
+For each circle, calculate a smaller circle covering every pipe not already covered by an earlier row.
+Confirm that no unintended unreplaced pipes enter the new circle and that its scheduled replacement targets exactly match the original.
+Accept only if the radius decreases and costs fall by at least $1.
 
-最初から交換済みでも、まだどの前の円にも覆われていない管を無条件に消すことはしない。
-そのため、元のCSVが各行までにカバーしていた管の集合を、各行までの新CSVでも維持する。
-円の中心は必要な管を覆うために変わる場合がある。
-各円で地表の種類と費用を再計算するので、交換済み管の地表を勝手に費用計算から除外しない。
+Do not automatically discard a historically replaced pipe if no earlier circle has geometrically covered it.
+At every row, the new CSV consequently preserves the set of pipes covered by the original CSV up to that row.
+The circle center may move to cover the required pipes.
+Recalculate surfaces and costs for each circle; do not exclude surfaces merely because their pipes are already replaced.
 
-## 漏水ゼロでの検証
+## Verification with zero leak
 
-| 指標 | $77.22M版 | 今回 |
+| Indicator | $77.22M version | This time |
 |---|---:|---:|
-| 円数 | 19,352 | 19,352 |
-| 小さくした円 | — | **81** |
-| 工事費 | $180,290,222.26 | **$180,205,924.17** |
-| 完了年 | 2045 | 2045 |
+| Circle count | 19,352 | 19,352 |
+| Smaller circle | — | **81** |
+| Construction cost | $180,290,222.26 | **$180,205,924.17** |
+| Completion year | 2045 | 2045 |
 
-工事費は **$84,298.09削減**。元の予定より交換が遅れる管は0本、前倒しは102本。
-各行に割り当てられる交換対象管が同じことと、全行までの包含カバーが失われないことを確認。
-将来漏水でどちらの施工時期も変わり得るので、全将来での交換年維持の保証ではない。
+Construction savings: **$84,298.09**. No pipe was delayed relative to the original schedule; 102 were advanced.
+Confirmed identical per-row replacement targets and preserved cumulative containment coverage through every row.
+Future leaks can change either plan's timing; replacement years are not guaranteed to remain unchanged across all futures.
 
-## 共通乱数比較（各条件30回）
+## Common random number comparison (30 times for each condition)
 
-| 評価モデル | ハザード倍率 | 平均工事費の削減 | 平均スコア差 |
+| Evaluation model | Hazard multiplier | Mean construction savings | Mean score difference |
 |---|---:|---:|---:|
-| 細管齢 | 0.5 | $67,050 | +$96,054 |
-| 細管齢 | 1 | $53,827 | +$66,631 |
-| 細管齢 | 2 | $35,981 | +$68,365 |
-| 旧5年管齢 | 0.5 | $66,161 | +$71,870 |
-| 旧5年管齢 | 1 | $58,645 | +$77,210 |
-| 旧5年管齢 | 2 | $30,723 | +$54,717 |
+| Fine age bands | 0.5 | $67,050 | +$96,054 |
+| Fine age bands | 1 | $53,827 | +$66,631 |
+| Fine age bands | 2 | $35,981 | +$68,365 |
+| Old 5-year age bands | 0.5 | $66,161 | +$71,870 |
+| Old 5-year age bands | 1 | $58,645 | +$77,210 |
+| Old 5-year age | 2 | $30,723 | +$54,717 |
 
-全6条件で平均工事費・平均修理費・平均スコアが改善した。
-平均スコア差の近似95%モンテカルロ区間は各条件で0より上だったが、モデル誤差を含む
-予測区間ではなく、publicやprivateスコアの更新を保証するものではない。
+Mean construction costs, repair costs, and scores improved in all six settings.
+Approximate 95% Monte Carlo intervals for mean score differences were above zero in each setting, but they exclude model error and are not
+This is not a prediction interval and does not guarantee a higher public or private score.
 
-2件のテストに合格。先の円で交換済みとなる管を除いて円を縮められる例と、
-初期交換済み管の幾何学的カバーを勝手に捨てないことを確認。
-共有検証では未交換鉄管を明示した予算内完了を確認する。
-基準版にある歴史的交換済みoriginal ironのカバーに関する留保は引き継ぎ、
-全original ironカバーに合格したとは記録しない。元のカバーは悪化させていない。
+Passed 2 tests. An example of shrinking a circle by excluding the pipe that was replaced in the previous circle,
+Confirmed that geometric coverage of pipes replaced before project start was not discarded.
+Shared validation checks budget-feasible completion for an explicitly defined unreplaced-iron target set.
+The baseline's coverage limitation for historically replaced original iron is retained,
+Do not record a pass on full original-iron coverage. Original coverage was not worsened.
 
-詳細は `shrinks.csv`、`report.json`、`comparison.csv`、`simulations.csv` と検証JSON。
-費用式は `2026-10-26-area-exponent`。最高点版はそのまま保存して比較する。
+Details: `shrinks.csv`, `report.json`, `comparison.csv`, `simulations.csv`, and validation JSON.
+Cost model: `2026-10-26-area-exponent`. Retain the best-scoring version unchanged for comparison.
