@@ -1,10 +1,10 @@
-# 提出モデルの資料一覧（2026-10-26提出セッション）
+# List of submitted model materials (2026-10-26 submission session)
 
-2026-10-27 UTCに整理。会話中の「今日」は提出画面・既存記録に残る10月26日の提出セッションとして扱い、日付を一律に書き換えていません。共有Google Docの現行内容、GitHub main、本人確認済みのチャット記録を照合しました。
+Organized on 2026-10-27 UTC. "Today" in the conversation is treated as the submission session of October 26th, which remains on the submission screen and existing records, and the date is not uniformly rewritten. We compared the current contents of the shared Google Doc, GitHub main, and verified chat records.
 
-## 提出と結果を確認できるモデル
+## Model where you can check submission and results
 
-| ID | 手法・変更点 | Public (M$) | 提出CSV |
+| ID | Method/Changes | Public (M$) | Submitted CSV |
 | --- | --- | ---: | --- |
 | 09a | Fixed initial net benefit / corrected cost | 65.40 | [CSV](../submissions/2026-10-26_after_second_bug%202/09a_corrected_reference.csv) |
 | 10a | Nearby grouping rebuilt with corrected costs | 65.78 | [CSV](../submissions/2026-10-26_after_second_bug%202/10a_corrected_nearby_pairs.csv) |
@@ -14,33 +14,33 @@
 | 13a | Rebuilt grouping plus dynamic overlap updates | 70.24 | [CSV](../submissions/2026-10-26_after_second_bug%202/13a_corrected_grouped_dynamic.csv) |
 | 21a | 20a circles + p17b + CatBoost 68.627% / corrected log RF 31.373%; dynamic net benefit/cost | 74.78 | [CSV](../submissions/2026-10-26_best20a_catboost_logrf/21a_20a_catboost6863_logrf3137.csv) |
 
-09a～13aはRionの修正再構築パッケージです。6件の対応は本人が述べた提出順に基づきます。21aはTakitoがファイル名と$74.78Mの対応を確認済みです。11b・11cをTakito作として扱っていません。
+09a-13a are Rion modified rebuild packages. The responses for the six cases are based on the order of submission as stated by the person. For 21a, Takito has confirmed the correspondence between the file name and $74.78M. 11b and 11c are not treated as works by Takito.
 
-- [09a～13a：手法、旧版との違い、予算、再現手順](../submissions/2026-10-26_after_second_bug%202/README.md)。再現はそのフォルダで `python rebuild_corrected.py`。
-- [21a：モデル構成、年次検証、重み、チームの貢献、限界](2026-10-26_takito_latest_model.md)。凍結提出の再現はリポジトリ直下で `python submissions/2026-10-26_best20a_catboost_logrf/reproduce.py`。このコマンドだけは過去再現用のlegacy計算を明示的に使用します。
-- [機械可読の提出台帳](2026-10-27_submission_register.json)：提出CSVのSHA-256、結果の出典区分を収録。
+- [09a-13a: Methodology, differences from previous versions, budget, reproduction steps](../submissions/2026-10-26_after_second_bug%202/README.md). Reproduce `python rebuild_corrected.py` in that folder.
+- [21a: Model configuration, annual validation, weights, team contributions, limits](2026-10-26_takito_latest_model.md). To reproduce a frozen submission, go to `python submissions/2026-10-26_best20a_catboost_logrf/reproduce.py` directly under the repository. Only this command explicitly uses legacy calculations for past reproduction.
+- [Machine-readable submission ledger](2026-10-27_submission_register.json): Contains SHA-256 of submission CSV and source classification of results.
 
-## 提出画面にあるがファイル対応が未確定の結果
+## Result on the submission screen but file correspondence is not confirmed
 
-| 画面上の時刻（元記録のまま） | Public (M$) | 状態 |
+| Displayed time (as recorded) | Public (M$) | Status |
 | --- | ---: | --- |
-| 15:25 | 74.16 | ファイル名未確認 |
-| 15:34 | 74.25 | ファイル名未確認 |
-| 15:34 | 74.00 | ファイル名未確認 |
+| 15:25 | 74.16 | File name not confirmed |
+| 15:34 | 74.25 | File name not confirmed |
+| 15:34 | 74.00 | File name not confirmed |
 
-出典は[21aの既存報告](2026-10-26_takito_latest_model.md)に記載されたユーザー提供画面です。スコアだけから18a、20a、stacking比較などへ割り当てていません。これらの正確なファイル対応が確定するまでは、全提出のモデル名まで確定したとは扱えません。
+The source is the user-provided screenshot cited in the [existing 21a report](2026-10-26_takito_latest_model.md). Scores alone were not assigned to 18a, 20a, or stacking comparisons. Model names for all submissions remain unresolved until the exact file mappings are confirmed.
 
-## 再構築・準備済みだが新規提出結果を確認できないもの
+## Rebuilt and prepared, but new submission results cannot be confirmed
 
-- [修正版09b](../submissions/2026-10-26_09b_corrected_after_second_bug/README.md)：CatBoost + LightGBMのみの漏水確率を使用。生成コード・CSVはmainに存在。現行評価での新規publicスコア未確認。共有Docの59.32Mは10/21の旧条件なので転記しません。
-- 06・07a・07b：共有Docには「10/27に修正」とありますが、今回照合したmainには対応する新しい提出パッケージ・確定スコアがありません。旧スコアを現行結果として扱いません。
-- [修正版21a](../submissions/2026-10-27_current_rules/README.md)：新費用式で順序を再構築。公式publicスコア未評価。$74.78Mはこの別CSVの結果ではありません。
-- ローカルの `2026-10-26_cost_stacking_comparison` は18a対照とstacking差し替えの比較準備。manifestの両publicスコアはnullで、提出確認の根拠になりません。
+- [Fixed version 09b](../submissions/2026-10-26_09b_corrected_after_second_bug/README.md): Use leak probability of CatBoost + LightGBM only. The generated code/CSV exists in main. New public score based on current evaluation has not been confirmed. 59.32M of shared Doc is the old condition of 10/21, so it will not be posted.
+- 06/07a/07b: The shared Doc says "Fixed on 10/27", but there is no corresponding new submission package/confirmed score in the main we checked this time. Do not treat old scores as current results.
+- [Modified version 21a](../submissions/2026-10-27_current_rules/README.md): Rebuild order with new cost formula. Official public score not evaluated. $74.78M is not the result of this other CSV.
+- Local `2026-10-26_cost_stacking_comparison` is ready for comparison of 18a control and stacking replacement. Both public scores of the manifest are null and cannot be used as a basis for confirmation of submission.
 
-## 費用式と比較の注意
+## Notes on cost formulas and comparisons
 
-現在の式は `100 + surface_rate * area**0.85 + 200 * unreplaced_length`。面積のみを0.85乗し、座標と直線管長はmです。[現行ルール](../docs/current_rules.md)を新規実験に使用します。
+The current formula is `100 + surface_rate * area**0.85 + 200 * unreplaced_length`. Only area is raised to 0.85; coordinates and straight pipe lengths are meters. Use the [current rules](../docs/current_rules.md) for new experiments.
 
-09a～13aは修正式で再構築された同一評価条件の比較です。21aの提出生成・既存ローカル検証は旧費用式で、公式スコアとローカル工事費は別の指標です。旧20aと21aの差をモデルだけの改善とは断定しません。全てpublic結果でprivate結果は未確定です。
+09a to 13a are comparisons of the same evaluation conditions reconstructed using the correction formula. The 21a submission generation/existing local verification is the old cost formula, and the official score and local construction cost are different metrics. We do not conclude that the difference between the old 20a and 21a is an improvement in the model alone. All results are public and private results are unconfirmed.
 
-共有記録：[STAT440 Google Doc](https://docs.google.com/document/d/1N32Z_DC6Frw1OYwSNA9mIlXjgDPuKiOQXH4nJV2RZcQ/edit)（2026-10-27読み取り）。共有Docは変更していません。
+Shared record: [STAT440 Google Doc](https://docs.google.com/document/d/1N32Z_DC6Frw1OYwSNA9mIlXjgDPuKiOQXH4nJV2RZcQ/edit), read 2026-10-27. The shared document was not edited.

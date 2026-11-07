@@ -1,0 +1,18 @@
+{
+  "comparator": "G17",
+  "internal_reference_key": "G05",
+  "public_baseline": 79168928.88,
+  "seed": 202611027702,
+  "draws_per_setting": 128,
+  "settings": 24,
+  "user_requested_Amy_Ryota_order_comparison": true,
+  "rule": "All four plans must satisfy geometry, annual budget/carry and completion by 2051. Internal score differences are reported, not hidden.",
+  "forecast_note": "Frozen forecast-based synthetic scenarios, not unseen real-world outcomes.",
+  "sha256": {
+    "G05": "47a960a0cec73ee2abd1bb5df61891b66f64eca4a05f114e76a25e9b7a6dd86b",
+    "G22_Ryota_fixed3": "64e289d0e7a0fe745201e2e4635e6d87d21d7b6a7d546b1f4305bd29bb0b46e9",
+    "G23_Ryota_dynamic3": "09808f6d7d01461c5d3cd41e96e88a9e2e09b0635172341870b23fbd48d1eaf1",
+    "G24_Amy_annualBCR": "fe098704b83aff89686fe235260ecaa2234ff903f08eaef06b780fdb437f04b7",
+    "G25_Amy_submitted_order": "6a25b2dac6813f68e22990b1b20a712f47ccecef072b79264343bfb2440dfc73"
+  }
+}

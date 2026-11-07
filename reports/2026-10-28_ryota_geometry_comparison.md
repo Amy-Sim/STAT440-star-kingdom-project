@@ -1,57 +1,57 @@
-# Ryota：円の統合・スキップ対策・縮小の3比較、最高表示$77.29M
+# Ryota: 3 comparisons of circle integration, skip countermeasures, and reduction, highest display $77.29M
 
-**3版とも元の$77.22M探索拡張版を基準にした別々の実験。順番に積み重ねたものではない。**
-予測モデルや修理費予測を替えず、円の形・採用条件を変更して工事費削減を検証した。
+**All three versions are separate experiments based on the original $77.22M exploration extension. They are not stacked in order.**
+Geometry and acceptance rules were varied to assess construction savings while keeping leak and repair-cost forecasts fixed.
 
-| 版 | 基準 | 主な変更 | 円数 | Public表示 | 基準との差（表示値） |
+| Version | Baseline | Main change | Circles | Displayed public score | Difference from baseline (displayed) |
 |---|---:|---|---:|---:|---:|
-| 基準：同年統合の探索拡張 | — | 前回までの最高点 | 19,352 | $77.22M | — |
-| 3円同時統合 | $77.22M | 24組の3円統合 | 19,304 | $77.21M | −$0.01M |
-| スキップ条件厳格化 | $77.22M | 空円化しやすい候補を除外、9組採用 | 19,334 | $77.22M | 表示上同値 |
-| **後続円の縮小** | $77.22M | **81円を縮小、数と順序を維持** | **19,352** | **$77.29M** | **+$0.07M** |
+| Criteria: Same year integration exploration expansion | — | Highest score until last time | 19,352 | $77.22M | — |
+| 3 circle simultaneous integration | $77.22M | 24 pairs of 3 circle integration | 19,304 | $77.21M | −$0.01M |
+| Stricter skip conditions | $77.22M | Exclude candidates that are likely to become empty circles, adopt 9 pairs | 19,334 | $77.22M | Same value on display |
+| **Reducing subsequent circles** | $77.22M |**Reducing 81 circles, preserving number and order** |**19,352** |**$77.29M** |**+$0.07M** |
 
-Public値はユーザー提供の提出画面とファイル対応確認に基づく。こちらから評価サイトを
-直接照合してはいない。0.01M単位の表示なので、同じ表示でも厳密な同点とは限らない。
-private評価は未確認。各フォルダに提出CSV・スコア画像・年次内訳画像・SHA-256を保存した。
+Public value is based on user-provided submission screen and file correspondence confirmation. Click here for evaluation site
+These were not independently fetched. Scores display to 0.01M, so identical displays need not mean exact ties.
+Private evaluation is unconfirmed. I saved the submitted CSV, score image, annual breakdown image, and SHA-256 in each folder.
 
-## 1. 3円同時統合
+## 1. 3 circle simultaneous integration
 
-既存の複数管円を3個まとめる候補2,570組を評価し、24組を採用。5組はどの2円の
-組み合わせでも固定費を削れず、3円なら削れる例だった。
-未来漏水ゼロでは$31,274.70安いが、公開表示の最高点は更新しなかった。
-漏水が多い試算では、元の円が無料スキップになる機会を失い、平均工事費が増える条件があった。
+Evaluate 2,570 candidate triples of existing multi-pipe circles and accept 24. Five groups saved costs only as triples; no pair
+combination saved fixed costs, whereas the triple did.
+No-leak costs fell by $31,274.70, but the displayed public best did not improve.
+Under high-leak simulations, some settings increased mean construction costs because merging lost opportunities for free skips of original circles.
 
-[提出・方法・結果](../submissions/2026-10-28_ryota_circle_triples/README.md)
+[Submission/Method/Results](../submissions/2026-10-28_ryota_circle_triples/README.md)
 
-## 2. スキップ条件の厳格化
+## 2. Stricter skip conditions
 
-円内の管の漏水が独立とは仮定せず、空円確率の予測上限を保守的に計算。
-各円10%以下、組のどれかが空になる上限15%以下、固定費節約の保守的下限$25以上を
-2モデル×ハザード0.5/1/2倍の全条件で要求した。19候補を除外し9組を採用。
-未来漏水ゼロの削減額は$3,171.74。Public表示は基準と同じで、更新は確認できなかった。
+Calculate a conservative upper bound on the empty-circle probability without assuming independent pipe leaks.
+Require at most 10% empty probability per circle, at most 15% for any member of a group becoming empty, and a conservative fixed-savings lower bound of at least $25,
+Required under all conditions of 2 models x hazard 0.5/1/2 times. 19 candidates were excluded and 9 were selected.
+No-leak savings were $3,171.74. The displayed public score matched the baseline, so no improvement was confirmed.
 
-[提出・方法・結果](../submissions/2026-10-28_ryota_skip_guard/README.md)
+[Submission/Method/Results](../submissions/2026-10-28_ryota_skip_guard/README.md)
 
-## 3. 後続円の縮小：今回の最高点
+## 3. Reduction of subsequent circle: highest point this time
 
-先頭から施工順に処理し、前の円ですでにカバーされた管を除いて後続円を再計算。
-未交換管が新たに追加されないこと、各行の交換対象が変わらないこと、元の全行までの
-カバーを維持することを求めた。歴史的に交換済みでも、まだ前の円で覆っていない管を
-無条件にカバーから落としてはいない。
+Process circles in execution order; recalculate later circles after excluding pipes already covered by earlier circles.
+Confirm no new unreplaced pipes, unchanged per-row replacement targets, and preserved cumulative coverage of all original
+coverage must be maintained. Even historically replaced pipes must remain covered if no earlier circle has covered them;
+were not removed from coverage unconditionally.
 
-81円を縮小し、円数と順序は維持。未来漏水ゼロでは工事費が
-$180,290,222.26から **$180,205,924.17へ、$84,298.09削減**。
-同条件で交換予定の遅延0本、前倒し102本。公開表示は **$77.29M** で最高点を更新した。
-ユーザー提供の年次画像では、修理件数・修理費は元の基準版と同じであり、
-今回のpublic改善は工事費の削減と整合する。
+81 Shrink the circle, keeping the number and order of circles. In the future with zero leak, construction costs will be reduced.
+From $180,290,222.26 to **$180,205,924.17, a reduction of $84,298.09**.
+Under the same conditions, no pipe was delayed and 102 were advanced. The displayed public score reached a new best of **$77.29M**.
+In the user-provided annual breakdown images, repair counts and repair costs match the original baseline, and
+The public improvement is consistent with the construction savings.
 
-[最高点の提出CSV](../submissions/2026-10-28_ryota_shrink_after_work/outputs/submission_shrink_after_work.csv)
-／[方法・検証・再実行](../submissions/2026-10-28_ryota_shrink_after_work/README.md)
+[Highest score submission CSV](../submissions/2026-10-28_ryota_shrink_after_work/outputs/submission_shrink_after_work.csv)
+/ [Method, validation, and reproduction](../submissions/2026-10-28_ryota_shrink_after_work/README.md)
 
-## 検証上の留保
+## Verification reservations
 
-元のカバーと漏水ゼロ条件の予算内完了を確認。施工時期は将来漏水で変わるため、
-すべての未来で交換年が維持される保証ではない。予測モデルを条件とした試算結果と
-公式表示は区別して記録する。
-基準版から引き継ぐ歴史的交換済みoriginal ironの幾何学的カバー不足は、各READMEと
-検証JSONに明記。active ironの共有検証を全original ironへの合格とは記録していない。
+Original coverage and budget-feasible completion were verified without future leaks. Future leaks can change work timing, so
+This does not guarantee unchanged replacement years in every future scenario. Treat the model-conditional simulations and
+Record official displayed scores separately.
+The baseline's missing geometric coverage for historically replaced original iron is documented in each README and
+The validation JSON explicitly distinguishes active-iron validation from full original-iron coverage.

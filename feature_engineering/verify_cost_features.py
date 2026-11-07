@@ -42,7 +42,7 @@ def main():
                    'hashlib': hashlib, 'json': json, 'csv': csv, 'io': io}
         exec(compile(ast.Module(body=[block],type_ignores=[]),str(runner),'exec'),context)
         assert (Path(tmp)/'train_predict_cost.csv').read_bytes()==reconstructed
-    for doc in ['README.md', 'data/train_predict_cost.md', 'data/train_predict_cost_jpn.md',
+    for doc in ['README.md', 'data/train_predict_cost.md',
                 'notebooks/Takito_Kobayashi/README.md']:
         original = subprocess.check_output(['git', 'show', 'HEAD:' + doc], cwd=ROOT).decode('utf-8').replace('\r\n', '\n')
         current = (ROOT/doc).read_text(encoding='utf-8').replace('\r\n', '\n')

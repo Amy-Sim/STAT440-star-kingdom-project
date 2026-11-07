@@ -1,0 +1,42 @@
+{
+  "ryota_original": {
+    "rows": 19352,
+    "uncovered_original_iron": 10704,
+    "uncovered_active_iron": 0,
+    "no_future_leak_construction": 180205924.17,
+    "valid_geometry": false,
+    "sha256": "63ae42529ac0a490df947db2f6dd68b6dc1825e10068fc97e5a2372c7331a8c9"
+  },
+  "ryota_coverage_repaired": {
+    "rows": 30056,
+    "uncovered_original_iron": 0,
+    "uncovered_active_iron": 0,
+    "no_future_leak_construction": 180675094.9,
+    "valid_geometry": true,
+    "sha256": "059f6c4106f3d6a140c68906e9a8ab77d9730f6fd7c4c5446706fa0d56e29222"
+  },
+  "amy_integrated": {
+    "rows": 30094,
+    "uncovered_original_iron": 0,
+    "uncovered_active_iron": 0,
+    "no_future_leak_construction": 179868011.38,
+    "valid_geometry": true,
+    "sha256": "fe3a108ca087fa89431a88ed53d7d93c6201b8381fccf270b02d12d208209f10"
+  },
+  "shana_20a": {
+    "rows": 36375,
+    "uncovered_original_iron": 0,
+    "uncovered_active_iron": 0,
+    "no_future_leak_construction": 187904198.5,
+    "valid_geometry": true,
+    "sha256": "bee3665ae61c51d829886ac8ca39cde77a0f479d009484a4236280c6d4dff86a"
+  },
+  "takito_g04": {
+    "rows": 59468,
+    "uncovered_original_iron": 0,
+    "uncovered_active_iron": 0,
+    "no_future_leak_construction": 185618921.05,
+    "valid_geometry": true,
+    "sha256": "3e240e4122be8e69e6f9ede23c7bb042c215a84d853815bd0d372d999aa5ecc4"
+  }
+}

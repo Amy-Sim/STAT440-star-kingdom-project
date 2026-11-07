@@ -1,8 +1,4 @@
-"""Build English and Japanese-support HTML reports（英語版・日本語補助版の作成）。
-
-Run after run_eda.py / run_eda.py の実行後に起動。
-Uses the installed Data report runtime / インストール済みのレポートランタイムを使用。
-"""
+"""Build the English HTML report after run_eda.py, using the installed report runtime."""
 from pathlib import Path
 import argparse
 import json
@@ -18,12 +14,12 @@ PLUGIN=HOME/".codex/plugins/cache/openai-curated-remote/data-analytics/1.0.11"
 
 SECTIONS={
 "en":[("quality","1. Data scope and quality"),("inventory","2. What is in the network?"),("time","3. When were leaks recorded?"),("risk","4. Which groups experienced leaks?"),("cost","5. What drives historical repair dollars?"),("space","6. Where are pipes and recorded replacements?")],
-"ja":[("quality","1. データの範囲と品質"),("inventory","2. 配管網の構成"),("time","3. 漏洩の時系列"),("risk","4. 漏洩割合・発生率の比較"),("cost","5. 過去の修理費の分布"),("space","6. 配管と記録済み交換箇所の位置")]
+
 }
 
 
 def narratives(m,lang):
-# Both editions use the same validated metrics（両版で同じ検証済み数値を使用）。
+# Both editions use the same validated metrics.
     if lang=="en":
         return {
         "title":"Star Kingdom: leak costs are concentrated, and 26.2k iron pipes remain",
@@ -31,17 +27,9 @@ def narratives(m,lang):
         "summary":f"## Executive Summary\n\n- **Start from the repaired inventory.** The {m['pipe_rows']:,} original pipe records include {m['original_iron']:,} iron pipes. Every pipe recorded in train.csv is treated as polyurethane after its leak; eight unknown-material pipes remain unresolved.\n- **Severity matters alongside leak probability.** The {m['leak_rows']:,} historical leaks cost **${m['historical_cost']/1e6:.1f}M**. The most expensive 1% account for **{m['top1_cost_share']:.1%}** of repair dollars. Median cost is **${m['median_cost']:,.0f}**, far below the **${m['mean_cost']:,.0f}** mean.\n- **Original material is not a causal risk estimate.** Historical leak fractions differ markedly by material, but age, surface, location, and repair-driven removal are intertwined. The age comparison therefore includes a separate original-iron-only view.\n- **Within-material unit costs vary by year.** Annual mean and median repair dollars per pipe metre are shown within each original material, together with an indexed red–blue heatmap. These nominal values are descriptive and can be moved by extreme repairs or changing surface and location mix.",
         "quality_intro":"The supplied files contain one row per pipe and one recorded leak per leaking pipe. All leak IDs join successfully; no duplicate pipe IDs, nonpositive lengths, or leaks preceding known installation dates were found. The brief names the leak file costs.csv; the supplied train.csv is treated as that history. The supplied competition window is used through 2026-12-31, even though it extends beyond the current real-world date. No real-world freshness claim is made.",
         "preview":"### Source preview\n\nThe first five records are shown in source-file order. Full derived data, chart evidence, and validation results are exported beside this report.",
-        "methods":"## Methods and interpretation\n\n**Observation window.** 2019-01-01 through 2026-12-31; 2027-01-01 is the project-start reference. The supplied history is assumed complete for that window. All known installation dates precede it. The original state at 2019 is assumed to be the stated original material; unrecorded earlier replacements cannot be reconstructed.\n\n**Inventory update.** Every pipe with a recorded historical leak is set to polyurethane for 2027, following the competition rule. Unknown materials stay unknown. Original-installation age must not be used as the actual age of newly installed polyurethane.\n\n**Geometry.** Each pipe length is the straight-line Euclidean distance between its supplied endpoints; the length distribution is therefore a distribution across individual pipe records, not total network length. Coordinates are local metres without a geographic basemap. Surface regions are nearest-pipe estimates used only for display, not measured land boundaries.\n\n**Fractions versus incidence.** An eight-year leak fraction divides leaking pipes by the source inventory. Original-material incidence divides recorded first leaks by pipe-years until leak/replacement or the end of observation. Missing installation dates are assigned observation entry at 2019-01-01 for exposure only; no age is imputed. Wilson intervals summarize binomial fractions; exact Poisson intervals summarize incidence. Their independence assumptions do not model spatial clustering or competing unrecorded changes.\n\n**Cost analysis.** Costs are nominal competition dollars; no inflation adjustment is assumed. Cost per metre divides each recorded repair cost by that pipe's endpoint-to-endpoint length. Annual mean values are sensitive to extreme repairs, so medians and event counts are shown alongside them. Spearman correlation compares rank order on a -1 to +1 scale; LOWESS summarizes local log-cost tendency. Both are descriptive, not forecasts or causal effects.\n\n**Python libraries.** pandas joins and aggregates; NumPy computes geometry and arrays; Matplotlib exports PNG/SVG; Seaborn draws statistical plots; SciPy computes rank correlation, nearest-neighbour surface estimates, and Poisson interval quantiles; statsmodels supplies Wilson intervals, ECDF, and LOWESS. A fixed seed is unnecessary because this analysis uses no random subsampling.\n\n**Reproducibility.** eda/run_eda.py regenerates the figures, tables, metrics and source hashes. eda/build_reports.py rebuilds the two HTML reports from the same evidence. Package versions and validation checks are saved in validation.json. This EDA does not train a forecast, simulate future leaks, or construct a submission.",
+        "methods":"## Methods and interpretation\n\n**Observation window.** 2019-01-01 through 2026-12-31; 2027-01-01 is the project-start reference. The supplied history is assumed complete for that window. All known installation dates precede it. The original state at 2019 is assumed to be the stated original material; unrecorded earlier replacements cannot be reconstructed.\n\n**Inventory update.** Every pipe with a recorded historical leak is set to polyurethane for 2027, following the competition rule. Unknown materials stay unknown. Original-installation age must not be used as the actual age of newly installed polyurethane.\n\n**Geometry.** Each pipe length is the straight-line Euclidean distance between its supplied endpoints; the length distribution is therefore a distribution across individual pipe records, not total network length. Coordinates are local metres without a geographic basemap. Surface regions are nearest-pipe estimates used only for display, not measured land boundaries.\n\n**Fractions versus incidence.** An eight-year leak fraction divides leaking pipes by the source inventory. Original-material incidence divides recorded first leaks by pipe-years until leak/replacement or the end of observation. Missing installation dates are assigned observation entry at 2019-01-01 for exposure only; no age is imputed. Wilson intervals summarize binomial fractions; exact Poisson intervals summarize incidence. Their independence assumptions do not model spatial clustering or competing unrecorded changes.\n\n**Cost analysis.** Costs are nominal competition dollars; no inflation adjustment is assumed. Cost per metre divides each recorded repair cost by that pipe's endpoint-to-endpoint length. Annual mean values are sensitive to extreme repairs, so medians and event counts are shown alongside them. Spearman correlation compares rank order on a -1 to +1 scale; LOWESS summarizes local log-cost tendency. Both are descriptive, not forecasts or causal effects.\n\n**Python libraries.** pandas joins and aggregates; NumPy computes geometry and arrays; Matplotlib exports PNG/SVG; Seaborn draws statistical plots; SciPy computes rank correlation, nearest-neighbour surface estimates, and Poisson interval quantiles; statsmodels supplies Wilson intervals, ECDF, and LOWESS. A fixed seed is unnecessary because this analysis uses no random subsampling.\n\n**Reproducibility.** eda/run_eda.py regenerates the figures, tables, metrics and source hashes. eda/build_reports.py rebuilds the English HTML report from the same evidence. Package versions and validation checks are saved in validation.json. This EDA does not train a forecast, simulate future leaks, or construct a submission.",
         "next":"",
         "nav":"Contents", "download":"Download PNG", "source_label":"Preview of supplied data"}
-    return {
-        "title":"Star Kingdom：配管網の探索的データ分析",
-        "intro":"ガス配管網、2019～2026年の漏洩履歴、および2027年時点の配管状態を整理した探索的データ分析です。",
-        "summary":f"## 要約\n\n- 元データは配管{m['pipe_rows']:,}本、漏洩記録{m['leak_rows']:,}件です。漏洩記録のある配管は、修理後にポリウレタンへ交換されたものとして2027年時点の素材を再構成しています。\n- 過去の修理費総額は **${m['historical_cost']/1e6:.1f}M** で、上位1%の高額漏洩が **{m['top1_cost_share']:.1%}** を占めます。中央値${m['median_cost']:,.0f}に対し平均${m['mean_cost']:,.0f}で、分布は高額側に長い裾を持ちます。\n- 素材別漏洩割合は元の素材・敷設年齢・地表・場所が絡む記述値であり、素材の因果効果や年間確率ではありません。敷設年齢の比較には鉄管だけの図も併記します。\n- 同じ元素材の中で、年ごとの1m当たり修理費の平均・中央値と、素材自身の全期間平均からの上下を比較します。\n- 地図では、train.csvに記録された漏洩配管を交換後のポリウレタンとして扱います。別図で交換箇所だけを強調し、地表図では推定地表領域を塗り、配管線を一色にします。",
-        "quality_intro":"提供ファイルは配管1本につき1行、漏洩配管1本につき1件の記録です。漏洩IDはすべて配管表に結合でき、配管IDの重複、長さ0以下、既知の敷設日より前の漏洩はありません。課題文のcosts.csvに相当する履歴として、提供されたtrain.csvを使用します。",
-        "preview":"### 元データの先頭5行\n\nファイル内の順序のまま表示します。派生データ、図の根拠表、検証結果はレポートと同時に出力します。",
-        "methods":"## 方法と読み方\n\n**観測期間。** 2019-01-01から2026-12-31までを漏洩履歴、2027-01-01を計画開始時点とします。\n\n**素材の更新。** train.csvに漏洩記録がある配管は、課題ルールに従い、漏洩後にポリウレタンへ交換されたものとして2027年時点の素材を更新します。素材欠損はUnknownのままです。元の敷設年齢を交換後のポリウレタン管の年齢としては扱いません。\n\n**配管長。** 配管ごとの長さは、記録された2端点間のユークリッド距離です。「配管長の分布」は、この1本ごとの長さの分布を表します。\n\n**漏洩割合と発生率。** 漏洩割合は8年間に漏洩記録のあった配管の割合です。発生率は最初の漏洩・交換または観測終了までのpipe-yearsを分母にします。いずれも因果効果や将来の年間確率ではありません。\n\n**修理費との関連。** Spearman順位相関は、2変数の大小順位がどの程度同じ向きに並ぶかを-1～+1で表します。LOWESSはデータの局所傾向を滑らかに示す記述線です。どちらも予測式や因果効果を示しません。1m当たり修理費は修理費を各配管の端点間距離で割った名目額で、物価調整はしていません。\n\n**地表図。** 同じ地表区分を同じ色で示すため、配管上の地表ラベルから近傍領域を推定しています。実測の土地境界ではありません。\n\n**再現性。** eda/run_eda.pyが図・表・指標・入力ファイルのハッシュを再生成し、eda/build_reports.pyが同じ根拠から日本語版と英語版を構築します。",
-        "next":"", "nav":"目次", "download":"PNGをダウンロード", "source_label":"提供データのプレビュー"}
 
 
 JSX='''import React from "react";
@@ -49,7 +37,7 @@ import { DataComponent, ReportSection, RichNarrative, useDataApp } from "../../d
 import content from "./content.json";
 import "./report.css";
 
-// Render reviewed evidence without recalculation（検証済み結果を表示）。
+// Render reviewed evidence without recalculation.
 export function ReportContent() {
   const { snapshot, visible, appTitle } = useDataApp();
   const rows=(id)=>snapshot.queries[id]?.rows ?? [];
@@ -61,7 +49,7 @@ export function ReportContent() {
     <ReportSection id="eda-summary" title="Executive Summary" queryId="key_metrics" sourceRows={rows("key_metrics")} showHeading={false}>
       <RichNarrative id="eda-summary-body" value={n.summary}/>
     </ReportSection>
-    <nav className="eda-nav" aria-label={n.nav}>{content.sections.map(([id,label])=><a key={id} href={"#section-"+id}>{label}</a>)}<a href="#methods">{content.language==="ja"?"方法と読み方":"Methods and interpretation"}</a></nav>
+    <nav className="eda-nav" aria-label={n.nav}>{content.sections.map(([id,label])=><a key={id} href={"#section-"+id}>{label}</a>)}<a href="#methods">{"Methods and interpretation"}</a></nav>
     {content.sections.map(([section,label])=><section id={"section-"+section} key={section} className="eda-section">
       <RichNarrative id={"heading-"+section} value={"## "+label}/>
       {section==="quality" && <><RichNarrative id="quality-intro" value={n.quality_intro}/><RichNarrative id="preview-intro" value={n.preview}/>
@@ -104,7 +92,7 @@ CSS='''.report-page { --data-app-layout-intent: authored-report; --data-app-cont
 
 def main(build=True):
     data=json.loads((OUT/"report_content.json").read_text(encoding="utf-8"))
-    # Add concrete findings from reviewed tables（検証済み表から具体的な解釈を追加）。
+    # Add concrete findings from reviewed tables.
     pipes=pd.read_csv(OUT/"tables/pipe_features.csv")
     leak_rows=pipes[pipes.leaked]
     road=leak_rows[leak_rows.Surface=="road"]
@@ -114,11 +102,11 @@ def main(build=True):
             c["en"]=f"Road-associated pipes account for {len(road):,} recorded leaks ({len(road)/len(leak_rows):.1%} of events) but {road.Cost.sum()/leak_rows.Cost.sum():.1%} of repair dollars. Their median repair cost is ${road.Cost.median():,.0f}. This is conditional severity, not a causal surface effect or the work-unit earthwork tariff. All outliers are retained."
         if c["id"]=="12_material_leak_fraction":
             c["en"]=f"The observed eight-year fraction is {material.loc['brass','observed_leak_share']:.1%} for brass and {material.loc['copper','observed_leak_share']:.1%} for copper, versus roughly 30–34% for the three iron groups. These are original-material, unadjusted fractions—not annual probabilities or causal effects. Wilson 95% intervals do not account for spatial dependence."
-    for lang in ["en","ja"]:
+    for lang in ["en"]:
         app=ROOT/f"eda/report_{lang}_app"
         if not app.exists():
             subprocess.run([str(NODE),str(PLUGIN/"scripts/prepare-data-app.mjs"),"--surface","report","--output",str(app),"--snapshot",str(OUT/"reviewed_snapshot.json")],check=True)
-        # Preserve identity while refreshing evidence（アプリIDを維持）。
+        # Preserve identity while refreshing evidence.
         prior=json.loads((app/"src/data.json").read_text(encoding="utf-8"))
         snap=json.loads((OUT/"reviewed_snapshot.json").read_text(encoding="utf-8"))
         n=narratives(data["metrics"],lang)
@@ -131,7 +119,7 @@ def main(build=True):
         (folder/"content.json").write_text(json.dumps({"charts":chart_copy,"metrics":data["metrics"],"versions":data["versions"],"language":lang,"narrative":n,"sections":sections},ensure_ascii=False),encoding="utf-8")
         (folder/"ReportContent.jsx").write_text(JSX,encoding="utf-8")
         (folder/"report.css").write_text(CSS,encoding="utf-8")
-        # Export a Markdown companion（テキスト版も保存）。
+        # Export a Markdown companion (also saves text version).
         md=["# "+n["title"],n["intro"],n["summary"]]
         for section,label in sections:
             md.append("## "+label)

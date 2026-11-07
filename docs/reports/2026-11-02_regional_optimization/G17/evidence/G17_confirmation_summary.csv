@@ -1,0 +1,2 @@
+arm,mean_gain,worst_setting_gain,positive_settings,all_feasible,win_fraction,p05_gain,A_mean_gain,B_mean_gain,minimum_family_mc95_low,gate_pass
+G17_single_merge,0.10338541689755705,-2040.3428125006612,17,True,0.908203125,0.0,252.2044986980618,-251.99772786426666,-749.8250375114671,False

@@ -1,0 +1,14 @@
+{
+  "candidate": "G17_single_merge",
+  "submission_id": "SuKJib1exdar",
+  "status": "complete",
+  "public_score": "79168928.88",
+  "sha256": "47a960a0cec73ee2abd1bb5df61891b66f64eca4a05f114e76a25e9b7a6dd86b",
+  "standard_gate_passed": false,
+  "user_explicitly_authorized_small_adverse_settings": true,
+  "comparator": "G08",
+  "CAPEX": "139702537.08",
+  "OPEX": "31128534.04",
+  "delta_vs_G08": "123.56",
+  "result_url": "http://172.16.42.11:51238/static/output/_IRapCtCuhwD3l48CPvQeGsF.txt"
+}

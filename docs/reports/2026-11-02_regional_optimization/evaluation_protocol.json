@@ -1,0 +1,31 @@
+{
+  "seed_development": 202611021101,
+  "seed_confirmation": 202611021102,
+  "development_draws": 24,
+  "confirmation_draws": 64,
+  "hazard_scales": [
+    0.5,
+    1.0,
+    1.5
+  ],
+  "severity_cv": [
+    0.0,
+    1.5
+  ],
+  "spatial_rho": [
+    0.0,
+    0.35
+  ],
+  "spatial_cell_m": 250,
+  "candidate_sha256": {
+    "G04": "3e240e4122be8e69e6f9ede23c7bb042c215a84d853815bd0d372d999aa5ecc4",
+    "R01_2D_centers": "70a5c05e963e64a3115c00968fe38213665b0adc98eec41146d4ceeb4beadbd8",
+    "R02_regional4": "106bf2ac3e9b99ef49560fd24a0135acb0e9db5ce04b4d319d0634f1caffb12e",
+    "R03_regional6": "4fb91ec3820e39ed4861fe9ff127c7ea4ca3e675c6f252408ee4b820031a00cc",
+    "R04_expected_order_1y": "3447c7d958c9bd9c4b09dd8cf12e13e28555446be43c855b61fc126ba21d2232",
+    "R05_expected_order_3y": "229aeda074572fd2bae1b22cfeaf4f4044961d11a2679da9b35b9c5531b1d7a3",
+    "R06_expected_order_5y": "42ce9c554ba9a2514bf65512537a10c72133e1dc78e7178bfc7f32b86b338f8f"
+  },
+  "selection_rule": "Rank by worst-setting mean gain, then average gain; do not submit reordered variants with negative worst-setting mean gain.",
+  "note": "New random bank, not an independent real-world holdout. Equal setting weights are stress assumptions. No changes allowed after seeing confirmation results."
+}

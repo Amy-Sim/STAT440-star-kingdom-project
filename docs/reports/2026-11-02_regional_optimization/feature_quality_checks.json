@@ -1,0 +1,32 @@
+{
+  "grid_reconciliations": [
+    {
+      "cell_m": 25,
+      "occupied_cells": 17124,
+      "pipes": 43039,
+      "live_iron": 26237
+    },
+    {
+      "cell_m": 50,
+      "occupied_cells": 8335,
+      "pipes": 43039,
+      "live_iron": 26237
+    },
+    {
+      "cell_m": 100,
+      "occupied_cells": 2861,
+      "pipes": 43039,
+      "live_iron": 26237
+    },
+    {
+      "cell_m": 250,
+      "occupied_cells": 535,
+      "pipes": 43039,
+      "live_iron": 26237
+    }
+  ],
+  "independent_neighborhood_checks": 96,
+  "unique_pipe_ids": true,
+  "missing_numeric_values": 0,
+  "historical_residuals_used_only_static_features": true
+}

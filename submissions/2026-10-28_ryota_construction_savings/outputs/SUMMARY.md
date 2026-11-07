@@ -1,68 +1,68 @@
-# 工事費削減版 — $76.91M版からの変更
+# Construction cost reduction version — Changes from the $76.91M version
 
-提出候補：**`submission_construction_savings.csv`**
+Submission candidate: **`submission_construction_savings.csv`**
 
-漏水予測を変更せず、最高点$76.91M版の近隣円を統合して工事費を削る実験。
-提出後、ユーザー提供画面で **$77.07M** を確認した。前の最高点$76.91Mから表示上 **+$0.16M**。出典とCSV対応は `../official_results.json` に記録。
+Merge neighboring circles from the best $76.91M plan to reduce construction costs without changing leak forecasts.
+After submission, the user-provided screenshot confirmed **$77.07M**, a displayed gain of**+$0.16M** over $76.91M. Sources and CSV mapping are recorded in `../official_results.json`.
 
-## 方法
+## Method
 
-元のCSVを未来漏水ゼロで実行し、円ごとの施工年と管ごとの交換年を取得。
-同じ年の近隣12円、中心距離80m以内、CSVの行間隔160行以内からペアを調べる。
-元の両円が完全に含む管の集合すべてを覆う円を作り、完全包含する全管と地表から
-費用を計算し直す。円が新たに含む未交換管について、その年または後年に予定されていた
-管がある候補は除外する。候補の元の包含管の合計は最大12本まで。
+Replay the original CSV without future leaks to obtain each circle's construction year and each pipe's replacement year.
+Examine pairs among 12 neighboring circles in the same scheduled year, within 80 m and a 160-row CSV gap.
+Build a circle covering the entire union of pipes wholly contained in the two original circles; use all wholly contained pipes and surfaces to
+recalculate costs. If the new circle includes an unreplaced pipe scheduled for the same or a later year,
+reject such candidates. The combined original containment set may contain at most 12 pipes.
 
-固定工事費が$25以上節約でき、前回の漏水予測から見た将来の空円スキップの影響も
-考慮した推定節約が$10以上の候補を残す。節約が大きい順に重複しないペアを選ぶ。
-統合円は早い方の行へ置き、遅い方の行を削除。その他の円の相対順序は保つ。
+Require at least $25 in fixed construction savings, while accounting for future empty-circle skipping under the previous leak forecast,
+retain candidates with at least $10 in estimated savings after this adjustment. Choose disjoint pairs in descending savings order.
+Place the merged circle at the earlier row and remove the later row, preserving other relative ordering.
 
-7,237ペアを評価し、正の候補289件から260ペアを採用した。
-拡大した円が元の両円の対象管を覆うことを確認し、出力CSVを再読込して再検証する。
+We evaluated 7,237 pairs and selected 260 pairs from 289 positive candidates.
+Confirm that the enlarged circle covers both original target sets, then read back and revalidate the exported CSV.
 
-## 未来漏水ゼロでの実行確認
+## Confirm execution with zero leak in the future
 
-| 指標 | $76.91M版 | 工事費削減版 |
+| Index | $76.91M version | Construction cost reduction version |
 |---|---:|---:|
-| 円の数 | 19,838 | 19,578 |
-| 工事費 | $180,664,606.53 | $180,425,969.20 |
-| 完了年 | 2045 | 2045 |
+| Number of circles | 19,838 | 19,578 |
+| Construction cost | $180,664,606.53 | $180,425,969.20 |
+| Completion year | 2045 | 2045 |
 
-**工事費の差は$238,637.33削減。**
-元のCSVが覆っていた管をすべて引き続きカバーすることを確認。
-同条件で、元の予定より交換年が遅れる管は0本、早まる管は189本。
-2件のテストに合格。同年の並行管をまとめて費用が減る例と、施工年が違う円を
-統合しないことを確認した。
+**Construction cost difference reduced by $238,637.33.**
+Confirmed continued coverage of every pipe covered by the original CSV.
+Under the same conditions, no pipe was delayed relative to the original schedule and 189 were advanced.
+Passed 2 tests. An example of reducing costs by combining parallel pipes of the same year, and circles constructed in different years.
+were confirmed not to be merged.
 
-前回からある全original ironカバーの留保は引き継ぐ。未交換鉄管は全てカバーするが、
-歴史的に漏水・交換済みの鉄管への円を追加する変更は今回は行わない。
+The previous full-original-iron coverage limitation remains. Every unreplaced iron pipe is covered, but
+No circles were added for historically leaked/replaced iron pipes in this round.
 
-## 共通乱数の比較試算（各条件30回）
+## Comparison trial calculation of common random numbers (30 times for each condition)
 
-| 漏水評価モデル | ハザード倍率 | 平均工事費の削減 | 平均修理費の削減 | 平均スコア差 |
+| Leak evaluation model | Hazard multiplier | Mean construction savings | Mean repair savings | Mean score difference |
 |---|---:|---:|---:|---:|
-| 細管齢 | 0.5 | $171,953 | $100,453 | +$272,406 |
-| 細管齢 | 1 | $118,387 | $39,265 | +$157,651 |
-| 細管齢 | 2 | $70,989 | $65,463 | +$136,452 |
-| 旧5年管齢 | 0.5 | $176,506 | $122,885 | +$299,391 |
-| 旧5年管齢 | 1 | $132,776 | $55,516 | +$188,291 |
-| 旧5年管齢 | 2 | $73,535 | $57,870 | +$131,405 |
+| Fine age bands | 0.5 | $171,953 | $100,453 | +$272,406 |
+| Fine age bands | 1 | $118,387 | $39,265 | +$157,651 |
+| Fine age bands | 2 | $70,989 | $65,463 | +$136,452 |
+| Old 5-year age | 0.5 | $176,506 | $122,885 | +$299,391 |
+| Old 5-year age | 1 | $132,776 | $55,516 | +$188,291 |
+| Old 5-year age bands | 2 | $73,535 | $57,870 | +$131,405 |
 
-全6条件で平均スコアが改善し、各スコア差の近似95%モンテカルロ区間も0より上だった。
-ただし、これはモデルとシミュレーションを条件とした比較であり、将来予測誤差や
-private評価の不確実性を含む区間ではない。1回ごとの全ての試行が改善したという意味でもない。
+Mean scores improved in all six settings; approximate 95% Monte Carlo intervals for score differences were also above zero.
+However, this comparison is conditional on the models and simulations; future forecast errors and
+It is not an interval that includes the uncertainty of private evaluation. Nor does it mean that every single trial improved.
 
-**「同じ年」「交換遅延0」は元の未来漏水ゼロの施工予定についての確認。**
-実際の将来漏水が起きると元のCSVも新CSVも施工時期が前倒しになるため、全将来で
-各管の交換年が必ず同じ、または必ず早まると保証したものではない。
-元の$76.91M版を残し、新しい候補として公式評価で比較する。
+**“Same year” and “0 replacement delays” are confirmations of the original future leak-free construction schedule.**
+Realized future leaks can advance construction in both the original and new CSV, so across all futures
+This does not guarantee that every pipe's replacement year remains the same or moves earlier.
+Retain the original $76.91M version and compare the new candidate through official evaluation.
 
-## ファイル
+## File
 
-- `merges.csv`：統合した元の2行、施工予定年、半径、節約見込み。
-- `report.json`：入力・提出ハッシュ、カバー・予定年・費用・試算結果。
-- `comparison.csv` / `simulations.csv`：条件別の要約と各試行。
-- `*.validation.json`：共有検証による未交換鉄管の予算・完了確認。
+- `merges.csv`: Original two rows combined, construction year, radius, estimated savings.
+- `report.json`: Input/submission hash, cover/planned year/cost/estimate results.
+- `comparison.csv`/`simulations.csv`: summary by condition and each trial.
+- `*.validation.json`: Confirmation of budget and completion of unreplaced iron pipes through shared verification.
 
-費用式は `2026-10-26-area-exponent`。円の地表費用は、すでに交換された管も含む
-全包含管の地表の種類から計算する。元のデータや予測モデルは変更しない。
+Cost model: `2026-10-26-area-exponent`. Surface costs include distinct surfaces of every wholly contained pipe, including
+Calculate using distinct surfaces of every wholly contained pipe. The raw data and predictors remain unchanged.

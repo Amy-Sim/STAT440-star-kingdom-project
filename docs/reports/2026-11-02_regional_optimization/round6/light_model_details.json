@@ -1,0 +1,48 @@
+{
+  "radius": {
+    "base_models": [
+      "ExtraTrees",
+      "HistGradientBoosting",
+      "Ridge",
+      "MLP32_16",
+      "Nystroem64_Ridge"
+    ],
+    "NN_train_row_cap": 10000,
+    "NN_max_iterations": 100,
+    "NN_actual_iterations": 59,
+    "NN_parameters": 5889,
+    "kernel_components": 64,
+    "meta_coefficients_on_standardized_base_predictions": [
+      0.12948277120836796,
+      0.259007919995596,
+      0.0019905783691816794,
+      0.028206284177463965,
+      -0.056068004776679635
+    ],
+    "coefficient_note": "Coefficients may be negative; they are not probability weights.",
+    "sklearn_version": "1.9.1"
+  },
+  "action": {
+    "base_models": [
+      "ExtraTrees",
+      "HistGradientBoosting",
+      "Ridge",
+      "MLP32_16",
+      "Nystroem64_Ridge"
+    ],
+    "NN_train_row_cap": 10000,
+    "NN_max_iterations": 100,
+    "NN_actual_iterations": 100,
+    "NN_parameters": 6529,
+    "kernel_components": 64,
+    "meta_coefficients_on_standardized_base_predictions": [
+      0.6715642739514429,
+      1.0893497426930892,
+      0.012273570364930946,
+      0.022147196986103547,
+      -0.03848775484255442
+    ],
+    "coefficient_note": "Coefficients may be negative; they are not probability weights.",
+    "sklearn_version": "1.9.1"
+  }
+}

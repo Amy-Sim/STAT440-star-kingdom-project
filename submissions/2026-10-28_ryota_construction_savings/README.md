@@ -1,7 +1,6 @@
 # Ryota: construction-cost reduction — public display $77.07M
 
-The user supplied a screenshot showing **$77.07M**, versus the previous best
-**$76.91M**: **+$0.16M** using the rounded display. The submitted CSV and screenshot
+The user supplied a screenshot showing **$77.07M**, versus the previous best**$76.91M**:**+$0.16M** using the rounded display. The submitted CSV and screenshot
 are preserved with SHA-256 hashes in [official_results.json](official_results.json).
 This is user-reported public evaluation evidence; private performance is unknown.
 

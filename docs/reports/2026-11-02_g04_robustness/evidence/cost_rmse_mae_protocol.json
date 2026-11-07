@@ -1,0 +1,28 @@
+{
+  "target": "Observed conditional leak repair amount in dollars; not construction cost, circle geometry, or exact failure time",
+  "evaluation_years": [
+    2024,
+    2025,
+    2026
+  ],
+  "events": 6766,
+  "annual_counts": {
+    "2024": 1955,
+    "2025": 1773,
+    "2026": 3038
+  },
+  "aggregation": "Pool all 6766 held-year event residuals; not an unweighted mean of annual RMSE/MAE",
+  "formula_RMSE": "sqrt(mean((prediction - actual)**2))",
+  "formula_MAE": "mean(abs(prediction - actual))",
+  "no_comparator_subtraction": true,
+  "models": {
+    "Amy_and_Ryota": "Identical past-only material/surface means and surface/global fallbacks",
+    "Shana": "Existing past-OOF stable ensemble used by 20a",
+    "Takito": "CMS001 past-only historical conditional-stack forecasts; 2027 final weights not applied retrospectively"
+  },
+  "selection_caveat": "Recipe selection and public candidate choice already reused historical years; not an untouched test or proof of no overfitting",
+  "source_sha256": {
+    "github-main\\notebooks\\Takito_Kobayashi\\2026-10-28\\ThreeModelStacking\\heldout_predictions_2024_2026.csv": "7e96e8bf2b6413d7c3048cd7f0a4eb2e390e2a15982cab043c8a5806d156a6ca",
+    "output\\2026-10-28_cost_model_comparison\\verified_oof_with_existing_ensembles.csv": "c08c945edec14d621596b3943146f0c0bb9d85950dde2c931d91b4961ed7beae"
+  }
+}

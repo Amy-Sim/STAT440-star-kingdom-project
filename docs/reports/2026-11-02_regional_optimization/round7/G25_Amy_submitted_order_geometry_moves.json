@@ -1,0 +1,1219 @@
+[
+  {
+    "row": 44,
+    "planned_year": 2027,
+    "active_pipes": 10,
+    "old_radius": 21.224930539,
+    "new_radii": [
+      21.183566015
+    ],
+    "old_cost": 35249.94,
+    "new_cost": 35218.38,
+    "old_surfaces": [
+      "grassland",
+      "road"
+    ],
+    "new_surfaces": [
+      [
+        "grassland",
+        "road"
+      ]
+    ],
+    "old_fixed": 9633.361453728361,
+    "new_fixed": 9601.798303535606,
+    "split": false
+  },
+  {
+    "row": 65,
+    "planned_year": 2027,
+    "active_pipes": 8,
+    "old_radius": 7.265505134,
+    "new_radii": [
+      7.093424894
+    ],
+    "old_cost": 8014.34,
+    "new_cost": 7952.81,
+    "old_surfaces": [
+      "grassland",
+      "road"
+    ],
+    "new_surfaces": [
+      [
+        "grassland",
+        "road"
+      ]
+    ],
+    "old_fixed": 1640.8461275762925,
+    "new_fixed": 1579.321415886536,
+    "split": false
+  },
+  {
+    "row": 303,
+    "planned_year": 2027,
+    "active_pipes": 9,
+    "old_radius": 5.859581987,
+    "new_radii": [
+      3.105200033,
+      4.233255494
+    ],
+    "old_cost": 8540.54,
+    "new_cost": 8495.44,
+    "old_surfaces": [
+      "water"
+    ],
+    "new_surfaces": [
+      [
+        "water"
+      ],
+      [
+        "water"
+      ]
+    ],
+    "old_fixed": 1810.4116661766275,
+    "new_fixed": 1765.3172736669828,
+    "split": true
+  },
+  {
+    "row": 414,
+    "planned_year": 2027,
+    "active_pipes": 5,
+    "old_radius": 3.982528464,
+    "new_radii": [
+      2.918947728,
+      1.762740345
+    ],
+    "old_cost": 4310.43,
+    "new_cost": 4268.37,
+    "old_surfaces": [
+      "water"
+    ],
+    "new_surfaces": [
+      [
+        "water"
+      ],
+      [
+        "water"
+      ]
+    ],
+    "old_fixed": 987.150865397536,
+    "new_fixed": 945.0791115509296,
+    "split": true
+  },
+  {
+    "row": 766,
+    "planned_year": 2027,
+    "active_pipes": 10,
+    "old_radius": 13.432369474,
+    "new_radii": [
+      1.91787743,
+      11.353642283
+    ],
+    "old_cost": 15611.59,
+    "new_cost": 15572.28,
+    "old_surfaces": [
+      "grassland"
+    ],
+    "new_surfaces": [
+      [
+        "grassland"
+      ],
+      [
+        "grassland"
+      ]
+    ],
+    "old_fixed": 756.9890268955274,
+    "new_fixed": 717.6762715589133,
+    "split": true
+  },
+  {
+    "row": 1040,
+    "planned_year": 2027,
+    "active_pipes": 3,
+    "old_radius": 4.449608086,
+    "new_radii": [
+      3.042508833,
+      2.105808446
+    ],
+    "old_cost": 3971.06,
+    "new_cost": 3861.47,
+    "old_surfaces": [
+      "water"
+    ],
+    "new_surfaces": [
+      [
+        "water"
+      ],
+      [
+        "water"
+      ]
+    ],
+    "old_fixed": 1171.209371272658,
+    "new_fixed": 1061.6232203579439,
+    "split": true
+  },
+  {
+    "row": 3143,
+    "planned_year": 2028,
+    "active_pipes": 6,
+    "old_radius": 18.802466024,
+    "new_radii": [
+      18.787255787
+    ],
+    "old_cost": 40265.12,
+    "new_cost": 40232.05,
+    "old_surfaces": [
+      "structure",
+      "swamp"
+    ],
+    "new_surfaces": [
+      [
+        "structure",
+        "swamp"
+      ]
+    ],
+    "old_fixed": 24151.06226656072,
+    "new_fixed": 24117.99628931987,
+    "split": false
+  },
+  {
+    "row": 4038,
+    "planned_year": 2028,
+    "active_pipes": 5,
+    "old_radius": 3.012563376,
+    "new_radii": [
+      2.94220535
+    ],
+    "old_cost": 1184.87,
+    "new_cost": 1182.83,
+    "old_surfaces": [
+      "grassland"
+    ],
+    "new_surfaces": [
+      [
+        "grassland"
+      ]
+    ],
+    "old_fixed": 151.7475952932336,
+    "new_fixed": 149.7098799093709,
+    "split": false
+  },
+  {
+    "row": 4205,
+    "planned_year": 2028,
+    "active_pipes": 5,
+    "old_radius": 4.370557123,
+    "new_radii": [
+      4.368917645
+    ],
+    "old_cost": 3461.34,
+    "new_cost": 3461.19,
+    "old_surfaces": [
+      "farmland"
+    ],
+    "new_surfaces": [
+      [
+        "farmland"
+      ]
+    ],
+    "old_fixed": 327.2940113168422,
+    "new_fixed": 327.1490845238777,
+    "split": false
+  },
+  {
+    "row": 5837,
+    "planned_year": 2030,
+    "active_pipes": 12,
+    "old_radius": 9.308626129,
+    "new_radii": [
+      9.300740748
+    ],
+    "old_cost": 11530.27,
+    "new_cost": 11529.77,
+    "old_surfaces": [
+      "grassland"
+    ],
+    "new_surfaces": [
+      [
+        "grassland"
+      ]
+    ],
+    "old_fixed": 452.2119976501116,
+    "new_fixed": 451.7049352954564,
+    "split": false
+  },
+  {
+    "row": 5918,
+    "planned_year": 2030,
+    "active_pipes": 3,
+    "old_radius": 5.842592686,
+    "new_radii": [
+      4.292382242
+    ],
+    "old_cost": 2483.21,
+    "new_cost": 2418.11,
+    "old_surfaces": [
+      "grassland"
+    ],
+    "new_surfaces": [
+      [
+        "grassland"
+      ]
+    ],
+    "old_fixed": 259.5615273140707,
+    "new_fixed": 194.46825835105562,
+    "split": false
+  },
+  {
+    "row": 5950,
+    "planned_year": 2030,
+    "active_pipes": 3,
+    "old_radius": 8.216787498,
+    "new_radii": [
+      8.144337744
+    ],
+    "old_cost": 4210.65,
+    "new_cost": 4206.4,
+    "old_surfaces": [
+      "grassland"
+    ],
+    "new_surfaces": [
+      [
+        "grassland"
+      ]
+    ],
+    "old_fixed": 384.89979761669315,
+    "new_fixed": 380.6425157355926,
+    "split": false
+  },
+  {
+    "row": 6082,
+    "planned_year": 2030,
+    "active_pipes": 3,
+    "old_radius": 7.046498357,
+    "new_radii": [
+      4.848387329
+    ],
+    "old_cost": 3503.64,
+    "new_cost": 3400.43,
+    "old_surfaces": [
+      "grassland"
+    ],
+    "new_surfaces": [
+      [
+        "grassland"
+      ]
+    ],
+    "old_fixed": 319.4084503146265,
+    "new_fixed": 216.2021247960989,
+    "split": false
+  },
+  {
+    "row": 6117,
+    "planned_year": 2030,
+    "active_pipes": 1,
+    "old_radius": 6.233366864,
+    "new_radii": [
+      3.118854956
+    ],
+    "old_cost": 1525.67,
+    "new_cost": 1402.43,
+    "old_surfaces": [
+      "grassland"
+    ],
+    "new_surfaces": [
+      [
+        "grassland"
+      ]
+    ],
+    "old_fixed": 278.1259592318912,
+    "new_fixed": 154.88964845706195,
+    "split": false
+  },
+  {
+    "row": 6192,
+    "planned_year": 2030,
+    "active_pipes": 1,
+    "old_radius": 5.020807708,
+    "new_radii": [
+      2.779124063
+    ],
+    "old_cost": 1334.96,
+    "new_cost": 1256.77,
+    "old_surfaces": [
+      "grassland"
+    ],
+    "new_surfaces": [
+      [
+        "grassland"
+      ]
+    ],
+    "old_fixed": 223.31438666663183,
+    "new_fixed": 145.11719958831077,
+    "split": false
+  },
+  {
+    "row": 6237,
+    "planned_year": 2030,
+    "active_pipes": 2,
+    "old_radius": 5.551650351,
+    "new_radii": [
+      3.077175028
+    ],
+    "old_cost": 2054.72,
+    "new_cost": 1962.08,
+    "old_surfaces": [
+      "grassland"
+    ],
+    "new_surfaces": [
+      [
+        "grassland"
+      ]
+    ],
+    "old_fixed": 246.290534488067,
+    "new_fixed": 153.6484755109602,
+    "split": false
+  },
+  {
+    "row": 6424,
+    "planned_year": 2030,
+    "active_pipes": 1,
+    "old_radius": 4.862482362,
+    "new_radii": [
+      3.047262065
+    ],
+    "old_cost": 1435.68,
+    "new_cost": 1371.67,
+    "old_surfaces": [
+      "grassland"
+    ],
+    "new_surfaces": [
+      [
+        "grassland"
+      ]
+    ],
+    "old_fixed": 216.7769996661241,
+    "new_fixed": 152.76492381098672,
+    "split": false
+  },
+  {
+    "row": 6660,
+    "planned_year": 2030,
+    "active_pipes": 1,
+    "old_radius": 5.341934171,
+    "new_radii": [
+      3.284742238
+    ],
+    "old_cost": 1550.92,
+    "new_cost": 1473.84,
+    "old_surfaces": [
+      "grassland"
+    ],
+    "new_surfaces": [
+      [
+        "grassland"
+      ]
+    ],
+    "old_fixed": 237.02069016514423,
+    "new_fixed": 159.94470787212987,
+    "split": false
+  },
+  {
+    "row": 6898,
+    "planned_year": 2030,
+    "active_pipes": 1,
+    "old_radius": 5.719242646,
+    "new_radii": [
+      2.855386263
+    ],
+    "old_cost": 1396.03,
+    "new_cost": 1289.4,
+    "old_surfaces": [
+      "grassland"
+    ],
+    "new_surfaces": [
+      [
+        "grassland"
+      ]
+    ],
+    "old_fixed": 253.87715021372148,
+    "new_fixed": 147.24206996144267,
+    "split": false
+  },
+  {
+    "row": 6902,
+    "planned_year": 2030,
+    "active_pipes": 1,
+    "old_radius": 5.7284672,
+    "new_radii": [
+      2.85808165
+    ],
+    "old_cost": 1397.53,
+    "new_cost": 1290.55,
+    "old_surfaces": [
+      "grassland"
+    ],
+    "new_surfaces": [
+      [
+        "grassland"
+      ]
+    ],
+    "old_fixed": 254.29930815947182,
+    "new_fixed": 147.3179063340717,
+    "split": false
+  },
+  {
+    "row": 6998,
+    "planned_year": 2030,
+    "active_pipes": 1,
+    "old_radius": 4.662024993,
+    "new_radii": [
+      4.228505464
+    ],
+    "old_cost": 1900.11,
+    "new_cost": 1883.49,
+    "old_surfaces": [
+      "grassland"
+    ],
+    "new_surfaces": [
+      [
+        "grassland"
+      ]
+    ],
+    "old_fixed": 208.71149348447864,
+    "new_fixed": 192.0908263297108,
+    "split": false
+  },
+  {
+    "row": 7011,
+    "planned_year": 2030,
+    "active_pipes": 1,
+    "old_radius": 4.372703254,
+    "new_radii": [
+      2.19158148
+    ],
+    "old_cost": 1074.13,
+    "new_cost": 1006.76,
+    "old_surfaces": [
+      "grassland"
+    ],
+    "new_surfaces": [
+      [
+        "grassland"
+      ]
+    ],
+    "old_fixed": 197.4930497751139,
+    "new_fixed": 130.1291308475039,
+    "split": false
+  },
+  {
+    "row": 7022,
+    "planned_year": 2030,
+    "active_pipes": 1,
+    "old_radius": 4.46970457,
+    "new_radii": [
+      2.589711409
+    ],
+    "old_cost": 1237.08,
+    "new_cost": 1175.9,
+    "old_surfaces": [
+      "grassland"
+    ],
+    "new_surfaces": [
+      [
+        "grassland"
+      ]
+    ],
+    "old_fixed": 201.19816524125986,
+    "new_fixed": 140.01529064250332,
+    "split": false
+  },
+  {
+    "row": 7192,
+    "planned_year": 2030,
+    "active_pipes": 2,
+    "old_radius": 3.478339593,
+    "new_radii": [
+      2.393428172
+    ],
+    "old_cost": 1782.1,
+    "new_cost": 1751.03,
+    "old_surfaces": [
+      "grassland"
+    ],
+    "new_surfaces": [
+      [
+        "grassland"
+      ]
+    ],
+    "old_fixed": 166.0740629745464,
+    "new_fixed": 134.99720199467131,
+    "split": false
+  },
+  {
+    "row": 7267,
+    "planned_year": 2030,
+    "active_pipes": 1,
+    "old_radius": 1.19504929,
+    "new_radii": [
+      0.785892214
+    ],
+    "old_cost": 425.1,
+    "new_cost": 419.63,
+    "old_surfaces": [
+      "grassland"
+    ],
+    "new_surfaces": [
+      [
+        "grassland"
+      ]
+    ],
+    "old_fixed": 110.74619055733295,
+    "new_fixed": 105.27006198096369,
+    "split": false
+  },
+  {
+    "row": 7309,
+    "planned_year": 2031,
+    "active_pipes": 1,
+    "old_radius": 5.718079786,
+    "new_radii": [
+      2.855386263
+    ],
+    "old_cost": 1395.98,
+    "new_cost": 1289.4,
+    "old_surfaces": [
+      "grassland"
+    ],
+    "new_surfaces": [
+      [
+        "grassland"
+      ]
+    ],
+    "old_fixed": 253.82396620635757,
+    "new_fixed": 147.24206996144267,
+    "split": false
+  },
+  {
+    "row": 7636,
+    "planned_year": 2031,
+    "active_pipes": 2,
+    "old_radius": 8.093295391,
+    "new_radii": [
+      8.060478389
+    ],
+    "old_cost": 5445.77,
+    "new_cost": 5441.31,
+    "old_surfaces": [
+      "farmland"
+    ],
+    "new_surfaces": [
+      [
+        "farmland"
+      ]
+    ],
+    "old_fixed": 747.8710852419966,
+    "new_fixed": 743.4115048767883,
+    "split": false
+  },
+  {
+    "row": 7883,
+    "planned_year": 2031,
+    "active_pipes": 1,
+    "old_radius": 5.703692787,
+    "new_radii": [
+      2.523238008
+    ],
+    "old_cost": 1262.46,
+    "new_cost": 1147.58,
+    "old_surfaces": [
+      "grassland"
+    ],
+    "new_surfaces": [
+      [
+        "grassland"
+      ]
+    ],
+    "old_fixed": 253.1665956984947,
+    "new_fixed": 138.284908803977,
+    "split": false
+  },
+  {
+    "row": 7997,
+    "planned_year": 2031,
+    "active_pipes": 1,
+    "old_radius": 6.386452691,
+    "new_radii": [
+      4.552681529
+    ],
+    "old_cost": 2106.7,
+    "new_cost": 2025.48,
+    "old_surfaces": [
+      "grassland"
+    ],
+    "new_surfaces": [
+      [
+        "grassland"
+      ]
+    ],
+    "old_fixed": 285.62656812414406,
+    "new_fixed": 204.41262346122272,
+    "split": false
+  },
+  {
+    "row": 8706,
+    "planned_year": 2031,
+    "active_pipes": 1,
+    "old_radius": 4.346430569,
+    "new_radii": [
+      2.353854224
+    ],
+    "old_cost": 1138.04,
+    "new_cost": 1075.56,
+    "old_surfaces": [
+      "grassland"
+    ],
+    "new_surfaces": [
+      [
+        "grassland"
+      ]
+    ],
+    "old_fixed": 196.49933389055363,
+    "new_fixed": 134.01918491272494,
+    "split": false
+  },
+  {
+    "row": 8999,
+    "planned_year": 2031,
+    "active_pipes": 1,
+    "old_radius": 3.101804066,
+    "new_radii": [
+      2.108062906
+    ],
+    "old_cost": 1070.11,
+    "new_cost": 1009.03,
+    "old_surfaces": [
+      "farmland"
+    ],
+    "new_surfaces": [
+      [
+        "farmland"
+      ]
+    ],
+    "old_fixed": 226.88779351736193,
+    "new_fixed": 165.8078185400843,
+    "split": false
+  },
+  {
+    "row": 9075,
+    "planned_year": 2031,
+    "active_pipes": 1,
+    "old_radius": 6.364755512,
+    "new_radii": [
+      5.473375188
+    ],
+    "old_cost": 2473.91,
+    "new_cost": 2432.15,
+    "old_surfaces": [
+      "grassland"
+    ],
+    "new_surfaces": [
+      [
+        "grassland"
+      ]
+    ],
+    "old_fixed": 284.5557499470357,
+    "new_fixed": 242.80141768507082,
+    "split": false
+  },
+  {
+    "row": 9949,
+    "planned_year": 2032,
+    "active_pipes": 1,
+    "old_radius": 4.519085531,
+    "new_radii": [
+      3.774259205
+    ],
+    "old_cost": 2709.5,
+    "new_cost": 2419.44,
+    "old_surfaces": [
+      "water"
+    ],
+    "new_surfaces": [
+      [
+        "water"
+      ]
+    ],
+    "old_fixed": 1199.7990090592477,
+    "new_fixed": 909.7319934078035,
+    "split": false
+  },
+  {
+    "row": 9985,
+    "planned_year": 2032,
+    "active_pipes": 1,
+    "old_radius": 5.260210121,
+    "new_radii": [
+      2.53571096
+    ],
+    "old_cost": 1247.76,
+    "new_cost": 1152.89,
+    "old_surfaces": [
+      "grassland"
+    ],
+    "new_surfaces": [
+      [
+        "grassland"
+      ]
+    ],
+    "old_fixed": 233.47622146210756,
+    "new_fixed": 138.60719220533477,
+    "split": false
+  },
+  {
+    "row": 10194,
+    "planned_year": 2032,
+    "active_pipes": 1,
+    "old_radius": 16.225141986,
+    "new_radii": [
+      13.125877161
+    ],
+    "old_cost": 6256.12,
+    "new_cost": 5982.06,
+    "old_surfaces": [
+      "grassland"
+    ],
+    "new_surfaces": [
+      [
+        "grassland"
+      ]
+    ],
+    "old_fixed": 1005.7724493014412,
+    "new_fixed": 731.7086401898534,
+    "split": false
+  },
+  {
+    "row": 10214,
+    "planned_year": 2032,
+    "active_pipes": 1,
+    "old_radius": 4.446173511,
+    "new_radii": [
+      3.736995113
+    ],
+    "old_cost": 2664.6,
+    "new_cost": 2390.99,
+    "old_surfaces": [
+      "water"
+    ],
+    "new_surfaces": [
+      [
+        "water"
+      ]
+    ],
+    "old_fixed": 1169.8041096855193,
+    "new_fixed": 896.1880793134313,
+    "split": false
+  },
+  {
+    "row": 10316,
+    "planned_year": 2032,
+    "active_pipes": 2,
+    "old_radius": 5.170120037,
+    "new_radii": [
+      5.162635986
+    ],
+    "old_cost": 2294.14,
+    "new_cost": 2293.82,
+    "old_surfaces": [
+      "grassland"
+    ],
+    "new_surfaces": [
+      [
+        "grassland"
+      ]
+    ],
+    "old_fixed": 229.61334279017905,
+    "new_fixed": 229.2945454981124,
+    "split": false
+  },
+  {
+    "row": 10320,
+    "planned_year": 2032,
+    "active_pipes": 6,
+    "old_radius": 23.266273263,
+    "new_radii": [
+      22.262112351
+    ],
+    "old_cost": 17787.77,
+    "new_cost": 17666.98,
+    "old_surfaces": [
+      "grassland"
+    ],
+    "new_surfaces": [
+      [
+        "grassland"
+      ]
+    ],
+    "old_fixed": 1771.6072586039563,
+    "new_fixed": 1650.8202950439786,
+    "split": false
+  },
+  {
+    "row": 10533,
+    "planned_year": 2032,
+    "active_pipes": 26,
+    "old_radius": 28.309311336,
+    "new_radii": [
+      28.269016713
+    ],
+    "old_cost": 69724.38,
+    "new_cost": 69711.22,
+    "old_surfaces": [
+      "farmland"
+    ],
+    "new_surfaces": [
+      [
+        "farmland"
+      ]
+    ],
+    "old_fixed": 5544.465494787637,
+    "new_fixed": 5531.297928239214,
+    "split": false
+  },
+  {
+    "row": 10721,
+    "planned_year": 2032,
+    "active_pipes": 1,
+    "old_radius": 8.170235085,
+    "new_radii": [
+      6.059260443
+    ],
+    "old_cost": 2805.87,
+    "new_cost": 2693.45,
+    "old_surfaces": [
+      "grassland"
+    ],
+    "new_surfaces": [
+      [
+        "grassland"
+      ]
+    ],
+    "old_fixed": 382.16126018193415,
+    "new_fixed": 269.75086677859053,
+    "split": false
+  },
+  {
+    "row": 11153,
+    "planned_year": 2033,
+    "active_pipes": 11,
+    "old_radius": 23.88981758,
+    "new_radii": [
+      21.278421889,
+      6.670462004
+    ],
+    "old_cost": 28955.21,
+    "new_cost": 28942.74,
+    "old_surfaces": [
+      "grassland"
+    ],
+    "new_surfaces": [
+      [
+        "grassland"
+      ],
+      [
+        "grassland"
+      ]
+    ],
+    "old_fixed": 1848.4791727766187,
+    "new_fixed": 1836.0136818107792,
+    "split": true
+  },
+  {
+    "row": 12098,
+    "planned_year": 2033,
+    "active_pipes": 1,
+    "old_radius": 5.947431117,
+    "new_radii": [
+      3.114386975
+    ],
+    "old_cost": 1510.21,
+    "new_cost": 1400.51,
+    "old_surfaces": [
+      "grassland"
+    ],
+    "new_surfaces": [
+      [
+        "grassland"
+      ]
+    ],
+    "old_fixed": 264.4593849676053,
+    "new_fixed": 154.75603885540772,
+    "split": false
+  },
+  {
+    "row": 12822,
+    "planned_year": 2034,
+    "active_pipes": 3,
+    "old_radius": 25.901738393,
+    "new_radii": [
+      26.168208826,
+      4.666862901,
+      4.662430624
+    ],
+    "old_cost": 20879.49,
+    "new_cost": 19518.36,
+    "old_surfaces": [
+      "farmland",
+      "grassland"
+    ],
+    "new_surfaces": [
+      [
+        "farmland"
+      ],
+      [
+        "farmland"
+      ],
+      [
+        "grassland"
+      ]
+    ],
+    "old_fixed": 6787.080377539282,
+    "new_fixed": 5425.952125581433,
+    "split": true
+  },
+  {
+    "row": 12904,
+    "planned_year": 2034,
+    "active_pipes": 1,
+    "old_radius": 3.970079715,
+    "new_radii": [
+      2.064752801
+    ],
+    "old_cost": 1008.63,
+    "new_cost": 953.13,
+    "old_surfaces": [
+      "grassland"
+    ],
+    "new_surfaces": [
+      [
+        "grassland"
+      ]
+    ],
+    "old_fixed": 182.72891574527864,
+    "new_fixed": 127.22540539174804,
+    "split": false
+  },
+  {
+    "row": 13590,
+    "planned_year": 2035,
+    "active_pipes": 2,
+    "old_radius": 31.013997765,
+    "new_radii": [
+      40.394095333
+    ],
+    "old_cost": 97841.23,
+    "new_cost": 94529.77,
+    "old_surfaces": [
+      "structure",
+      "water"
+    ],
+    "new_surfaces": [
+      [
+        "structure"
+      ]
+    ],
+    "old_fixed": 74579.95769741485,
+    "new_fixed": 71268.49837735179,
+    "split": false
+  },
+  {
+    "row": 14566,
+    "planned_year": 2036,
+    "active_pipes": 19,
+    "old_radius": 19.804569979,
+    "new_radii": [
+      19.199193344
+    ],
+    "old_cost": 41037.72,
+    "new_cost": 40776.34,
+    "old_surfaces": [
+      "swamp"
+    ],
+    "new_surfaces": [
+      [
+        "swamp"
+      ]
+    ],
+    "old_fixed": 5184.635749215982,
+    "new_fixed": 4923.249272978069,
+    "split": false
+  },
+  {
+    "row": 14572,
+    "planned_year": 2036,
+    "active_pipes": 1,
+    "old_radius": 7.23962926,
+    "new_radii": [
+      6.312656939
+    ],
+    "old_cost": 2854.79,
+    "new_cost": 2807.06,
+    "old_surfaces": [
+      "grassland"
+    ],
+    "new_surfaces": [
+      [
+        "grassland"
+      ]
+    ],
+    "old_fixed": 329.72930662378354,
+    "new_fixed": 281.9949622407162,
+    "split": false
+  },
+  {
+    "row": 15610,
+    "planned_year": 2036,
+    "active_pipes": 2,
+    "old_radius": 9.383029456,
+    "new_radii": [
+      4.894091825,
+      3.913490491
+    ],
+    "old_cost": 5051.08,
+    "new_cost": 4518.25,
+    "old_surfaces": [
+      "swamp"
+    ],
+    "new_surfaces": [
+      [
+        "swamp"
+      ],
+      [
+        "swamp"
+      ]
+    ],
+    "old_fixed": 1528.044935406101,
+    "new_fixed": 995.2189063560597,
+    "split": true
+  },
+  {
+    "row": 16097,
+    "planned_year": 2037,
+    "active_pipes": 1,
+    "old_radius": 27.575002813,
+    "new_radii": [
+      42.01731988
+    ],
+    "old_cost": 63195.72,
+    "new_cost": 41569.36,
+    "old_surfaces": [
+      "grassland",
+      "road",
+      "structure"
+    ],
+    "new_surfaces": [
+      [
+        "grassland",
+        "road"
+      ]
+    ],
+    "old_fixed": 52165.72174128807,
+    "new_fixed": 30539.36423334068,
+    "split": false
+  },
+  {
+    "row": 16207,
+    "planned_year": 2037,
+    "active_pipes": 2,
+    "old_radius": 7.297060003,
+    "new_radii": [
+      3.293862715,
+      4.047938747
+    ],
+    "old_cost": 5520.3,
+    "new_cost": 4691.22,
+    "old_surfaces": [
+      "water"
+    ],
+    "new_surfaces": [
+      [
+        "water"
+      ],
+      [
+        "water"
+      ]
+    ],
+    "old_fixed": 2583.5838651006475,
+    "new_fixed": 1754.494782472984,
+    "split": true
+  },
+  {
+    "row": 16280,
+    "planned_year": 2037,
+    "active_pipes": 1,
+    "old_radius": 8.267627624,
+    "new_radii": [
+      6.169295935
+    ],
+    "old_cost": 3719.33,
+    "new_cost": 3267.82,
+    "old_surfaces": [
+      "swamp"
+    ],
+    "new_surfaces": [
+      [
+        "swamp"
+      ]
+    ],
+    "old_fixed": 1251.6119979121365,
+    "new_fixed": 800.0985265931124,
+    "split": false
+  },
+  {
+    "row": 16286,
+    "planned_year": 2037,
+    "active_pipes": 1,
+    "old_radius": 6.754697514,
+    "new_radii": [
+      4.727021732
+    ],
+    "old_cost": 2807.56,
+    "new_cost": 2436.01,
+    "old_surfaces": [
+      "swamp"
+    ],
+    "new_surfaces": [
+      [
+        "swamp"
+      ]
+    ],
+    "old_fixed": 916.7491233866461,
+    "new_fixed": 545.2024606414209,
+    "split": false
+  },
+  {
+    "row": 17535,
+    "planned_year": 2038,
+    "active_pipes": 4,
+    "old_radius": 54.440273088,
+    "new_radii": [
+      34.111914247,
+      31.184521266
+    ],
+    "old_cost": 121917.63,
+    "new_cost": 109879.93,
+    "old_surfaces": [
+      "water"
+    ],
+    "new_surfaces": [
+      [
+        "water"
+      ],
+      [
+        "water"
+      ]
+    ],
+    "old_fixed": 75747.02826121631,
+    "new_fixed": 63709.337393787995,
+    "split": true
+  }
+]

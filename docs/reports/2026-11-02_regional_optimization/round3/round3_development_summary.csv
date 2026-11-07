@@ -1,0 +1,2 @@
+arm,mean_gain,worst_setting_gain,positive_settings,all_feasible,win_fraction,p05_gain,A_mean_gain,B_mean_gain,minimum_family_mc95_low,gate_pass
+G13_iterative350,-596.5575434026154,-4354.878750002012,12,True,0.9383680555555556,-101.07300000488726,-279.12657986105313,-913.9885069441775,-2224.1731516914842,False

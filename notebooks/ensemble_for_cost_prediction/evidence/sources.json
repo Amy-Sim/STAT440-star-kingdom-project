@@ -1,1 +1,116 @@
-{"schemaVersion": 1, "items": [{"id": "optuna-ensemble", "title": "Optuna最適化後の比較と検証", "queries": [{"id": "temporal-tuned-models", "source": {"label": "Pinned GitHub inputs + locally refit, verified temporal models", "links": [{"label": "Training labels", "url": "https://github.com/reinesana/STAT440-star-kingdom-project/blob/a09355d835d9acbb5746f11edcddd0cfd5e8ec3e/data/train.csv"}, {"label": "Pipe inventory", "url": "https://github.com/reinesana/STAT440-star-kingdom-project/blob/a09355d835d9acbb5746f11edcddd0cfd5e8ec3e/data/pipes.csv"}, {"label": "Original model folders", "url": "https://github.com/reinesana/STAT440-star-kingdom-project/tree/a09355d835d9acbb5746f11edcddd0cfd5e8ec3e/notebooks"}], "filters": ["2019–2026の14,113件を保持。評価は2023–2026の8,592件。", "2027用は支持対象27,240本の故障時費用。PU/不明材料15,799本は未推定。"], "caveats": ["過去結果を参照済みのため、未使用最終ホールドアウトとは呼ばない。", "30trialは有限範囲の探索。乱数・計算制御などは固定。失敗/実行切替で中断したtrialも記録し、正常な候補だけを採用。", "年間総額偏りは実際に故障した歴史データでの評価。将来の予算には故障確率・件数の予測も必要。"], "evidenceFlow": [{"kind": "validation", "title": "独立検証", "text": "80件の学習期間確認、10保存モデルの再生、全指標と重みの再計算、将来の修理日・費用の変更検査が通過。"}, {"kind": "calculation", "title": "探索・集計", "text": "各モデル・各origin 30trial、内側は過去最新2年の年平均RMSE。2020のみ時系列検証不能で固定設定。2027用モデルは2019–2026全件で再学習。"}, {"kind": "calculation", "title": "成果物", "text": "採用: ensemble_stable。コード・全trial・設定・検証記録: ensemble_training/optuna/results/、比較説明: ensemble_training/optuna/README_ja.md。"}]}, "table": {"columns": [{"key": "method", "label": "方法", "type": "string"}, {"key": "RMSE", "label": "年平均RMSE", "type": "number"}, {"key": "meanBias", "label": "年総額の平均絶対偏り(%)", "type": "number"}, {"key": "worstBias", "label": "年総額の最大絶対偏り(%)", "type": "number"}], "rows": [{"method": "prior_surface_mean", "RMSE": 125255.32, "meanBias": 8.63, "worstBias": 21.22}, {"method": "ensemble_equal", "RMSE": 125151.59, "meanBias": 6.47, "worstBias": 12.39}, {"method": "ensemble_rmse_weighted", "RMSE": 125329.07, "meanBias": 7.67, "worstBias": 21.3}, {"method": "ensemble_stable", "RMSE": 125230.52, "meanBias": 4.61, "worstBias": 10.02}, {"method": "ensemble_balanced", "RMSE": 125255.35, "meanBias": 6.38, "worstBias": 13.33}], "rowCount": 5, "previewRowCount": 5, "truncated": false}}]}]}
+{
+  "schemaVersion": 1,
+  "items": [
+    {
+      "id": "optuna-ensemble",
+      "title": "Comparison and verification after Optuna optimization",
+      "queries": [
+        {
+          "id": "temporal-tuned-models",
+          "source": {
+            "label": "Pinned GitHub inputs + locally refit, verified temporal models",
+            "links": [
+              {
+                "label": "Training labels",
+                "url": "https://github.com/reinesana/STAT440-star-kingdom-project/blob/a09355d835d9acbb5746f11edcddd0cfd5e8ec3e/data/train.csv"
+              },
+              {
+                "label": "Pipe inventory",
+                "url": "https://github.com/reinesana/STAT440-star-kingdom-project/blob/a09355d835d9acbb5746f11edcddd0cfd5e8ec3e/data/pipes.csv"
+              },
+              {
+                "label": "Original model folders",
+                "url": "https://github.com/reinesana/STAT440-star-kingdom-project/tree/a09355d835d9acbb5746f11edcddd0cfd5e8ec3e/notebooks"
+              }
+            ],
+            "filters": [
+              "Retains 14,113 items from 2019–2026. 8,592 reviews from 2023–2026.",
+              "For 2027, the cost is for failure of 27,240 supported items. 15,799 pieces of PU/unknown material are not estimated."
+            ],
+            "caveats": [
+              "Historical results were previously inspected; this is not an untouched final holdout.",
+              "30trial is a finite range search. Random numbers, calculation control, etc. are fixed. Trials that were interrupted due to failure/execution switching are also recorded, and only successful candidates are adopted.",
+              "Annual total bias is evaluated on historical repairs that actually occurred. Future budgets also require predictions of failure probabilities/counts."
+            ],
+            "evidenceFlow": [
+              {
+                "kind": "validation",
+                "title": "Independent validation",
+                "text": "Passed 80 learning period confirmations, 10 saved model regenerations, recalculation of all indicators and weights, and future repair date/cost change inspections."
+              },
+              {
+                "kind": "calculation",
+                "title": "Search and aggregation",
+                "text": "There were 30 trials per model/origin. Inner validation used equal-weight RMSE over the two latest past years. The 2020 cold start used fixed settings because temporal validation was unavailable. Deployment models were refitted on all 2019–2026 data."
+              },
+              {
+                "kind": "calculation",
+                "title": "Artifacts",
+                "text": "Selected: ensemble_stable. Code, all trials, settings, and validation: ensemble_training/optuna/results/. Comparison report: ensemble_training/optuna/README.md."
+              }
+            ]
+          },
+          "table": {
+            "columns": [
+              {
+                "key": "method",
+                "label": "Method",
+                "type": "string"
+              },
+              {
+                "key": "RMSE",
+                "label": "Mean annual RMSE",
+                "type": "number"
+              },
+              {
+                "key": "meanBias",
+                "label": "Mean absolute annual total bias (%)",
+                "type": "number"
+              },
+              {
+                "key": "worstBias",
+                "label": "Worst absolute annual total bias (%)",
+                "type": "number"
+              }
+            ],
+            "rows": [
+              {
+                "method": "prior_surface_mean",
+                "RMSE": 125255.32,
+                "meanBias": 8.63,
+                "worstBias": 21.22
+              },
+              {
+                "method": "ensemble_equal",
+                "RMSE": 125151.59,
+                "meanBias": 6.47,
+                "worstBias": 12.39
+              },
+              {
+                "method": "ensemble_rmse_weighted",
+                "RMSE": 125329.07,
+                "meanBias": 7.67,
+                "worstBias": 21.3
+              },
+              {
+                "method": "ensemble_stable",
+                "RMSE": 125230.52,
+                "meanBias": 4.61,
+                "worstBias": 10.02
+              },
+              {
+                "method": "ensemble_balanced",
+                "RMSE": 125255.35,
+                "meanBias": 6.38,
+                "worstBias": 13.33
+              }
+            ],
+            "rowCount": 5,
+            "previewRowCount": 5,
+            "truncated": false
+          }
+        }
+      ]
+    }
+  ]
+}

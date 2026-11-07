@@ -1,0 +1,17 @@
+{
+  "G05": {
+    "sha256": "8590a908e9a81311f1d3c4eee31359fe4025c7f04e9bc52f0e8d6f55b14d69e4",
+    "uncovered_iron": 0,
+    "rows": 59118
+  },
+  "G16_single_merge": {
+    "sha256": "03d42134c6e3629d68d54dafe6a2ae3b8b20f2c5f6d58b4b5045374d37af7740",
+    "uncovered_iron": 0,
+    "rows": 59117
+  },
+  "G17_single_merge": {
+    "sha256": "47a960a0cec73ee2abd1bb5df61891b66f64eca4a05f114e76a25e9b7a6dd86b",
+    "uncovered_iron": 0,
+    "rows": 59117
+  }
+}

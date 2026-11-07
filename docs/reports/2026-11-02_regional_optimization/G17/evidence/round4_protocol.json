@@ -1,0 +1,42 @@
+{
+  "comparator": "G08",
+  "comparator_public_score": 79168805.32,
+  "development_draws": 48,
+  "confirmation_draws": 128,
+  "seed_development": 202611024401,
+  "seed_confirmation": 202611024402,
+  "settings": 24,
+  "hazard_scales": [
+    0.5,
+    1.0,
+    1.5
+  ],
+  "cost_cv": [
+    0.0,
+    1.5
+  ],
+  "spatial_rho": [
+    0.0,
+    0.35
+  ],
+  "cell_m": 250,
+  "gate": "All 24 setting mean gains > 0, all scenarios feasible, and each forecast-family mean paired MC95 lower bound >0; must pass development and fresh confirmation.",
+  "note": "Synthetic checks conditional on forecasts, not independent real-world validation. No candidate changes after confirmation.",
+  "sha256": {
+    "G05": "8590a908e9a81311f1d3c4eee31359fe4025c7f04e9bc52f0e8d6f55b14d69e4",
+    "G16_single_merge": "03d42134c6e3629d68d54dafe6a2ae3b8b20f2c5f6d58b4b5045374d37af7740",
+    "G17_single_merge": "47a960a0cec73ee2abd1bb5df61891b66f64eca4a05f114e76a25e9b7a6dd86b"
+  },
+  "duplicate_aliases": {},
+  "forecast_input_sha256": {
+    "CMS001_predictions_2027.csv": "01c194da1c12c3d76ad0c8744c63b36cfaa071659de14484496758dd57f2a422",
+    "F168_curves_2027.npz": "ceb27cd2552da76574fdd1d11c5f72666ccc67d7cda64a36f7f37d2f92536cdc"
+  },
+  "code_sha256": {
+    "assess.py": "b2fddef61f10d1a7bb2149ed556533396b5e3647eb7145f358be6601b0cadb26",
+    "fast_geometry.py": "3f33807652524905fb789b8c5a2463e0b4fe306e677f029a7e1d4652f9fc8442",
+    "larger_circles.py": "73d75d9b32854a6e9867c631fa39e0e4cd8f6e53677f0cb631c5e9ddce3d8a94"
+  },
+  "evaluation_cost_rule": "round_to_cents(100 + sum(distinct all-contained surface rates)*area**0.85 + 200*unreplaced length)",
+  "future_public_annual_outcomes_used_as_forecast_inputs": false
+}

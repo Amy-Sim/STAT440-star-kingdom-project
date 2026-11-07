@@ -178,26 +178,26 @@ def main():
                                  'No future leak validation establishes construction feasibility, not official score improvement.',
                                  'Unknown-material pipes are not original-iron targets; incidental replacement is charged.'])
     (OUT/'manifest.json').write_text(json.dumps(manifest,indent=2),encoding='utf-8')
-    (OUT/'README_ja.md').write_text('''# コスト予測を使った提出候補
+    (OUT/'README.md').write_text('''# Submission candidates using cost prediction
 
-提出するのは01〜06のCSVだけです（ヘッダーなし、中心座標と半径の2列）。audit.csv、comparison.csvは提出しません。
+Submit only CSVs 01–06: no header, two columns containing center coordinates and radius. Do not submit audit.csv or comparison.csv.
 
-1. 01_catboost_risk.csv：CatBoost × 2年間漏れ確率
-2. 02_stable_risk.csv：縮小重みアンサンブル × 2年間漏れ確率
-3. 03_equal_risk.csv：等重みアンサンブル × 2年間漏れ確率
-4. 04_rmse_weighted_risk.csv：RMSE重みアンサンブル × 2年間漏れ確率
-5. 05_catboost_cost_only.csv：CatBoostの修理費だけで降順
-6. 06_stable_risk_per_work_cost.csv：期待修理費 / 初期工事費で降順
+1. 01_catboost_risk.csv: CatBoost × 2-year leakage probability
+2. 02_stable_risk.csv: Shrinkage ensemble × 2-year leakage probability
+3. 03_equal_risk.csv: Equal weight ensemble × 2-year leakage probability
+4. 04_rmse_weighted_risk.csv: RMSE weighted ensemble × 2-year leakage probability
+5. 05_catboost_cost_only.csv: Descending by CatBoost repair cost only
+6. 06_stable_risk_per_work_cost.csv: Descending order by expected repair cost / initial construction cost
 
-まず01と02を提出して単体とアンサンブルを比較し、06で工事費を考慮する効果を確認することを推奨します。
-元の鉄管1本ごとの円を維持し、円内の未交換管すべての優先度を合計して順序を決めました。座標・距離はmです。
-各CSVを再読み込みして端点の完全被覆、地表種類、重複交換、履歴によるPU化、予算繰越、先頭での工事停止を確認しました。
-将来漏れなしで全候補が予算内に完了。工事費・完了年はcomparison.csv、年別明細はvalidation.jsonです。
-将来の漏れ修理費を含めたスコアは推定していません。no_future_leak_scoreは公式結果ではありません。
-baselineの公式スコア約−26Mドルはユーザー報告であり、今回のモデルの改善は提出結果で判断します。
-固定2027年コスト・2027〜2028年漏れ確率を使った順序の比較であり、25年間の最適化ではありません。
+First compare submissions 01 and 02 to assess a single model versus the ensemble, then use 06 to assess the construction-cost adjustment.
+The original one-circle-per-iron-pipe geometry was retained. Order used the summed priority of all unreplaced pipes contained in each circle. Coordinates and distances are in meters.
+Each exported CSV was reloaded to verify full endpoint containment, distinct surfaces, overlapping replacement, historical PU conversion, budget carryover, and stopping at the first unaffordable unit.
+All candidates completed within budget without future leaks. See comparison.csv for construction costs/completion years and validation.json for annual details.
+Scores including future leak repair costs were not estimated. `no_future_leak_score` is not an official result.
+The official baseline score of approximately -26M dollars is based on user reports, and improvements to this model will be determined based on the submitted results.
+This compares orders using fixed 2027 repair costs and 2027–2028 leak probabilities, not a 25-year optimization.
 
-再実行：プロジェクトルートから `.venv-eda/Scripts/python.exe github-main/src/build_cost_submissions.py`
+Reproduce from the project root: `.venv-eda/Scripts/python.exe github-main/src/build_cost_submissions.py`
 ''',encoding='utf-8')
 
 

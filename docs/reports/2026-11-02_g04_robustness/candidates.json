@@ -1,0 +1,37 @@
+{
+  "ryota_original": {
+    "author": "Ryota",
+    "file": "candidates/ryota_original.csv",
+    "public_score_M": 77.29,
+    "public_note": "Rounded display; invalid original iron geometric coverage",
+    "sha256": "63ae42529ac0a490df947db2f6dd68b6dc1825e10068fc97e5a2372c7331a8c9"
+  },
+  "ryota_coverage_repaired": {
+    "author": "Ryota original plan + common repair",
+    "file": "candidates/baseline_full_original_iron.csv",
+    "public_score_M": null,
+    "public_note": "Evaluation-only coverage repair; never officially submitted",
+    "sha256": "059f6c4106f3d6a140c68906e9a8ab77d9730f6fd7c4c5446706fa0d56e29222"
+  },
+  "amy_integrated": {
+    "author": "Amy",
+    "file": "candidates/amy_integrated.csv",
+    "public_score_M": 77.45649615,
+    "public_note": "Current rules, exact annual totals",
+    "sha256": "fe3a108ca087fa89431a88ed53d7d93c6201b8381fccf270b02d12d208209f10"
+  },
+  "shana_20a": {
+    "author": "Shana",
+    "file": "candidates/shana_20a.csv",
+    "public_score_M": 74.03,
+    "public_note": "Old evaluator only; not comparable with current public",
+    "sha256": "bee3665ae61c51d829886ac8ca39cde77a0f479d009484a4236280c6d4dff86a"
+  },
+  "takito_g04": {
+    "author": "Takito",
+    "file": "candidates/takito_g04.csv",
+    "public_score_M": 78.99096825,
+    "public_note": "Current rules, user supplied exact annual totals",
+    "sha256": "3e240e4122be8e69e6f9ede23c7bb042c215a84d853815bd0d372d999aa5ecc4"
+  }
+}

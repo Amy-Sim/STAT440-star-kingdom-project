@@ -1,0 +1,6 @@
+arm,author,public_score_M,public_note,A_mean_gain_M,B_mean_gain_M,worst_setting_gain_M,winning_settings,all_valid,uncovered_original_iron,mean_score_M,no_future_leak_construction_M
+ryota_original,Ryota,77.29,Rounded display; invalid original iron geometric coverage,-0.19934117042317706,-0.3804921483072916,-0.4441730939062499,0,False,10704,55.710180904010414,180.20592416999997
+ryota_coverage_repaired,Ryota original plan + common repair,,Evaluation-only coverage repair; never officially submitted,-0.662041316347656,-0.46502460748697916,-0.69568238421875,0,True,0,55.436564601458336,180.6750949
+amy_integrated,Amy,77.45649615,"Current rules, exact annual totals",0.0,0.0,0.0,0,True,0,56.000097563375654,179.86801137999998
+shana_20a,Shana,74.03,Old evaluator only; not comparable with current public,1.4566573369563802,2.2084911721419274,-0.5332983736328125,20,True,0,57.8326718179248,187.9041985
+takito_g04,Takito,78.99096825,"Current rules, user supplied exact annual totals",7.820926414251303,-0.22774607687499993,-1.44246008125,16,True,0,59.7966877320638,185.61892105

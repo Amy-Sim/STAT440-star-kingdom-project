@@ -1,0 +1,12 @@
+{
+  "baseline": "G17",
+  "baseline_sha256": "47a960a0cec73ee2abd1bb5df61891b66f64eca4a05f114e76a25e9b7a6dd86b",
+  "geometry": "G17 circles; rerun center/radius/split for each reordered assignment",
+  "forecasts": "All variants use frozen CMS001/F168; transplant ordering rules only, not historical Amy/Ryota models.",
+  "source_commit": "ca6cdae4b859782e7a30d543fce686a30d52354c",
+  "source_sha256": {
+    "early_three_years.py": "77b19689242ac35b2b2e6cad1451560bec3eecb71edd2e0244316a9b85d43522",
+    "star_kingdom_full_pipeline_AS.ipynb": "2cc68eabcc4f3b1381027ab70fd4511b6c31f555881419c260bd6a00c0fa6d87"
+  },
+  "note": "Amy 77.46M integrated coverage inherited Ryota order. The separate Amy rule comes from latest full-pipeline annual BCR plus iron progress notebook. CSV execution cannot explicitly pause between planned annual blocks."
+}

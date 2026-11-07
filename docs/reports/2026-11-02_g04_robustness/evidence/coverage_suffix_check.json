@@ -1,0 +1,11 @@
+{
+  "active_prefix_rows": 22154,
+  "coverage_suffix_rows": 37314,
+  "suffix_circles_with_new_replacements": 0,
+  "suffix_newly_replaced_pipes": 0,
+  "suffix_construction_cost": 0,
+  "original_iron_not_geometrically_covered_before_suffix": 10826,
+  "of_these_already_PU_at_start": 10826,
+  "every_suffix_pipe_already_initial_PU_or_in_prefix_union": true,
+  "reasoning": "Since every suffix pipe is initial PU or inside a completed prefix work unit, future leaks only make additional pipes PU; a completed prefix leaves every suffix PU-only."
+}

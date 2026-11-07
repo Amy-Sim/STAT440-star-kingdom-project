@@ -15,7 +15,7 @@ library(ranger)
 
 
 ```{r}
-# view data set 
+# view data set
 
 url <- paste0(
   "https://raw.githubusercontent.com/",
@@ -30,13 +30,13 @@ View(df)
 
 
 ```{r}
-dim(df)    
-names(df)  
-head(df)   
+dim(df)
+names(df)
+head(df)
 ```
 
 ```{r}
-# doenload data and distribute 
+# doenload data and distribute
 set.seed(440)
 
 # 1. GitHub data
@@ -47,11 +47,11 @@ url <- paste0(
 
 df <- read.csv(url, stringsAsFactors = FALSE)
 
-# 2. 日付から漏洩年を作る
+# 2. Create leak year from date
 df$date <- as.Date(df$date)
 df$event_year <- as.integer(format(df$date, "%Y"))
 
-# 3. 今回使用する説明変数
+# 3. Explanatory variables used this time
 features <- c(
   "material",
   "surface",
@@ -62,17 +62,17 @@ features <- c(
   "event_year"
 )
 
-# 必要な列の確認
+# Check required columns
 required <- c("pipe_id", "date", "cost", features)
 stopifnot(all(required %in% names(df)))
 
-# 4. 2019～2022年で学習、2023年だけでテスト
+# 4. Study from 2019 to 2022, test only from 2023
 train <- subset(df, event_year >= 2019 & event_year <= 2022)
 test  <- subset(df, event_year == 2023)
 
 stopifnot(nrow(train) > 0, nrow(test) > 0)
 
-# 欠損値などがあれば、勝手に削除せず停止する
+# If there are missing values, etc., stop without deleting them.
 used <- c("cost", features)
 stopifnot(
   !anyNA(train[, used]),
@@ -92,7 +92,7 @@ stopifnot(
              logical(1)))
 )
 
-# 5. カテゴリは学習データに合わせる
+# 5. Categories match learning data
 for (col in c("material", "surface")) {
 
   categories <- sort(unique(train[[col]]))
@@ -100,7 +100,7 @@ for (col in c("material", "surface")) {
 
   if (length(unseen) > 0) {
     stop(paste(
-      "学習データにないカテゴリがあります:",
+      "Some categories are missing from the training data:",
       col, paste(unseen, collapse = ", ")
     ))
   }
@@ -112,7 +112,7 @@ for (col in c("material", "surface")) {
 cat("Training: 2019–2022,", nrow(train), "rows\n")
 cat("Testing: 2023,", nrow(test), "rows\n")
 
-# 学習データの費用分布を確認
+# Check the cost distribution of training data
 print(quantile(
   train$cost,
   probs = c(0, 0.5, 0.9, 0.99, 1)
@@ -121,8 +121,8 @@ print(quantile(
 ```
 
 ```{r}
-# 通常版とlog版のrandom forest regressors
-# 大きな費用は削除せず、同じデータ・同じ設定で、目的変数の変換だけを変えます。
+# random forest regressors for normal and log versions
+# Do not delete large costs, use the same data and settings, and only change the transformation of the objective variable.
 
 x_train <- train[, features, drop = FALSE]
 x_test  <- test[, features, drop = FALSE]
@@ -130,7 +130,7 @@ x_test  <- test[, features, drop = FALSE]
 y_train <- train$cost
 y_test  <- test$cost
 
-# A. 費用をそのまま学習
+# A. Learn the cost as it is
 rf_raw <- ranger(
   x = x_train,
   y = y_train,
@@ -141,7 +141,7 @@ rf_raw <- ranger(
   seed = 440
 )
 
-# B. log(1 + 費用)を学習
+# B. Learn log(1 + cost)
 rf_log <- ranger(
   x = x_train,
   y = log1p(y_train),
@@ -152,10 +152,10 @@ rf_log <- ranger(
   seed = 440
 )
 
-# 2023年 prediction 
+# 2023 prediction
 pred_raw <- predict(rf_raw, data = x_test)$predictions
 
-# log版は、予測後に元のドル単位へ戻す
+# log version returns to original dollar unit after prediction
 pred_log <- expm1(
   predict(rf_log, data = x_test)$predictions
 )
@@ -163,11 +163,11 @@ pred_log <- expm1(
 ```
 
 
-# 2023 ver 
+# 2023 ver
 
 ```{r}
-# 2023年のMAE・RMSE
-# log版も、対数のままではなくドルに戻してから評価します。
+# MAE / RMSE in 2023
+# The log version is also evaluated after converting it back to dollars instead of leaving it as a logarithm.
 
 evaluate <- function(model_name, actual, predicted) {
 
@@ -189,7 +189,7 @@ results <- rbind(
 
 print(results, row.names = FALSE, digits = 7)
 
-# 今回のテストでRMSEが小さい方法を表示
+# Show how the RMSE is small in this test
 cat(
   "\nLower RMSE on 2023:",
   results$model[which.min(results$RMSE)],
@@ -199,7 +199,7 @@ cat(
 ```
 
 ```{r}
-# save the results 
+# save the results
 predictions <- data.frame(
   pipe_id = test$pipe_id,
   leak_date = test$date,
@@ -226,10 +226,10 @@ View(predictions)
 
 
 
-# 2024 ver 
+# 2024 ver
 ```{r}
 
-# 1. 2024年用のデータ分割
+# 1. Data division for 2024
 df$date <- as.Date(df$date)
 df$event_year <- as.integer(format(df$date, "%Y"))
 
@@ -253,7 +253,7 @@ stopifnot(
   all(test_2024$cost > 0)
 )
 
-# 2. カテゴリの処理
+# 2. Processing categories
 for (col in c("material", "surface")) {
 
   categories <- sort(unique(as.character(train_2024[[col]])))
@@ -263,7 +263,7 @@ for (col in c("material", "surface")) {
   )
 
   if (length(unseen) > 0) {
-    stop(paste("学習データにないカテゴリ:", col))
+    stop(paste("Category not in training data:", col))
   }
 
   train_2024[[col]] <- factor(
@@ -274,14 +274,14 @@ for (col in c("material", "surface")) {
   )
 }
 
-# 3. 入力と正解を更新
+# 3. Update input and correct answer
 x_train_2024 <- train_2024[, features, drop = FALSE]
 x_test_2024  <- test_2024[, features, drop = FALSE]
 
 y_train_2024 <- train_2024$cost
 y_test_2024  <- test_2024$cost
 
-# 4. 通常版を新しく学習
+# 4. New learning of the regular version
 rf_raw_2024 <- ranger(
   x = x_train_2024,
   y = y_train_2024,
@@ -292,7 +292,7 @@ rf_raw_2024 <- ranger(
   seed = 440
 )
 
-# 5. log版を新しく学習
+# 5. Learn new log version
 rf_log_2024 <- ranger(
   x = x_train_2024,
   y = log1p(y_train_2024),
@@ -303,7 +303,7 @@ rf_log_2024 <- ranger(
   seed = 440
 )
 
-# 6. 2024年のデータで予測
+# 6. Forecast using 2024 data
 pred_raw_2024 <- predict(
   rf_raw_2024, data = x_test_2024
 )$predictions
@@ -312,7 +312,7 @@ pred_log_2024 <- expm1(
   predict(rf_log_2024, data = x_test_2024)$predictions
 )
 
-# 7. 件数と予測値を確認
+# 7. Check the number and predicted value
 stopifnot(
   length(pred_raw_2024) == nrow(test_2024),
   length(pred_log_2024) == nrow(test_2024),
@@ -320,7 +320,7 @@ stopifnot(
   all(is.finite(pred_log_2024))
 )
 
-# 8. 元のドル単位で評価
+# 8. Valued in original dollars
 evaluate_2024 <- function(name, predicted) {
   data.frame(
     model = name,
@@ -351,10 +351,10 @@ write.csv(
 
 ```
 
-# 2025 ver 
+# 2025 ver
 ```{r}
 
-# 1. データを分割
+# 1. Split data
 df$date <- as.Date(df$date)
 df$event_year <- as.integer(format(df$date, "%Y"))
 
@@ -378,7 +378,7 @@ stopifnot(
   all(test_2025$cost > 0)
 )
 
-# 2. カテゴリを学習データに合わせる
+# 2. Match categories to training data
 for (col in c("material", "surface")) {
 
   categories <- sort(unique(
@@ -390,7 +390,7 @@ for (col in c("material", "surface")) {
   )
 
   if (length(unseen) > 0) {
-    stop(paste("学習データにないカテゴリ:", col))
+    stop(paste("Category not in training data:", col))
   }
 
   train_2025[[col]] <- factor(
@@ -401,14 +401,14 @@ for (col in c("material", "surface")) {
   )
 }
 
-# 3. 説明変数と予測対象
+# 3. Explanatory variables and prediction targets
 x_train_2025 <- train_2025[, features, drop = FALSE]
 x_test_2025  <- test_2025[, features, drop = FALSE]
 
 y_train_2025 <- train_2025$cost
 y_test_2025  <- test_2025$cost
 
-# 4. 通常版を学習
+# 4. Learn the regular version
 rf_raw_2025 <- ranger(
   x = x_train_2025,
   y = y_train_2025,
@@ -419,7 +419,7 @@ rf_raw_2025 <- ranger(
   seed = 440
 )
 
-# 5. log版を学習
+# 5. Learn log version
 rf_log_2025 <- ranger(
   x = x_train_2025,
   y = log1p(y_train_2025),
@@ -430,12 +430,12 @@ rf_log_2025 <- ranger(
   seed = 440
 )
 
-# 6. 2025年を予測
+# 6. Predicting 2025
 pred_raw_2025 <- predict(
   rf_raw_2025, data = x_test_2025
 )$predictions
 
-# log版はドル単位に戻す
+# log version returns to dollar unit
 pred_log_2025 <- expm1(
   predict(rf_log_2025, data = x_test_2025)$predictions
 )
@@ -447,7 +447,7 @@ stopifnot(
   all(is.finite(pred_log_2025))
 )
 
-# 7. ドル単位でMAE・RMSEを計算
+# 7. Calculate MAE and RMSE in dollar units
 evaluate_2025 <- function(name, predicted) {
   data.frame(
     model = name,
@@ -476,7 +476,7 @@ cat(
   "\n"
 )
 
-# 8. 結果を保存
+# 8. Save results
 write.csv(
   results_2025,
   "rf_metrics_2025.csv",
@@ -502,7 +502,7 @@ write.csv(
 
 # 2026 ver
 ```{r}
-# 1. データを分割
+# 1. Split data
 df$date <- as.Date(df$date)
 df$event_year <- as.integer(format(df$date, "%Y"))
 
@@ -526,7 +526,7 @@ stopifnot(
   all(test_2026$cost > 0)
 )
 
-# 2. カテゴリを学習データに合わせる
+# 2. Match categories to training data
 for (col in c("material", "surface")) {
 
   categories <- sort(unique(
@@ -538,7 +538,7 @@ for (col in c("material", "surface")) {
   )
 
   if (length(unseen) > 0) {
-    stop(paste("学習データにないカテゴリ:", col))
+    stop(paste("Category not in training data:", col))
   }
 
   train_2026[[col]] <- factor(
@@ -549,14 +549,14 @@ for (col in c("material", "surface")) {
   )
 }
 
-# 3. 説明変数と予測対象
+# 3. Explanatory variables and prediction targets
 x_train_2026 <- train_2026[, features, drop = FALSE]
 x_test_2026  <- test_2026[, features, drop = FALSE]
 
 y_train_2026 <- train_2026$cost
 y_test_2026  <- test_2026$cost
 
-# 4. 選択済みの通常版を、同じ設定で学習し直す
+# 4. Re-learn the selected regular version with the same settings
 rf_raw_2026 <- ranger(
   x = x_train_2026,
   y = y_train_2026,
@@ -567,7 +567,7 @@ rf_raw_2026 <- ranger(
   seed = 440
 )
 
-# 5. 2026年の費用を予測
+# 5. Forecast costs in 2026
 pred_raw_2026 <- predict(
   rf_raw_2026, data = x_test_2026
 )$predictions
@@ -577,7 +577,7 @@ stopifnot(
   all(is.finite(pred_raw_2026))
 )
 
-# 6. ドル単位でMAE・RMSEを計算
+# 6. Calculate MAE and RMSE in dollar units
 results_2026 <- data.frame(
   model = "Random forest: raw",
   test_year = 2026,
@@ -593,7 +593,7 @@ cat("Final test: 2026,", nrow(test_2026), "rows\n")
 
 print(results_2026, row.names = FALSE, digits = 7)
 
-# 7. 評価結果とパイプごとの予測を保存
+# 7. Save evaluation results and predictions for each pipe
 write.csv(
   results_2026,
   "rf_metrics_2026.csv",
@@ -618,13 +618,13 @@ write.csv(
 
 
 --------------------------
-# Gamma Regression 
+# Gamma Regression
 
-# 2023 ver 
+# 2023 ver
 ```{r}
 # 1. Choose the years
 train_start <- 2019
-train_end   <- 2022  
+train_end   <- 2022
 test_year   <- 2023
 
 set.seed(440)
@@ -955,7 +955,7 @@ write.csv(
 
 
 
-# 2025 ver 
+# 2025 ver
 ```{r}
 # Fold 2: train on 2019–2024, test on 2025
 train_start <- 2019
@@ -1305,18 +1305,18 @@ mean(c(157549.3, 101120.1, 114040.9, 129651.1))
 # LightGBM
 
 
-# 2023 ver 
+# 2023 ver
 ```{r}
 library(lightgbm)
 
-# 1. 年を設定
+# 1. Set the year
 train_start <- 2019
 train_end   <- 2022
 test_year   <- 2023
 
 set.seed(440)
 
-# 2. データを読み込む
+# 2. Load data
 url <- paste0(
   "https://raw.githubusercontent.com/",
   "reinesana/STAT440-star-kingdom-project/",
@@ -1330,7 +1330,7 @@ lgb_df$event_year <- as.integer(
   format(lgb_df$date, "%Y")
 )
 
-# 3. 年で分割
+# 3. Divide by year
 lgb_train <- subset(
   lgb_df,
   event_year >= train_start & event_year <= train_end
@@ -1347,7 +1347,7 @@ features <- c(
   "midpoint_x", "midpoint_y", "event_year"
 )
 
-# 欠損や不正な値を確認。高額な費用もそのまま残す
+# Check for missing or invalid values. Leave the high costs as is
 stopifnot(
   nrow(lgb_train) > 0,
   nrow(lgb_test) > 0,
@@ -1371,7 +1371,7 @@ for (col in numeric_cols) {
   )
 }
 
-# 4. 学習データのカテゴリに合わせる
+# 4. Match the training data category
 for (col in c("material", "surface")) {
 
   categories <- sort(unique(lgb_train[[col]]))
@@ -1393,7 +1393,7 @@ for (col in c("material", "surface")) {
   )
 }
 
-# 5. カテゴリを0/1の列に変換して数値行列を作る
+# 5. Convert categories to 0/1 columns and create a numerical matrix
 x_formula <- ~ material + surface + pipe_length +
   years_used_at_leak + midpoint_x + midpoint_y +
   event_year - 1
@@ -1405,7 +1405,7 @@ stopifnot(
   identical(colnames(x_train_lgb), colnames(x_test_lgb))
 )
 
-# LightGBM用に列名を整理
+# Organize column names for LightGBM
 safe_names <- make.names(
   colnames(x_train_lgb), unique = TRUE
 )
@@ -1416,8 +1416,8 @@ colnames(x_test_lgb)  <- safe_names
 y_train_lgb <- lgb_train$cost
 y_test_lgb  <- lgb_test$cost
 
-# 6. 共通のモデル設定
-# まずは固定設定で比較。テストデータは学習に使わない
+# 6. Common model settings
+# First, compare with fixed settings. Test data is not used for learning
 params <- list(
   objective = "regression",
   metric = "rmse",
@@ -1434,7 +1434,7 @@ params <- list(
   verbosity = -1L
 )
 
-# 7. 通常版：元のcostを学習
+# 7. Regular version: Learn original cost
 dtrain_raw <- lgb.Dataset(
   data = x_train_lgb,
   label = y_train_lgb
@@ -1446,7 +1446,7 @@ lgb_raw_model <- lgb.train(
   nrounds = 500L
 )
 
-# 8. log版：log1p(cost)を学習
+# 8. log version: learn log1p(cost)
 dtrain_log <- lgb.Dataset(
   data = x_train_lgb,
   label = log1p(y_train_lgb)
@@ -1458,7 +1458,7 @@ lgb_log_model <- lgb.train(
   nrounds = 500L
 )
 
-# 9. 予測
+# 9. Prediction
 pred_raw_lgb <- predict(
   lgb_raw_model, newdata = x_test_lgb
 )
@@ -1474,15 +1474,15 @@ stopifnot(
   all(is.finite(pred_log_lgb))
 )
 
-# 費用は非負なので、負の予測は両モデルとも0にする
-# このルールは評価結果を見る前に固定
+# Since costs are non-negative, negative predictions are set to 0 in both models.
+# This rule is fixed before seeing the evaluation results
 cat("Negative predictions, raw:", sum(pred_raw_lgb < 0), "\n")
 cat("Negative predictions, log:", sum(pred_log_lgb < 0), "\n")
 
 pred_raw_lgb <- pmax(0, pred_raw_lgb)
 pred_log_lgb <- pmax(0, pred_log_lgb)
 
-# 10. 元のドル単位で評価
+# 10. Valued in original dollars
 evaluate_lgb <- function(name, predicted) {
   data.frame(
     model = name,
@@ -1512,7 +1512,7 @@ cat("Evaluation:", test_year, ",", nrow(lgb_test), "rows\n")
 
 print(lgb_results, row.names = FALSE, digits = 7)
 
-# 11. 保存
+# 11. Save
 file_label <- paste0(
   "lightgbm_train_", train_start, "_", train_end,
   "_test_", test_year
@@ -1541,16 +1541,16 @@ write.csv(
 
 
 
-# 2024 ver 
+# 2024 ver
 ```{r}
-# 1. 年を設定
+# 1. Set the year
 train_start <- 2019
 train_end   <- 2023
 test_year   <- 2024
 
 set.seed(440)
 
-# 2. データを読み込む
+# 2. Load data
 url <- paste0(
   "https://raw.githubusercontent.com/",
   "reinesana/STAT440-star-kingdom-project/",
@@ -1564,7 +1564,7 @@ lgb_df$event_year <- as.integer(
   format(lgb_df$date, "%Y")
 )
 
-# 3. 年で分割
+# 3. Divide by year
 lgb_train <- subset(
   lgb_df,
   event_year >= train_start & event_year <= train_end
@@ -1581,7 +1581,7 @@ features <- c(
   "midpoint_x", "midpoint_y", "event_year"
 )
 
-# 欠損や不正な値を確認。高額な費用もそのまま残す
+# Check for missing or invalid values. Leave the high costs as is
 stopifnot(
   nrow(lgb_train) > 0,
   nrow(lgb_test) > 0,
@@ -1605,7 +1605,7 @@ for (col in numeric_cols) {
   )
 }
 
-# 4. 学習データのカテゴリに合わせる
+# 4. Match the training data category
 for (col in c("material", "surface")) {
 
   categories <- sort(unique(lgb_train[[col]]))
@@ -1627,7 +1627,7 @@ for (col in c("material", "surface")) {
   )
 }
 
-# 5. カテゴリを0/1の列に変換して数値行列を作る
+# 5. Convert categories to 0/1 columns and create a numerical matrix
 x_formula <- ~ material + surface + pipe_length +
   years_used_at_leak + midpoint_x + midpoint_y +
   event_year - 1
@@ -1639,7 +1639,7 @@ stopifnot(
   identical(colnames(x_train_lgb), colnames(x_test_lgb))
 )
 
-# LightGBM用に列名を整理
+# Organize column names for LightGBM
 safe_names <- make.names(
   colnames(x_train_lgb), unique = TRUE
 )
@@ -1650,8 +1650,8 @@ colnames(x_test_lgb)  <- safe_names
 y_train_lgb <- lgb_train$cost
 y_test_lgb  <- lgb_test$cost
 
-# 6. 共通のモデル設定
-# まずは固定設定で比較。テストデータは学習に使わない
+# 6. Common model settings
+# First, compare with fixed settings. Test data is not used for learning
 params <- list(
   objective = "regression",
   metric = "rmse",
@@ -1668,7 +1668,7 @@ params <- list(
   verbosity = -1L
 )
 
-# 7. 通常版：元のcostを学習
+# 7. Regular version: Learn original cost
 dtrain_raw <- lgb.Dataset(
   data = x_train_lgb,
   label = y_train_lgb
@@ -1680,7 +1680,7 @@ lgb_raw_model <- lgb.train(
   nrounds = 500L
 )
 
-# 8. log版：log1p(cost)を学習
+# 8. log version: learn log1p(cost)
 dtrain_log <- lgb.Dataset(
   data = x_train_lgb,
   label = log1p(y_train_lgb)
@@ -1692,7 +1692,7 @@ lgb_log_model <- lgb.train(
   nrounds = 500L
 )
 
-# 9. 予測
+# 9. Prediction
 pred_raw_lgb <- predict(
   lgb_raw_model, newdata = x_test_lgb
 )
@@ -1708,15 +1708,15 @@ stopifnot(
   all(is.finite(pred_log_lgb))
 )
 
-# 費用は非負なので、負の予測は両モデルとも0にする
-# このルールは評価結果を見る前に固定
+# Since costs are non-negative, negative predictions are set to 0 in both models.
+# This rule is fixed before seeing the evaluation results
 cat("Negative predictions, raw:", sum(pred_raw_lgb < 0), "\n")
 cat("Negative predictions, log:", sum(pred_log_lgb < 0), "\n")
 
 pred_raw_lgb <- pmax(0, pred_raw_lgb)
 pred_log_lgb <- pmax(0, pred_log_lgb)
 
-# 10. 元のドル単位で評価
+# 10. Valued in original dollars
 evaluate_lgb <- function(name, predicted) {
   data.frame(
     model = name,
@@ -1746,7 +1746,7 @@ cat("Evaluation:", test_year, ",", nrow(lgb_test), "rows\n")
 
 print(lgb_results, row.names = FALSE, digits = 7)
 
-# 11. 保存
+# 11. Save
 file_label <- paste0(
   "lightgbm_train_", train_start, "_", train_end,
   "_test_", test_year
@@ -1774,16 +1774,16 @@ write.csv(
 ```
 
 
-# 2025 ver 
+# 2025 ver
 ```{r}
-# 1. 年を設定
+# 1. Set the year
 train_start <- 2019
 train_end   <- 2024
 test_year   <- 2025
 
 set.seed(440)
 
-# 2. データを読み込む
+# 2. Load data
 url <- paste0(
   "https://raw.githubusercontent.com/",
   "reinesana/STAT440-star-kingdom-project/",
@@ -1797,7 +1797,7 @@ lgb_df$event_year <- as.integer(
   format(lgb_df$date, "%Y")
 )
 
-# 3. 年で分割
+# 3. Divide by year
 lgb_train <- subset(
   lgb_df,
   event_year >= train_start & event_year <= train_end
@@ -1814,7 +1814,7 @@ features <- c(
   "midpoint_x", "midpoint_y", "event_year"
 )
 
-# 欠損や不正な値を確認。高額な費用もそのまま残す
+# Check for missing or invalid values. Leave the high costs as is
 stopifnot(
   nrow(lgb_train) > 0,
   nrow(lgb_test) > 0,
@@ -1838,7 +1838,7 @@ for (col in numeric_cols) {
   )
 }
 
-# 4. 学習データのカテゴリに合わせる
+# 4. Match the training data category
 for (col in c("material", "surface")) {
 
   categories <- sort(unique(lgb_train[[col]]))
@@ -1860,7 +1860,7 @@ for (col in c("material", "surface")) {
   )
 }
 
-# 5. カテゴリを0/1の列に変換して数値行列を作る
+# 5. Convert categories to 0/1 columns and create a numerical matrix
 x_formula <- ~ material + surface + pipe_length +
   years_used_at_leak + midpoint_x + midpoint_y +
   event_year - 1
@@ -1872,7 +1872,7 @@ stopifnot(
   identical(colnames(x_train_lgb), colnames(x_test_lgb))
 )
 
-# LightGBM用に列名を整理
+# Organize column names for LightGBM
 safe_names <- make.names(
   colnames(x_train_lgb), unique = TRUE
 )
@@ -1883,8 +1883,8 @@ colnames(x_test_lgb)  <- safe_names
 y_train_lgb <- lgb_train$cost
 y_test_lgb  <- lgb_test$cost
 
-# 6. 共通のモデル設定
-# まずは固定設定で比較。テストデータは学習に使わない
+# 6. Common model settings
+# First, compare with fixed settings. Test data is not used for learning
 params <- list(
   objective = "regression",
   metric = "rmse",
@@ -1901,7 +1901,7 @@ params <- list(
   verbosity = -1L
 )
 
-# 7. 通常版：元のcostを学習
+# 7. Regular version: Learn original cost
 dtrain_raw <- lgb.Dataset(
   data = x_train_lgb,
   label = y_train_lgb
@@ -1913,7 +1913,7 @@ lgb_raw_model <- lgb.train(
   nrounds = 500L
 )
 
-# 8. log版：log1p(cost)を学習
+# 8. log version: learn log1p(cost)
 dtrain_log <- lgb.Dataset(
   data = x_train_lgb,
   label = log1p(y_train_lgb)
@@ -1925,7 +1925,7 @@ lgb_log_model <- lgb.train(
   nrounds = 500L
 )
 
-# 9. 予測
+# 9. Prediction
 pred_raw_lgb <- predict(
   lgb_raw_model, newdata = x_test_lgb
 )
@@ -1941,15 +1941,15 @@ stopifnot(
   all(is.finite(pred_log_lgb))
 )
 
-# 費用は非負なので、負の予測は両モデルとも0にする
-# このルールは評価結果を見る前に固定
+# Since costs are non-negative, negative predictions are set to 0 in both models.
+# This rule is fixed before seeing the evaluation results
 cat("Negative predictions, raw:", sum(pred_raw_lgb < 0), "\n")
 cat("Negative predictions, log:", sum(pred_log_lgb < 0), "\n")
 
 pred_raw_lgb <- pmax(0, pred_raw_lgb)
 pred_log_lgb <- pmax(0, pred_log_lgb)
 
-# 10. 元のドル単位で評価
+# 10. Valued in original dollars
 evaluate_lgb <- function(name, predicted) {
   data.frame(
     model = name,
@@ -1979,7 +1979,7 @@ cat("Evaluation:", test_year, ",", nrow(lgb_test), "rows\n")
 
 print(lgb_results, row.names = FALSE, digits = 7)
 
-# 11. 保存
+# 11. Save
 file_label <- paste0(
   "lightgbm_train_", train_start, "_", train_end,
   "_test_", test_year
@@ -2008,11 +2008,11 @@ write.csv(
 
 
 
-# 2026 ver 
+# 2026 ver
 ```{r}
 set.seed(440)
 
-# 1. データを読み込む
+# 1. Load data
 url <- paste0(
   "https://raw.githubusercontent.com/",
   "reinesana/STAT440-star-kingdom-project/",
@@ -2026,7 +2026,7 @@ lgb_df_2026$event_year <- as.integer(
   format(lgb_df_2026$date, "%Y")
 )
 
-# 2. 学習：2019～2025年、最終テスト：2026年
+# 2. Study: 2019-2025, Final test: 2026
 lgb_train_2026 <- subset(
   lgb_df_2026,
   event_year >= 2019 & event_year <= 2025
@@ -2047,8 +2047,8 @@ features_2026 <- c(
   "event_year"
 )
 
-# 3. データを確認
-# 高額な修理費も削除・上限処理せず、そのまま使用
+# 3. Check the data
+# Use as is without deleting or capping expensive repair costs
 stopifnot(
   nrow(lgb_train_2026) > 0,
   nrow(lgb_test_2026) > 0,
@@ -2076,7 +2076,7 @@ for (col in numeric_cols_2026) {
   )
 }
 
-# 4. カテゴリを学習データに合わせる
+# 4. Match categories to training data
 for (col in c("material", "surface")) {
 
   categories <- sort(unique(lgb_train_2026[[col]]))
@@ -2104,7 +2104,7 @@ for (col in c("material", "surface")) {
   )
 }
 
-# 5. 数値行列を作る
+# 5. Create a numerical matrix
 x_formula_2026 <- ~ material + surface + pipe_length +
   years_used_at_leak + midpoint_x + midpoint_y +
   event_year - 1
@@ -2137,7 +2137,7 @@ colnames(x_test_lgb_2026) <- safe_names
 y_train_lgb_2026 <- lgb_train_2026$cost
 y_test_lgb_2026 <- lgb_test_2026$cost
 
-# 6. 2025年と同じモデル設定
+# 6. Same model settings as 2025
 params_2026 <- list(
   objective = "regression",
   metric = "rmse",
@@ -2154,7 +2154,7 @@ params_2026 <- list(
   verbosity = -1L
 )
 
-# 7. log1p(cost)で学習
+# 7. Learning with log1p(cost)
 dtrain_log_2026 <- lgb.Dataset(
   data = x_train_lgb_2026,
   label = log1p(y_train_lgb_2026)
@@ -2166,7 +2166,7 @@ lgb_log_model_2026 <- lgb.train(
   nrounds = 500L
 )
 
-# 8. 2026年を予測し、ドル単位に戻す
+# 8. Predict 2026 and convert back to dollars
 pred_log_lgb_2026 <- expm1(
   predict(
     lgb_log_model_2026,
@@ -2179,7 +2179,7 @@ stopifnot(
   all(is.finite(pred_log_lgb_2026))
 )
 
-# 前の年と同じルール：負の費用予測は0にする
+# Same rule as previous year: Negative cost forecasts should be 0
 cat(
   "Negative predictions:",
   sum(pred_log_lgb_2026 < 0),
@@ -2188,7 +2188,7 @@ cat(
 
 pred_log_lgb_2026 <- pmax(0, pred_log_lgb_2026)
 
-# 9. 元のドル単位でMAE・RMSEを計算
+# 9. Calculate MAE/RMSE in original dollar units
 lgb_results_2026 <- data.frame(
   model = "LightGBM: log1p",
   training_years = "2019-2025",
@@ -2225,14 +2225,14 @@ print(
   digits = 7
 )
 
-# 10. 評価結果を保存
+# 10. Save evaluation results
 write.csv(
   lgb_results_2026,
   "lightgbm_log_train_2019_2025_test_2026_metrics.csv",
   row.names = FALSE
 )
 
-# 11. パイプごとの予測を保存
+# 11. Save predictions for each pipe
 lgb_predictions_2026 <- data.frame(
   pipe_id = lgb_test_2026$pipe_id,
   leak_date = lgb_test_2026$date,

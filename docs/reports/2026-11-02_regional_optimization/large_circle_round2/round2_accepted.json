@@ -1,0 +1,16 @@
+[
+  {
+    "candidate": "G08_adaptive350",
+    "file": "submit\\G08_adaptive350.csv",
+    "sha256": "8590a908e9a81311f1d3c4eee31359fe4025c7f04e9bc52f0e8d6f55b14d69e4",
+    "internal_comparator": "G05",
+    "public_score": "79168805.32"
+  },
+  {
+    "candidate": "G07_wider250",
+    "file": "submit\\G07_wider250.csv",
+    "sha256": "571647ad471d9666179bc3d4b76b9d53bc85cc7c0808f54f7b5d0b484bd839bf",
+    "internal_comparator": "G05",
+    "public_score": "79167182.01"
+  }
+]

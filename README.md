@@ -1,26 +1,33 @@
 # STAT 440 – Star Kingdom Pipe Replacement
 
+## Final selected plan: G17
+
+**G17 is the final choice**, based on confidence in the plan. Recorded public score: **$79,168,928.88**.
+
+[Final CSV](docs/reports/2026-11-02_regional_optimization/G17/G17_single_merge.csv) · [Method and evidence](docs/reports/2026-11-02_regional_optimization/G17/README.md)
+
+The dated reports below preserve historical comparisons. Their earlier recommendations and later public-score records do not change the G17 selection.
+
+
 [October 30: three submitted plans — best public $77.46M (integrated coverage)](reports/2026-10-30_submission_comparison.md)
 
-[10月28日：Ryota 直近3版の比較・最高点 $77.29M（後続81円の縮小）](reports/2026-10-28_ryota_geometry_comparison.md)
+[October 28th: Comparison of Ryota latest 3 editions/highest score $77.29M (reduced by 81 circles)](reports/2026-10-28_ryota_geometry_comparison.md)
 
-[10月28日：Ryota 探索拡張版 $77.22M（$77.07M版から追加226組を統合）](reports/2026-10-28_ryota_construction_expanded.md)
+[October 28: Ryota Search Expansion Version $77.22M (Integrated 226 additional pairs from $77.07M version)](reports/2026-10-28_ryota_construction_expanded.md)
 
-[10月28日：Ryota 工事費削減版 $77.07M（$76.91M版から近隣円260組を統合）](reports/2026-10-28_ryota_construction_savings.md)
+[October 28: Ryota construction cost reduction version $77.07M (integrated 260 neighboring circles from $76.91M version)](reports/2026-10-28_ryota_construction_savings.md)
 
-[10月28日：Ryota 初期3年間重視版 $76.91M（提出CSV・再現コード・検証結果）](reports/2026-10-28_ryota_early3.md)
+[October 28: Ryota Initial 3-year focused version $76.91M (Submitted CSV/Reproduction code/Verification results)](reports/2026-10-28_ryota_early3.md)
 
-[提出モデル・スコア・再現資料の統合一覧（10月26日セッション）](reports/2026-10-27_submitted_models.md)
+[Integrated list of submitted models, scores, and reproduction materials (October 26th session)](reports/2026-10-27_submitted_models.md)
 
 ## Project description — updated October 14, 2026
 
-Star Kingdom has a natural gas network of approximately 43,000 iron, copper, brass and polyurethane pipes. The project replaces every iron pipe with polyurethane during **2027–2051**, using **$10 million per year for 25 years**. We choose circular work areas and their execution order to prevent costly leaks and reduce earthwork costs.
+Star Kingdom has a natural gas network of approximately 43,000 iron, copper, brass and polyurethane pipes. The project replaces every iron pipe with polyurethane during **2027–2051**, using**$10 million per year for 25 years**. We choose circular work areas and their execution order to prevent costly leaks and reduce earthwork costs.
 
 The supplied data comprise `pipes.csv` and leak history for **2019–2026**. The assignment calls the historical file `costs.csv`; this repository stores the leak history as `data/train.csv`.
 
-Submit a **headerless CSV**, one circular work unit per line, in the form `"(x, y)",r`, with coordinates and radius in metres. Every original iron pipe must be wholly inside at least one circle. Executed work units replace every currently non-polyurethane pipe wholly inside them, including copper and brass. Work runs in CSV order, subject to the annual budget and carryover; it stops at the first unaffordable unit each year.
-
-**Score = $250 million − work-unit costs − leak repair costs during 2027–2051.** Plans are rejected if they cannot complete within the project window or leave iron pipes unreplaced. Historical and future leak repairs replace the affected pipes with polyurethane; empty or polyurethane-only work units are skipped at zero cost.
+Submit a **headerless CSV**, one circular work unit per line, in the form `"(x, y)",r`, with coordinates and radius in metres. Every original iron pipe must be wholly inside at least one circle. Executed work units replace every currently non-polyurethane pipe wholly inside them, including copper and brass. Work runs in CSV order, subject to the annual budget and carryover; it stops at the first unaffordable unit each year.**Score = $250 million − work-unit costs − leak repair costs during 2027–2051.** Plans are rejected if they cannot complete within the project window or leave iron pipes unreplaced. Historical and future leak repairs replace the affected pipes with polyurethane; empty or polyurethane-only work units are skipped at zero cost.
 
 ### Public and private evaluation
 
@@ -35,19 +42,8 @@ Submit a **headerless CSV**, one circular work unit per line, in the form `"(x, 
 
 The [full supplied assignment description, updated October 14](docs/assignment_2026-10-14.md) records the detailed submission, cost, evaluation and competition rules. The implementation notes below provide additional project guidance; the assignment specification remains authoritative.
 
-### 日本語概要
 
-約43,000本の天然ガス管網について、2027〜2051年の25年間で鉄管をポリウレタン管へ交換する。年額1,000万ドルの予算内で円の位置・半径・実行順を決め、工事費と漏れ修理費の合計を減らす。
-
-開催中の順位はpublic testing setで評価される。終了時には別のprivate testing setで再評価され、**publicスコアが最も高い提出のprivateスコア**が採点に使われる。両テストセットは与えられた学習データを条件として独立同分布である。外部データの追加は禁止。外部コードは利用権がある場合に使用できる。
-
----
-
-Replace every iron pipe with polyurethane between **2027 and 2051**, with **$10M added to the budget each year**. We submit an ordered list of circular work units, one per line, in the form `"(x, y)",r`.
-
-**Score = ($250M − work-unit costs) − leak repair costs during 2027–2051**
-
-The assignment specification is authoritative. Strategy suggestions below should be tested using our scorer.
+Historical source-code hash receipts refer to their original publication snapshots in Git history. Translated comments and reports can have new hashes; raw inputs, model outputs, and submitted CSVs retain their original bytes.
 
 ## Layout
 
@@ -200,7 +196,7 @@ Also run a no-future-leak simulation as a construction-budget check.
 - Check duplicate records, missing values, dates, units and material/surface labels.
 - Verify joins between `pipes.csv` and `train.csv`.
 - Keep raw data unchanged.
-- Fit models on **2019–2023** and evaluate on **2024–2026**.
+- Fit models on **2019–2023** and evaluate on**2024–2026**.
 - Reconstruct pipe status at each cutoff using only information available at that time.
 - Do not use future leaks, future repair costs or future replacement status as training features.
 
@@ -236,192 +232,7 @@ Record each candidate's method, model/data version, random seed, costs, completi
 - For pipes replaced after historical leaks, the original `Lay date` is not the installation date of the replacement polyurethane pipe.
 - EDA surface maps show estimated regions, not measured land boundaries. Calculate work-unit surface costs from the labels of wholly contained pipes, not map colours or area proportions.
 
-EDA documentation 
-[English](notebooks/EDA/EDA.md) and
-[Japanese](notebooks/EDA/EDA_Japanese.md).
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### 1. 課題
-
-2027〜2051年の25年間で、すべての鉄管を polyurethane（ポリウレタン）管に交換します。
-
-毎年1,000万ドル、合計2億5,000万ドルの予算があります。評価は、
-
-**スコア ＝ 2億5,000万ドル − 交換工事費 − 期間中の漏れの修理費**
-
-です。つまり、**工事を安くして、修理費の高い漏れを先回りして防ぐほど高得点**になります。
-
-### 2. 提出するのは「円のリスト」
-
-提出する CSV の各行には、円の中心と半径を書きます。
-
-```csv
-"(1234.5, 6789.0)",25.0
-```
-
-これは「中心が `(1234.5, 6789.0)`、半径25mの円で工事する」という意味です。座標と半径の単位はメートルです。
-
-**行の順番が工事の順番**になります。
-
-円に管の一部分が入っているだけでは交換されません。管全体が入っている必要があります。直線の管なら、両端が円の内側か境界上にあるかを確認します。
-
-すべての元の鉄管が、少なくとも1つの提出する円に完全に含まれる必要があります。
-
-また、円の中に完全に入っている、現在ポリウレタンではない管は、**鉄だけでなく銅や真鍮も交換されます**。
-
-### 3. 工事費
-
-- 1回の工事につき **100ドル**
-- 円の面積と、含まれる地表の種類から計算する **地表工事費**
-- 交換する管の長さ1mにつき **200ドル**
-
-```text
-円の面積 = π × 半径²
-
-工事費 =
-    100
-    + 地表単価の合計 × 円の面積^0.85
-    + 200 × 交換する管の合計長さ
-```
-
-最後に、工事費をセント単位に丸めます。
-
-地表工事費は少し特殊です。例えば円の中に草地と道路の管があれば、単価を `3 + 17 = 20` として、**円全体の面積**に掛けます。面積だけを0.85乗してから単価を掛けます。
-
-草地の管が何本あっても、草地の単価は1回だけ足します。一方、建物の管が1本でも完全に含まれると、建物の単価50が加わります。
-
-**すでにポリウレタンになった管の地表の種類も計算に含まれます。** ただし、その管の交換費200ドル/mは掛かりません。
-
-前の工事で交換された管が別の円にも含まれている場合も、交換費を二重に払うことはありません。ただし、地表の種類には引き続き含まれます。
-
-円の中に管がない場合、または現在ポリウレタンの管しかない場合は、工事がスキップされ、100ドルの基本料金も含めて費用は掛かりません。
-
-### 4. 年間予算と順番
-
-毎年の初めに1,000万ドルが追加され、CSV の順番どおりに工事を実行します。工事自体は瞬時に完了する設定です。
-
-例えば、ある年の予算残高が200万ドルで、次の工事が300万ドルなら、その年はそこで止まります。
-
-翌年に1,000万ドルを追加するので、残高は1,200万ドルになり、止まっていた工事から再開します。
-
-**残った予算は繰り越せますが、後ろにある安い工事を先に実行することはできません。**
-
-予算残高と工事費が同額なら実行できます。また、1つの工事が1,000万ドルを超えていても、繰越予算が十分にあれば実行できます。
-
-25年間で工事を完了できない計画は受理されません。そのため、円を作るだけでなく、リストの順番も考える必要があります。
-
-なお、早く工事が終わっても、スコアの余剰予算は合計2億5,000万ドルから工事費を引いて計算します。漏れの修理費はスコアから別途引かれます。
-
-### 5. 漏れた管
-
-2019〜2026年の履歴にある漏れた管は、修理時にすでにポリウレタンへ交換されています。
-
-`pipes.csv` の材質は元の材質なので、そのまま現在の状態として使ってはいけません。元の材質と、2027年時点の材質を分けて管理します。
-
-2027年以降も、漏れると修理費が発生し、その管はポリウレタンになります。その後の工事では、その管の交換費が不要になります。
-
-したがって、**工事の順番は、漏れの修理費だけでなく工事費にも影響します。**
-
-ただし、漏れを待つと修理費が発生するので、「交換費が減ったから得」とは限りません。工事費と修理費の両方を合わせて判断します。
-
-予定した工事が早く終わっても、2027〜2051年の全期間に発生する漏れの修理費が評価対象です。
-
-### 6. 最初に何を予測する？
-
-最初の優先事項は、過去のデータを使って、各管について次の2つを推定することです。
-
-- **いつ漏れそうか：** 年ごとの漏れ確率、または次の漏れまでの時間。
-- **漏れた場合にいくら掛かりそうか：** 修理費。
-
-将来の漏れの日時や修理費は与えられていないため、**自分たちでモデルを選び、過去データから予測する必要があります。**
-
-ただし、次の漏れ日を正確に当てる必要があるとは限りません。例えば「今後1年以内に漏れる確率」や「漏れるまでの時間の分布」を推定する方法も考えられます。
-
-モデルの種類は課題で指定されているわけではなく、自分たちで選択して比較します。
-
-優先順位を考える際は、漏れやすさだけでなく、漏れた場合の修理費も重要です。
-
-```text
-ある期間の期待修理費
-≈ その期間に漏れる確率 × 漏れた場合の予想修理費
-```
-
-これは優先順位を考えるための基本的な目安です。最終的には、工事費や予算による実行時期も含めて比較します。
-
-過去データでは、2019〜2023年でモデルを作り、2024〜2026年で予測を確認する方針です。
-
-その際、**予測する時点より後の情報を使わない**ようにします。例えば、2024年を予測するときに、2025年に漏れたという情報を使ってはいけません。
-
-### 7. 予測した後　--> 円と工事の順番を決める
-
-漏れのリスクと修理費の予測を使って、次に以下を決めます。
-
-- 円の中心をどこに置くか。
-- 円の半径をどれくらいにするか。
-- どの管を同じ円にまとめるか。
-- どの地域・どの管から先に工事するか。
-- その順番で、各工事を何年に実行できるか。
-
-まずは、鉄管1本ずつを囲む円を作る方法を baseline（比較の基準）にします。
-
-直線の管なら、中心は管の中点、半径は管の長さの半分です。数値の丸めによる囲み漏れが起きないよう、出力後にも確認します。
-
-これで鉄管を囲めますが、**25年間の予算内に収まるかは別途確認が必要**です。また、小さい円でも他の管が入ることがあります。
-
-そこから、次のように改善します。
-
-- 漏れそうで、漏れたときの修理費も高い管を早めに交換する。
-- 近い鉄管を同じ円にまとめて工事費を減らす。
-- 円を広げすぎて、銅・真鍮や高い地表の種類を余分に含めない。
-
-「大きい円にまとめれば必ず安い」「漏れる確率が高い管から交換すれば必ず良い」という単純な話ではなく、計算して比較します。
-
-### 8. 計画を比較するための道具
-
-予測モデルの準備と並行して、**scorer／simulator／validator** を作ります。
-
-- **Scorer：** 計画の工事費、予想修理費、予想スコアを計算する。
-- **Simulator：** 年ごとの予算、工事、漏れ、管の状態変化を再現する。
-- **Validator：** 鉄管の囲み漏れや、25年間で完了できない問題がないか確認する。
-
-これがないと、モデルや円の作り方を改善しても、本当に良くなったか判断できません。
-
-将来の漏れは未知なので、自分たちが計算するスコアは予測に基づく推定値です。候補を比較するときは、同じ条件・同じ漏れシナリオで評価します。
-
-最終提出前には、作成中のデータだけでなく、**実際に提出する CSV を読み直して検証**します。
-
-### 9. データを扱うときの注意
-
-- 鉄管には `cast iron`（鋳鉄）と `wrought iron`（錬鉄）の両方を含めます。
-- 材質不明の管を、勝手にポリウレタンや交換不要と判断しません。扱いを確認します。
-- 過去の漏れで交換された管の元の `Lay date` は、新しいポリウレタン管の敷設日ではありません。
-- EDA の地表地図は推定図です。工事費は地図の色や面積比ではなく、円に完全に含まれる管の `Surface` ラベルから計算します。
-- 元のデータは変更せず、補正や派生変数はコードで再現できるようにします。
-
-### 10. チームの進め方
-
-1. 課題のルールとデータを確認する。
-2. 漏れの時期・確率と修理費を予測するモデルを選び、検証する。
-3. 並行して scorer／simulator／validator を準備する。
-4. baseline の円と工事順序を作り、費用・スコア・実行可能性を確認する。
-5. 予測を使って、円の大きさ・位置・組合せ・工事順序を改善する。
-6. 最終 CSV を別のメンバーが再確認し、レポートを作成する。
-
+[Exploratory data analysis](notebooks/EDA/EDA.md).
 
 ## 2026-10-05 — Cost feature data extension
 
@@ -430,10 +241,9 @@ Today, 501 candidate columns were appended to `data/train_predict_cost.csv`
 Added candidates include prior-year repair costs/state, spatial geometry and
 endpoint-based route/straight-section groups for macro leak analysis. Raw inputs
 remain unchanged. Full definitions, limitations and rebuild instructions are in
-[the dated English addendum](data/train_predict_cost.md#2026-10-05--added-candidate-features-and-inferred-pipe-routes),
-[the Japanese addendum](data/train_predict_cost_jpn.md), and
+[the dated addendum](data/train_predict_cost.md#2026-10-05--added-candidate-features-and-inferred-pipe-routes), and
 [the feature dictionary](data/train_predict_cost_feature_dictionary_2026-10-05.md).
 
 ## Takito latest model — 26 October 2026
 
-[Model and experiment report](reports/2026-10-26_takito_latest_model.md) · [21a submission and reproducible evidence](submissions/2026-10-26_best20a_catboost_logrf/). The user confirmed that the screenshot’s Takito **$74.78M** result belongs to **21a**. Evaluator-version comparability is qualified in the report.
+[Model and experiment report](reports/2026-10-26_takito_latest_model.md) · [21a submission and reproducible evidence](submissions/2026-10-26_best20a_catboost_logrf/). The user confirmed that the screenshot’s Takito **$74.78M** result belongs to**21a**. Evaluator-version comparability is qualified in the report.

@@ -253,58 +253,6 @@ extracts and hash-checks the original 35 columns before using its frozen builder
 Select candidate features using temporal validation; do not automatically train
 on every column or infer that all candidates improve prediction.
 '''
-    japanese = '''## 2026-10-05 — 本日追加した特徴量と推定管路
-
-本日、`train_predict_cost.csv` に候補特徴量501列を追加した。元の35列の値と
-14,107行の順序はそのまま保持し、合計536列となった。元データの `pipes.csv`
-および `train.csv` は変更していない。
-
-追加内容は、設置年・月と漏洩の曜日・時刻・週末・夜間・周期表現、管の幅・方向・
-長さと管齢の積・二乗、材質と地表の組合せ、周辺管の本数・長さ・平均管齢・材質と
-地表の構成、道路・建物・水域の管までの距離、平行管の投影重なり、平面上の交差、
-過去の修理・交換状態、属性グループ別／周辺の過去修理費統計、管齢・長さと周辺
-環境の組合せである。同じ意味の既存列は重複追加せず、以前の事件時点の修理履歴
-特徴量は年初時点の履歴に揃えた。距離・長さの単位はmである。
-
-端点が完全に一致する管をつなぎ、分岐点・行き止まりで区切って `route_id` を
-作成した。途中で交差するだけの管はつながない。`straight_section_id`、直線・
-曲がりフラグ、方向変化角、端点の接続本数、分岐フラグ、管路全体の長さ・本数、
-管路内の位置、累積方向変化・蛇行度も追加した。直線判定の初期基準は10度で、
-連続する小さな曲がりも、区間最初の方向からの変化が10度を超えると直線区間を
-分割する。緩やかな曲線は管路全体の累積角度・蛇行度でも表す。局所的に直線でも
-管路全体は曲がっている場合がある。IDは集計用の共通キーであり、番号の大小を
-特徴量として扱わない。また、座標から推定したつながりは物理的接続の証明ではない。
-
-履歴はすべて対象年より前の暦年だけを使い、1月1日時点で固定した。明示的な
-修理・交換状態と管路／直線区間の履歴には、費用学習から除外された6件も含む
-元の漏洩履歴全件を使用する。一方、過去の費用グループ特徴量は以前の14,107件
-の学習用履歴を引き継ぐ。管路／区間の過去漏洩件数・修理費・直近1年の件数・
-最終漏洩からの日数・長さで割った件数と費用により、管路全体のマクロな分析が
-できる。ただし、これらの件数や長さ当たり件数は年間漏洩確率ではない。
-
-推定管路は36,304本、そのうち複数の管からなるものは4,871本、直線区間は37,747個
-となった。最大の管路は52個の管からなる。設置日不明の15本は過去時点の管路推定
-から除外し、台帳対応表には `topology_eligible=0`、管路情報は空欄として残した。
-既知の設置日はすべて学習期間より前である。台帳属性が各事件時点でも有効と仮定
-しているが、撤去・属性変更の履歴は存在しない。
-
-追加ファイルは、台帳の各管と管路の対応表 `pipe_route_lookup.csv`、管路全体の
-集計表 `pipe_route_summary.csv`、学習用事件と管路の対応表
-`pipe_route_event_membership.csv` である。
-[追加列の全定義](train_predict_cost_feature_dictionary_2026-10-05.md) と、
-`train_predict_cost_features_2026-10-05.json` に設定・出典、
-`train_predict_cost_validation_2026-10-05.json` に検証結果を記録した。
-
-リポジトリ直下で `python feature_engineering/enrich_cost_features.py` を実行すると再生成できる。
-必要なライブラリは `notebooks/Takito_Kobayashi/requirements.txt` に固定している。
-検証は `python feature_engineering/verify_cost_features.py`。既存のモデル再現コードは、拡張CSVから
-元の35列を復元してハッシュを確認し、従来の固定された特徴量作成コードを使う。
-今回の追加は候補の整理であり、全列の採用や予測精度の向上を意味しない。モデルへの
-採用は時系列検証で決める。将来の事件日時は未知なので、日時・管齢などは予測
-シナリオに合わせて計算し直す。
-'''
-    append(ROOT/'data/train_predict_cost.md', english)
-    append(ROOT/'data/train_predict_cost_jpn.md', japanese)
     append(ROOT/'README.md', '''## 2026-10-05 — Cost feature data extension
 
 Today, 501 candidate columns were appended to `data/train_predict_cost.csv`
@@ -312,8 +260,7 @@ Today, 501 candidate columns were appended to `data/train_predict_cost.csv`
 Added candidates include prior-year repair costs/state, spatial geometry and
 endpoint-based route/straight-section groups for macro leak analysis. Raw inputs
 remain unchanged. Full definitions, limitations and rebuild instructions are in
-[the dated English addendum](data/train_predict_cost.md#2026-10-05--added-candidate-features-and-inferred-pipe-routes),
-[the Japanese addendum](data/train_predict_cost_jpn.md), and
+[the dated addendum](data/train_predict_cost.md#2026-10-05--added-candidate-features-and-inferred-pipe-routes), and
 [the feature dictionary](data/train_predict_cost_feature_dictionary_2026-10-05.md).
 ''')
     append(ROOT/'notebooks/Takito_Kobayashi/README.md', '''## 2026-10-05 — Compatibility with the extended shared CSV

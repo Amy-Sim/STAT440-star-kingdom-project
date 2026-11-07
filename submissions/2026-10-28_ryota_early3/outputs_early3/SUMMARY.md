@@ -1,95 +1,95 @@
-# 初期3年間重視版の実行結果
+# Execution results of the initial 3-year focused version
 
-## 提出後の公式表示スコア（ユーザー報告）
+## Official display score after submission (user report)
 
-今回の `early3_adaptive.csv` で **$76.91M**、前回の `multi_pipe.csv` で
-**$71.40M** という表示結果がスクリーンショットで共有された。
-表示値による差は **+$5.51M（約7.72%）**。
-ローカルのシミュレーション結果とは区別し、画像・CSVハッシュとともに
-`official_results.json` に記録した。こちらから評価サイトへアクセスして
-提出との対応を照合したものではなく、ユーザーが共有した提出結果である。
+The current `early3_adaptive.csv` scored **$76.91M**, while the previous `multi_pipe.csv` scored
+The display result of **$71.40M** was shared in a screenshot.
+The displayed difference is **+$5.51M (approximately 7.72%)**.
+Keep this separate from local simulation results, and record the images and CSV hashes in
+Recorded in `official_results.json`. Click here to access the evaluation site
+These are user-provided submission results, not results independently fetched and matched to submissions.
 
-## 提出する主候補
+## Main candidate to submit
 
-**`early3_adaptive.csv`**。前回の $71.40M の提出CSVは保存したまま。
-円の組み合わせと順番を初期3年間の予想漏水損失に合わせて選び直した。
-危険な管を効率よくまとめられる候補を採用し、まとめる効率が低い管は単独で交換する。
-後半の設計グループは最大3本とした。
+**`early3_adaptive.csv`**. The previous CSV submission of $71.40M remains saved.
+Circle combinations and order were reselected to match expected leak losses in the first three years.
+Group risky pipes where efficient; replace pipes individually when grouping is inefficient.
+Later-stage design groups contain at most three pipes.
 
-## 実測した履歴検証
+## Actual history verification
 
-2024・2025年の時系列検証で6候補から設定を選び、2026年は設定選択に使わず検証した。
-選ばれた設定は、管齢0.5年刻み、平滑化幅0.5年、1年古い履歴ごとの重み0.85。
+Settings were selected from six candidates for time-series verification in 2024 and 2025, and verification was conducted without using them for setting selection in 2026.
+Selected settings: half-year age bands, 0.5-year smoothing bandwidth, and history weight 0.85 for each additional past year.
 
-| 2026年検証 | 前回モデル | 今回モデル |
+| 2026 verification | Previous model | Current model |
 |---|---:|---:|
-| 危険度上位10%による漏水捕捉率 | 28.28% | 49.57% |
-| Brier score（低い方がよい） | 0.08057 | 0.07937 |
-| Log loss（低い方がよい） | 0.26437 | 0.27219 |
-| 年間漏水確率の予測平均 | 6.15% | 4.66% |
-| 実際の年間漏水率 | 10.03% | 10.03% |
+| Leak capture rate by top 10% risk | 28.28% | 49.57% |
+| Brier score (lower is better) | 0.08057 | 0.07937 |
+| Log loss (lower is better) | 0.26437 | 0.27219 |
+| Predicted average annual leak probability | 6.15% | 4.66% |
+| Actual annual leak rate | 10.03% | 10.03% |
 
-**順位付けは改善したが、漏水確率の絶対値の校正は改善したとはいえない。**
-2026年の上位捕捉率は2027〜2029年の精度保証ではない。
+**Although the ranking has improved, the calibration of the absolute value of the leak probability cannot be said to have improved.**
+The top capture rate in 2026 does not guarantee accuracy from 2027 to 2029.
 
-## 初期3年間と全期間の比較試算
+## Comparative calculation of the initial 3 years and the entire period
 
-各条件30回、旧・新2モデル、ハザード0.5・1・2倍、3案を比較した。
-合計540件の全期間評価。全期間と同じ漏水時刻を使った追加計算で、
-初期3年間の修理費も分離した。全ケースで2051年までに完了。
+Compare three plans under two leak models, hazard multipliers 0.5/1/2, and 30 paired repetitions per setting.
+There were 540 full-period evaluations. Additional calculations using the same full-period leak times
+First-three-year repair costs were also recorded separately. Every case completed by 2051.
 
-以下はハザード1倍の共通乱数比較。金額は百万単位。
+The following paired comparison uses hazard multiplier 1. Amounts are in millions.
 
-| 評価する漏水モデル | 前回の初期3年修理費 | 今回の初期3年修理費 | 減少率 | 全期間スコアの差（今回−前回） |
+| Leak evaluation model | Previous first-three-year repair cost | Current first-three-year repair cost | Reduction | Full-period score difference (current minus previous) |
 |---|---:|---:|---:|---:|
-| 旧モデル | 30.490 | 29.507 | 3.23% | +1.209 |
-| 新モデル | 37.906 | 34.780 | 8.25% | +2.538 |
+| Old model | 30.490 | 29.507 | 3.23% | +1.209 |
+| New model | 37.906 | 34.780 | 8.25% | +2.538 |
 
-全期間スコア差の近似95%モンテカルロ区間は、旧モデルで[-0.136, +2.554]、
-新モデルで[+0.874, +4.203]百万。モデルの誤差を含む予測区間ではない。
-初期3年間の修理費は、検討した6条件すべてで前回より低かった。
-全期間スコアは6条件中5条件で高く、旧モデル・ハザード0.5倍では
-平均0.574百万低かった。したがってすべての条件で優位という結果ではない。
+Approximate 95% Monte Carlo intervals for full-period score differences were [-0.136, +2.554] for the old model,
+and [+0.874, +4.203] million for the new model. These are not prediction intervals incorporating model error.
+First-three-year repair costs were lower than the previous plan in all six settings examined.
+The full-period score was higher in five of six settings; for the old model at hazard multiplier 0.5,
+was $0.574M lower on average. The candidate therefore did not dominate every setting.
 
-比較用 `early3_reorder_only.csv` は前回の円形状をそのまま使って順番だけを変更した案。
-標準条件で旧・新モデルとも全期間スコアが前回を下回ったため、主候補にはしない。
-このCSVも実験の再現用に保存している。
+The comparison `early3_reorder_only.csv` retains the previous circle geometry and changes only order.
+Not selected as the main candidate because standard-setting full-period scores were lower under both old and new models.
+This CSV is also retained for reproducing the experiment.
 
-## 予算と円の大きさ
+## Budget and circle size
 
-未来の漏水が一切ない場合：
+Assuming no future leaks:
 
-| 指標 | 前回 | 今回 |
+| Indicators | Previous | This time |
 |---|---:|---:|
-| 円の数 | 15,328 | 19,838 |
-| 全工事費 | $175,986,889.96 | $180,664,606.53 |
-| 完了年 | 2044 | 2045 |
-| 残存する未交換鉄管 | 0 | 0 |
+| Number of circles | 15,328 | 19,838 |
+| Total construction cost | $175,986,889.96 | $180,664,606.53 |
+| Completion year | 2044 | 2045 |
+| Remaining unreplaced iron pipes | 0 | 0 |
 
-工事費は約4.68百万増える。初期の高リスク管を先に分離して処理することと、
-後半のグループを小さくしたことの代償であり、初期修理費減少だけを見てはいけない。
+Construction costs increase by approximately $4.68M. This reflects early separation of high-risk pipes and
+smaller later-stage groups increased costs; first-three-year repair savings alone are insufficient for judging the plan.
 
-今回の実行順での初期3年の値（将来漏水なし）：
+First-three-year results under the current execution order, assuming no future leaks:
 
-| 年 | 施工円数 | 新たに交換する鉄管数 | 円半径の中央値 | 円半径の平均 |
+| Year | Number of circles constructed | Number of newly replaced steel pipes | Median circle radius | Average circle radius |
 |---|---:|---:|---:|---:|
 | 2027 | 2,534 | 3,221 | 3.86 | 5.25 |
 | 2028 | 2,250 | 2,572 | 5.24 | 5.97 |
 | 2029 | 1,200 | 1,424 | 6.43 | 8.67 |
 
-**実際の半径は年々小さくなっていない。** 初期には危険で短い管を単独で守る方が
-効率がよいケースが多かった。大きな円から小さな円へ一律に並べる制約は付けず、
-リスクと費用の効率を優先した。後半の「最大3本」は設計対象の本数であり、
-半径上限ではない。偶然入る管もあり、本数と半径は単純には比例しない。
+**The actual radius is not getting smaller every year.** In the early stages, it is better to protect the dangerous and short pipes alone.
+was often more efficient. Rather than imposing a descending-radius order,
+risk and cost efficiency were prioritized. The later-phase maximum of three pipes refers to design targets;
+It is not a radius limit. Incidental pipes can also enter the circle, so pipe count and radius are not simply proportional.
 
-## 実行確認
+## Execution confirmation
 
-- 8件のユニットテスト合格。効率のよい複数管グループと孤立管の分離も確認。
-- 出力後のCSVを再読込し、全未交換鉄管のカバーと25年間の予算内完了を確認。
-- 新CSV2案から各100円、計200円を抽出し、全43,039管への総当たり包含確認に合格。
-- 前回CSVのSHA-256が以前の実行結果と一致し、上書きされていないことを確認。
-- 詳細は `report.json`、`comparison.csv`、`holdout_2026.csv`、`spot_audit.json` に保存。
+- Passed 8 unit tests. Efficient separation of multiple pipe groups and isolated pipes was also confirmed.
+- Reload the CSV after output and confirm that all unreplaced iron pipes are covered and completed within the 25-year budget.
+- Extracted 200 cost units (100 cost units each) from the 2 new CSV plans and passed round-robin confirmation of inclusion in all 43,039 pipes.
+- Confirm that the SHA-256 of the last CSV matches the previous execution result and has not been overwritten.
+- Details saved in `report.json`, `comparison.csv`, `holdout_2026.csv`, `spot_audit.json`.
 
-予算・費用・漏水タイミングの仮定は前回と同じ。公式問題文がないための留保も同じ。
-後に共有された公式表示では、今回は $76.91M、前回は $71.40M となった。
-この1回の提出結果を、ほかの将来データでも必ず改善する保証とは扱わない。
+Budget, cost, and leak-timing assumptions match the earlier experiment, including its reservations about the unavailable official specification.
+Later user-provided official displays showed $76.91M for this version and $71.40M for the previous version.
+This single submission result does not guarantee improvement on other future data.

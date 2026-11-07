@@ -1,0 +1,24 @@
+[
+  {
+    "candidate": "G05",
+    "input_file": "submit/R05_regional6.csv",
+    "sha256": "4fb91ec3820e39ed4861fe9ff127c7ea4ca3e675c6f252408ee4b820031a00cc",
+    "CAPEX": "139716030.60",
+    "OPEX": "31133156.82",
+    "public_score": "79150812.58",
+    "delta_vs_G04": "159844.33",
+    "completion_year": 2040,
+    "source": "User-provided official annual breakdown; exact score reconstructed with Decimal, not reread from service."
+  },
+  {
+    "candidate": "G06",
+    "input_file": "submit/R06_regional4.csv",
+    "sha256": "106bf2ac3e9b99ef49560fd24a0135acb0e9db5ce04b4d319d0634f1caffb12e",
+    "CAPEX": "139716491.35",
+    "OPEX": "31133156.82",
+    "public_score": "79150351.83",
+    "delta_vs_G04": "159383.58",
+    "completion_year": 2040,
+    "source": "User-provided official annual breakdown; exact score reconstructed with Decimal, not reread from service."
+  }
+]

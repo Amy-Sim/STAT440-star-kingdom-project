@@ -1,0 +1,57 @@
+{
+  "pipes": 43039,
+  "live_iron": 26237,
+  "initial_PU": 15791,
+  "historical_repairs": 14113,
+  "pipe_features": 154,
+  "region_rows": 28855,
+  "active_circles": 22154,
+  "mixed_circles": 469,
+  "avoidable_mix_upper_bound": 2636297.046171977,
+  "fixed_cost": 96911086.46824959,
+  "replacement_cost": 88707834.54198463,
+  "length_quantiles": [
+    0.16999999999984539,
+    7.983655175167506,
+    11.312563811974734,
+    20.673001717215733,
+    53.520080902822656,
+    74.88144496469081
+  ],
+  "neighborhood100_quantiles": [
+    1.0,
+    43.0,
+    75.0,
+    127.0,
+    218.0,
+    360.0
+  ],
+  "surface_counts": {
+    "grassland": 13507,
+    "water": 12824,
+    "farmland": 6531,
+    "structure": 5680,
+    "road": 2324,
+    "swamp": 2173
+  },
+  "material_counts": {
+    "wrought iron": 24562,
+    "cast iron": 10630,
+    "gray iron": 3263,
+    "polyurethane": 1678,
+    "copper": 1613,
+    "brass": 1285,
+    "unknown": 8
+  },
+  "input_sha256": {
+    "output\\2026-11-02_geometry_optimization\\delivery\\G04_economic_triples.csv": "3e240e4122be8e69e6f9ede23c7bb042c215a84d853815bd0d372d999aa5ecc4",
+    "data\\pipes.csv": "f849cbede7693f1924f3dd03e1a522e87418d0dc6fe9527acb69d85483ea74a2",
+    "data\\train.csv": "a062e6af1d13eade4c85edda2a1704f18b18a15ec5f1e80800769f8a48712189"
+  },
+  "notes": [
+    "Surface is pipe-level class, not measured land-area fractions.",
+    "Midpoint neighborhoods do not imply physical connectivity.",
+    "Mix overhead is an upper bound, not necessarily removable cost.",
+    "All historical features end 2026; no official Public annual outcomes used as predictors."
+  ]
+}

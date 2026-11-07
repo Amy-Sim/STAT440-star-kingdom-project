@@ -1,68 +1,68 @@
-# $77.07M版から同年統合を追加する探索拡張版
+# Exploration expansion version that adds same year integration from $77.07M version
 
-提出候補：**`submission_construction_expanded.csv`**
+Submission candidate: **`submission_construction_expanded.csv`**
 
-基準は現在の最高点$77.07Mを出した `submission_construction_savings.csv`。
-提出後、ユーザー提供画面で **$77.22M** を確認。基準$77.07Mから表示上 **+$0.15M**。基準CSVは変更せず保存し、出典は `../official_results.json` に記録した。
+The baseline is `submission_construction_savings.csv`, which achieved the then-best $77.07M.
+After submission, the user-provided screenshot confirmed **$77.22M**, a displayed gain of**+$0.15M** over $77.07M. The baseline CSV is preserved; sources are recorded in `../official_results.json`.
 
-## 前回から変えたところ
+## Changes from last time
 
-予測モデル、優先順位の考え方、費用式、統合を採用する条件は維持し、
-同じ未来漏水ゼロの施工予定年にある円を探す範囲を広げた。
+The predictors, prioritization approach, cost formula, and merge acceptance rules are unchanged;
+Expanded the search for circles sharing a scheduled year under no future leaks.
 
-| 探索項目 | 前回 | 今回 |
+| Search items | Previous | This time |
 |---|---:|---:|
-| 調べる近隣円数 | 12 | 24 |
-| 最大中心距離 | 80m | 120m |
-| 最大CSV行間隔 | 160 | 320 |
+| Neighboring circles examined | 12 | 24 |
+| Maximum center distance | 80m | 120m |
+| Maximum CSV row gap | 160 | 320 |
 
-近隣距離と元の半径の比率によるフィルター、元の2円の包含管の和集合上限12本は維持。
-そのため、上表を広げても全候補が幾何評価へ進むわけではない。
-元の両円が覆っていた全管を覆い、新しく入る未交換管が同年以降の予定なら却下する。
-円が空になる可能性も考慮して正の費用節約が見込まれるペアを選ぶ。
-早い方の位置へ統合円を置き、ほかの円の相対順序は保つ。
+Retain the neighbor-distance/original-radius filter and the limit of 12 pipes in the union of the original pair's containment sets.
+Expanding the limits above therefore does not send every candidate to geometric evaluation.
+Cover every pipe covered by the original pair. Reject newly included unreplaced pipes scheduled for the same year or later.
+Choose pairs with positive expected cost savings after accounting for the chance that a circle becomes empty.
+Place the merged circle at the earlier position and preserve all other relative ordering.
 
-9,118ペアを評価、正の候補254件から重複しない226ペアを採用した。
-元の19,578円から **19,352円**へ減少。
+We evaluated 9,118 pairs and selected 226 unique pairs from 254 positive candidates.
+Reduced from 19,578 circles to **19,352 circles**.
 
-## 漏水ゼロでの検証
+## Verification with zero leak
 
-| 指標 | $77.07M版 | 今回 |
+| Metric | $77.07MVersion | Current |
 |---|---:|---:|
-| 工事費 | $180,425,969.20 | **$180,290,222.26** |
-| 完了年 | 2045 | 2045 |
-| 円数 | 19,578 | **19,352** |
+| Construction cost | $180,425,969.20 | **$180,290,222.26** |
+| Completion year | 2045 | 2045 |
+| Circle count | 19,578 | **19,352** |
 
-追加の工事費削減は **$135,746.94**。
-基準の全包含管のカバーを保ち、交換予定が遅れる管は0本、早まる管は155本。
-元の$76.91M版から通算では486組の統合、同条件の工事費削減は$374,384.27。
+Additional construction savings: **$135,746.94**.
+Preserved coverage of all baseline-contained pipes; no pipe was delayed and 155 were advanced.
+Relative to the original $76.91M plan, 486 groups were merged in total, saving $374,384.27 in construction under the same conditions.
 
-同年・遅延ゼロはこの漏水ゼロの予定についての確認であり、全ての将来漏水で
-各管の交換年が必ず維持されるという保証ではない。
+Same-year execution and zero delay describe this no-leak schedule; they do not imply that every future leak scenario
+This does not guarantee unchanged replacement years for every pipe.
 
-## 共通乱数の比較試算（各条件30回）
+## Comparison trial calculation of common random numbers (30 times for each condition)
 
-全て$77.07M版との比較。実際のpublicスコアとの差ではない。
+All comparisons are against the $77.07M version, not differences from actual public scores.
 
-| 評価モデル | ハザード倍率 | 平均工事費の削減 | 平均スコア差 |
+| Evaluation model | Hazard multiplier | Mean construction savings | Mean score difference |
 |---|---:|---:|---:|
-| 細管齢 | 0.5 | $96,122 | +$173,558 |
-| 細管齢 | 1 | $62,929 | +$161,139 |
-| 細管齢 | 2 | $43,354 | +$135,794 |
-| 旧5年管齢 | 0.5 | $101,348 | +$125,887 |
-| 旧5年管齢 | 1 | $78,333 | +$169,142 |
-| 旧5年管齢 | 2 | $41,514 | +$110,139 |
+| Fine age bands | 0.5 | $96,122 | +$173,558 |
+| Fine age bands | 1 | $62,929 | +$161,139 |
+| Fine age bands | 2 | $43,354 | +$135,794 |
+| Old 5-year age | 0.5 | $101,348 | +$125,887 |
+| Old 5-year age bands | 1 | $78,333 | +$169,142 |
+| Old 5-year age | 2 | $41,514 | +$110,139 |
 
-6条件すべてで平均工事費・平均修理費・平均スコアが改善した。
-各スコア差の近似95%モンテカルロ区間も0より上。ただし予測モデルを条件とした
-区間であり、モデル誤差やprivate評価の不確実性を含まない。
-個別の全試行で改善したという意味ではない。
+The average construction cost, average repair cost, and average score improved in all six conditions.
+Approximate 95% Monte Carlo intervals for all score differences were also above zero. These are conditional on the predictors,
+intervals exclude model error and uncertainty in private evaluation.
+This does not mean every individual trial improved.
 
-追加した2件のテストに合格。CSVを再読込し、カバー、交換年、費用を再検証した。
-共有検証でも未交換鉄管を明示した対象で予算内完了を確認する。
-基準が持つ歴史的交換済みoriginal ironの幾何学的カバーの留保は引き継ぐ。
-今回もそのための円追加は行わず、全original ironカバーに合格したとは扱わない。
+Both added tests passed. Reloaded the CSV and rechecked coverage, replacement years, and costs.
+Shared validation checks budget-feasible completion for the explicitly defined unreplaced-iron target set.
+The inherited geometric-coverage limitation for historically replaced original iron remains.
+No coverage circles were added in this round; do not report a pass on full original-iron coverage.
 
-詳細は `report.json`、`merges.csv`、`comparison.csv`、`simulations.csv`。
-入力・基準・提出のSHA-256を保存。費用式は `2026-10-26-area-exponent`。
-**$77.07M版を保存したまま、新しい候補として公式評価で比較する。**
+Details: `report.json`, `merges.csv`, `comparison.csv`, and `simulations.csv`.
+Input, baseline, and submission SHA-256 hashes are recorded. Cost model: `2026-10-26-area-exponent`.
+**Keep the $77.07M version and compare it with the official evaluation as a new candidate.**

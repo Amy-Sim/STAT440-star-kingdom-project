@@ -1,0 +1,30 @@
+[
+  {
+    "task": "radius",
+    "holdout_rows": 4090,
+    "training_rows": 18029,
+    "target_scale": "log radius ratio",
+    "RMSE": 0.4165503445119159,
+    "MAE": 0.23920626917667592,
+    "base_RMSE": [
+      0.4163189513046101,
+      0.41879617277651876,
+      1.6013779626047695
+    ],
+    "note": "Surrogate teacher prediction in unseen region; not observed future repair cost or whole-plan validation."
+  },
+  {
+    "task": "action",
+    "holdout_rows": 5721,
+    "training_rows": 24573,
+    "target_scale": "signed log gross value",
+    "RMSE": 0.5262275156323422,
+    "MAE": 0.336669582108501,
+    "base_RMSE": [
+      0.6978883806806058,
+      0.5437774207199679,
+      2.0320804399178956
+    ],
+    "note": "Surrogate teacher prediction in unseen region; not observed future repair cost or whole-plan validation."
+  }
+]
