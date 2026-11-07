@@ -5,7 +5,9 @@ This folder follows the archive layout of `notebooks/Takito_Kobayashi`, while pr
 
 ## Original code
 
-[`executed_code/Project_codeW1.Rmd`](executed_code/Project_codeW1.Rmd) is a **byte-for-byte copy** of the supplied `Project_codeW1 .Rmd`, including its comments and exploratory chunks. Its hash is recorded in `executed_code_sha256.json`. The filename was normalized; the contents were not edited.
+[`executed_code/Project_codeW1.Rmd`](executed_code/Project_codeW1.Rmd) preserves Rion's model calculations and exploratory chunks. The English cleanup translates its comments, headings, and display text. `executed_code_sha256.json` records the original pre-translation archive hash; that version remains in Git history.
+
+Current English-source SHA-256: `879179e43fa2c359f6e0392f7a4d542ba41b745d5f8c5ab6d50ade7a5035933c`.
 
 ## Data
 
@@ -42,7 +44,7 @@ Means above are descriptive, equally weighted averages of the listed annual metr
 
 For the documented 2025-selection/2026-evaluation procedure, report those years separately. In the RF comparison, raw had lower 2025 RMSE; in the LightGBM comparison, log1p had lower 2025 RMSE. Gamma's 2025 RMSE was 114,040.92 and its 2026 RMSE was 129,651.09. This is a record of already-inspected project results, not a claim that 2026 remains a fresh independent holdout for subsequent experiments.
 
-See [`results/fold_metrics.csv`](results/fold_metrics.csv), [`results/average_metrics.csv`](results/average_metrics.csv), and the [Japanese report](results/results_ja.md).
+See [`results/fold_metrics.csv`](results/fold_metrics.csv), [`results/average_metrics.csv`](results/average_metrics.csv), and the [Japanese report](results/results.md).
 
 ## Reproduce
 

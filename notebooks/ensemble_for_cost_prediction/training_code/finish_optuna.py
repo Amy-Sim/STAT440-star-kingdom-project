@@ -142,45 +142,45 @@ def document(summary,c):
     for a in ax:a.set_xticks(range(2023,2027));a.grid(alpha=.2)
     fig.legend(*ax[0].get_legend_handles_labels(),loc='lower center',ncol=3,fontsize=8);fig.tight_layout(rect=(0,.15,1,1));fig.savefig(ROOT/'stability.png',dpi=180);plt.close(fig)
     table=summary.loc[methods,['mean_annual_RMSE','annual_RMSE_sd','mean_absolute_annual_total_bias_pct','worst_absolute_annual_total_bias_pct']].round(2).to_markdown()
-    text=f'''# Optuna最適化後のアンサンブル
+    text=f'''# Ensembles after Optuna optimization
 
-各モデル・各学習期間で30trial。2020年のみ、学習年が2019年しかないため探索せず固定設定です。2021–2027の10モデルで計2,100trialの探索枠です（収束失敗・処理方式切替で中断したtrialも含み、完了数はCSVで確認）。正常な試行を内側RMSEの順で選び、全学習データでも収束・有限予測を確認して採用します。2027用の全モデルは2019–2026年の14,113件を再学習しています。
+Thirty trials per model/origin. The 2020 cold start uses fixed settings because only 2019 training labels exist. Ten models across 2021–2027 give 2,100 trial slots, including convergence failures and interruptions during execution changes; completed counts are in CSVs. Rank valid trials by inner RMSE and verify convergence and finite predictions on full training data. Every 2027 base is refitted on all 14,113 events from 2019–2026.
 
-採用候補: `{c['default_ensemble']}`。安定化のため全モデルに正の重みを残す等重み・縮小重み・制約付き重みを採用候補とします。RMSEを主軸とし、その候補内で最良の年平均RMSEから1%以内にある方法を、年間総額偏りの最大値、平均値、相対年間RMSEのばらつきの順に比較しました。制約のないRMSE重みは比較用です。選択は過去結果を確認した後なので、未使用ホールドアウトでの評価とは呼びません。
+Selected candidate: `{c['default_ensemble']}`. For diversification, compare equal, shrinkage, and constrained weights retaining positive weight on every component. Among these methods within 1% of their best mean annual RMSE, compare worst absolute annual total bias, mean absolute bias, and relative annual RMSE variation, in that order. Unconstrained RMSE weights remain a benchmark. Selection followed inspection of historical results, so this is not untouched-holdout evaluation.
 
 {table}
 
-## 漏洩の防止
+## Leakage prevention
 
-各外側予測年YではYより前の年のみで学習し、その内側の最新2年を順方向検証します。特徴量の選択、前処理、探索、対数補正、重み学習は外側Yの正解を使いません。内側年の予測時も、その内側年より前のラベルのみ使用します。空間特徴量の距離単位はmです。歴史的な修理状態や費用の集約は各年1月1日より前だけを使います。
+For outer year Y, train only on earlier years and validate forward on the latest two inner years. Feature selection, preprocessing, search, log correction, and weight learning exclude outer-year outcomes. Each inner prediction also uses only preceding labels. Spatial distances are meters; historical repair-state and cost summaries use observations strictly before January 1 of each year.
 
-重み学習には2020–2026年の正当な順方向OOF予測13,035件を使用します。2019年には、それより前の学習用ラベルがないためOOF予測を作りません。2019年の1,078件も含め、最終的なベースモデルには全14,113件を使っています。
+Weights use 13,035 valid forward OOF predictions from 2020–2026. No 2019 OOF predictions are produced because earlier training labels are unavailable. Final bases use all 14,113 events, including 1,078 from 2019.
 
-Shanaの既存予測、将来に利用できない故障時刻・曜日を使った既存予測は投入しません。Anthony/Rionのモデル系統とTakitoの3モデルを新たに最適化・再学習した予測だけを使います。
+Exclude Shana's existing predictions and predictions requiring realized future failure times or weekdays. Use only newly optimized/refitted Anthony/Rion model families and Takito's three models.
 
-## 探索範囲
+## Search scope
 
-`../optimize.py`の`space()`に全範囲を記載しています。特徴量6群、線形回帰のOLS/Ridge/Lasso/ElasticNet・正則化強度・L1比率・切片・非負係数制約、GammaのL2正則化・切片、RFの木数・深さ・葉/分岐の最小件数・特徴量比率・最大葉数・bootstrap/標本比率・2種類の二乗誤差criterion、boostersの学習率・木数・複雑度・正則化・標本/特徴量比率・bin数などを探索します。XGBoost/LightGBMはL1・L2、CatBoostはL2を探索します。対数モデルは補正なし、学習残差補正、過去OOF補正も探索します。
+The full search is in `../optimize.py` function `space()`. It covers six feature packs; OLS/Ridge/Lasso/ElasticNet with regularization, L1 ratio, intercept, and nonnegative-coefficient options; Gamma L2/intercept; RF tree count/depth, minimum split/leaf sizes, feature fraction, maximum leaves, bootstrap/sample fraction, and two squared-error criteria; and booster learning rates, iterations, complexity, regularization, sample/feature fractions, and bins. XGBoost/LightGBM search L1/L2; CatBoost searches L2. Log models compare no correction, training-residual correction, and past-OOF correction.
 
-線形回帰は数値特徴量を学習期間内だけで標準化し、学習期間の平均費用で目的変数を正規化してから推定・元単位に戻します。Ridgeのalphaは1e-4–1e5、Lasso/ElasticNetは正規化した目的変数に対するalpha 1e-4–10、ElasticNetのL1比率は0.01–0.99です。初期のOLSだけの探索は`previous_ols/`に保存し、採用する線形回帰は別studyで改めて30trialを実行しています。
+Linear models standardize numeric features within each training period and normalize targets by training mean cost, then restore original units. Ridge alpha ranges from 1e-4 to 1e5; Lasso/ElasticNet alpha from 1e-4 to 10 on normalized targets; ElasticNet L1 ratio from 0.01 to 0.99. The initial OLS-only search is archived in `previous_ols/`; the adopted linear procedure ran a separate 30-trial study.
 
-すべてのライブラリ引数を探索したわけではありません。乱数、スレッド数、目的変数、目的関数、CPU実装、収束制御は固定です。RFのabsolute_error/Poissonや別のbooster/loss系統は範囲外です。30trialで探索空間全体や大域最適値を保証しません。Gamma/線形などに豊富な特徴量を追加する候補もあるため、元ノートブックの数値的な再現ではなく、同じモデル系統の安全な改良です。
+Not every library option was searched. Seeds, threads, target, objective, CPU implementation, and convergence controls are fixed. RF absolute_error/Poisson and other booster/loss families are outside scope. Thirty trials do not guarantee exhaustive search or global optimality. Additional features for Gamma/linear families make this a temporally controlled improvement within the same model families, not numerical reproduction of the original notebooks.
 
-## 予算への適用
+## Applying predictions to budgets
 
-2027用CSVは故障した場合の条件付き修理費です。将来予算には故障確率・期待故障件数と組み合わせる必要があります。歴史年の実際の故障群に対する総額偏りは、その条件付き費用の検証です。将来の全パイプ費用を単純合計すると予算にはなりません。
+The 2027 CSV estimates repair costs conditional on failure. Future budgets require matching failure probabilities or expected counts. Historical total bias validates these conditional estimates on observed failures; summing costs across all future pipes does not produce an annual budget.
 
-予測対象は修理前の既知材料27,240本です。PU15,791本と不明材料8本の計15,799本には故障費用の教師データがなく、ゼロ円扱いせず未推定として別途管理します。2027以降の履歴は2026年末で固定し、将来の未知修理・費用は追加しません。
+Forecasts cover 27,240 supported-material unrepaired pipes. Native/replaced PU (15,791) and eight unknown-material pipes lack conditional-cost training labels; these 15,799 pipes are tracked as unestimated rather than assigned zero. History is frozen at end-2026 for 2027 onward; unknown future repairs/costs are not added.
 
-## 再実行と成果物
+## Reproduction and artifacts
 
-`python ensemble_training/run_optuna.py`で各モデル30trialの探索・全件再学習・アンサンブル・検証を行います（5個の独立したローカル処理）。探索はSQLiteに保存され、完了済みの年別予測を再利用します。2027以降は`python ensemble_training/finish_optuna.py --year 2030`で再予測できます。
+Run `python ensemble_training/run_optuna.py` for 30 trials per model, full refitting, ensemble construction, and validation (five independent local processes). Studies are stored in SQLite and completed annual predictions are reused. For later years, use `python ensemble_training/finish_optuna.py --year 2030`.
 
-`results/selected_configs_summary.csv`、`results/trials_*.csv`、`results/configs/`で選択設定・全trialを確認できます。`results/validation.json`は独立再計算・保存モデル再生・将来ラベル/日付の変更検査の結果です。`results/forecast_costs_2027_adopted.csv`が採用予測、`results/out_of_time_predictions.csv`が過去の順方向予測です。元の固定グリッド成果物は上書きしていません。
+Selected settings and trials are in `results/selected_configs_summary.csv`, `results/trials_*.csv`, and `results/configs/`. `results/validation.json` records independent recomputation, saved-model replay, and future-label/date mutation checks. Adopted forecasts are in `results/forecast_costs_2027_adopted.csv`; historical forward predictions are in `results/out_of_time_predictions.csv`. Original fixed-grid artifacts are preserved.
 
-入力の出典: GitHub `reinesana/STAT440-star-kingdom-project` commit `{json.loads((OUT/'validation.json').read_text())['source_commit']}`。ファイルハッシュと取得経路は`../../ensemble_preparation/sources/manifest.json`。
+Input source: GitHub `reinesana/STAT440-star-kingdom-project` commit `{json.loads((OUT/'validation.json').read_text())['source_commit']}`. File hashes and retrieval details: `../../ensemble_preparation/sources/manifest.json`.
 '''
-    (ROOT/'README_ja.md').write_text(text,encoding='utf-8')
+    (ROOT/'README.md').write_text(text,encoding='utf-8')
     notebook=nbformat.v4.new_notebook(cells=[nbformat.v4.new_markdown_cell(text),nbformat.v4.new_code_cell("from pathlib import Path\nimport pandas as pd\ncandidates=[Path.cwd(),Path.cwd()/'optuna',Path.cwd()/'ensemble_training'/'optuna']\nroot=next(p for p in candidates if (p/'search_policy.json').exists())\npd.read_csv(root/'results'/'summary_metrics.csv')"),nbformat.v4.new_code_cell("pd.read_csv(root/'results'/'selected_configs_summary.csv')")])
     # Actually execute cells in one Python namespace; no Jupyter kernel installed.
     namespace={};counter=0

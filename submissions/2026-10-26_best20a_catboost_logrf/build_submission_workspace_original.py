@@ -71,22 +71,22 @@ pd.DataFrame(dict(pipe_id=pipes['Pipe ID'],active=active,leak_probability=prob,o
 inputs=[BASE,STACK/'predictions_2027.csv',STACK/'weights_2027.json',OLD,WORK/'data/pipes.csv',WORK/'data/train.csv',WORK/'notebooks/ensemble_for_cost_prediction/predictions/ensemble_stable.csv',WORK/'submissions/2026-10-20_rion_dynamic/source/probabilities.csv',WORK/'src/build_candidate_17.py',WORK/'src/build_candidate_16.py',WORK/'src/search_orders.py',WORK/'src/build_cost_submissions.py',Path(__file__)]
 manifest=dict(candidate=output.name,reference='20a_sameyear_merge_17b_order.csv',reference_public_score_millions=74.03,reference_score_source='https://github.com/reinesana/STAT440-star-kingdom-project/blob/668a598ba8efd478d1c5bf569b39fc7fb93162e2/src/calibrate_simulator.py',github_main_commit='668a598ba8efd478d1c5bf569b39fc7fb93162e2',github_reference_blob_sha1=blob_hash(canonical),local_reference_matches_github_canonical_blob=True,original_control_byte_identical=True,original20a_order_reproduced=True,exact_repair_cost_weights=weights,repair_cost_weighted_forecast_recomputed=True,geometry='20a frozen circles; same circle multiset; only execution order changes',leak_probabilities='unchanged p17b from build_candidate_17.py',priority='dynamic overlap update, clipped p*(conditional cost-200*length), blend=1',unsupported_active_fallback_ids=pipes.loc[missing,'Pipe ID'].tolist(),unsupported_fallback='unchanged stable-control severity; eight unknown-material pipes',rows=len(lines),changed_rank_rows=int((rank!=np.arange(1,len(lines)+1)).sum()),submission_sha256=digest(output),control_sha256=digest(control),new_validation=rep,control_validation=control_rep,source_sha256={str(p.relative_to(ROOT)):digest(p) for p in inputs},public_score_millions=None,limitations=['No new official score;74.03M belongs to original20a only.','Construction/budget validation assumes no future leaks; not an official score forecast.','Geometry was optimized under the prior recipe and deliberately frozen for cost-only comparison.','Conditional repair-cost backtests reuse previously inspected historical years.'])
 dump(HERE/'manifest.json',manifest)
-notes=f'''# 最高スコア20aのコスト予測を差し替えた提出ファイル
+notes=f'''# Replace the repair-cost predictor in the best-scoring 20a plan
 
-**提出するファイル：21a_20a_catboost6863_logrf3137.csv**
+**Submission file: 21a_20a_catboost6863_logrf3137.csv**
 
-GitHub main（commit668a598）と現在の共有Docで、従来最高の記録は20a：74.03Mです。前回の18a基準のCSVとは別の候補です。
+GitHub main (commit668a598) and the current shared document identify 20a at 74.03M as the previous best. This is a distinct candidate from the earlier 18a-based CSV.
 
-20aの円の集合、p17b漏水確率、重複を更新する動的な工事順位ルールを維持し、漏水時の修理コスト予測だけを変更しました。重みはCatBoost {weights['takito_catboost']:.15f}＋補正log RF {weights['anthony_rf_log_mean']:.15f}。保存済み2027予測を基モデル予測から再計算して一致を確認しています。対象外の未交換8本（材質不明）は元のstable予測を共通使用します。
+Retain 20a geometry, p17b leak probabilities, and dynamic overlap-aware work prioritization; change only conditional repair-cost predictions. Weights: CatBoost {weights['takito_catboost']:.15f} + corrected log RF {weights['anthony_rf_log_mean']:.15f}. Saved 2027 forecasts were recomputed from base predictions and matched. Eight unsupported unreplaced pipes with unknown material retain the common original stable predictions.
 
-提出CSVはヘッダーなし、円の中心と半径の2列。{len(lines):,}行。元20aと円の集合が一致。全鉄管の被覆、有限予測、CSV再読込、将来漏水なしの予算・2051年までの完了を検証済みです。この条件での完了年は{rep['completion_year']}年、工事費は${rep['construction_cost']:,.2f}。公式スコアの予測ではありません。
+Submission CSV: no header, two columns containing circle center and radius.{len(lines):,} rows. Circle sets match original 20a. Verified full iron coverage, finite predictions, exported CSV readback, and no-leak budget-feasible completion by 2051. Completion year under those conditions:{rep['completion_year']}; construction costs: ${rep['construction_cost']:,.2f}. This is not an official-score forecast.
 
-比較用の20a_original_control.csvは元20aのバイト一致コピー。元20aを既存コストで再順位付けして同じ順序になることも確認済みです。新案の採点結果はまだありません。74.03Mを新案のスコアと解釈しないでください。
+20a_original_control.csv is a byte-identical copy of original 20a. Reordering original 20a with its existing cost forecasts also reproduced its order. No score for the new candidate was available at that stage; do not interpret 74.03M as its result.
 
-提出対象は21a_20a_catboost6863_logrf3137.csvのみ。audit.csv、manifest.json、validation.jsonは提出しません。20a_original_control.csvは比較のために元案を再採点する場合のみ使用します。
+Submit only 21a_20a_catboost6863_logrf3137.csv. Do not submit audit.csv, manifest.json, or validation.json. Use 20a_original_control.csv only to rescore the original plan for comparison.
 
-再生成：プロジェクト直下から .venv-eda/Scripts/python.exe で build_submission.py を実行。ソースSHA-256とGitHub参照はmanifest.jsonに記録しています。GitHubへの公開や共有Docの編集はしていません。
+Reproduce by running build_submission.py with .venv-eda/Scripts/python.exe from the project root. Source SHA-256 hashes and GitHub references are in manifest.json. This historical run neither published to GitHub nor edited the shared document.
 '''
-(HERE/'README_ja.md').write_text(notes,encoding='utf-8')
+(HERE/'README.md').write_text(notes,encoding='utf-8')
 print(json.dumps({k:manifest[k] for k in ['candidate','reference_public_score_millions','local_reference_matches_github_canonical_blob','original20a_order_reproduced','exact_repair_cost_weights','rows','changed_rank_rows','unsupported_active_fallback_ids','submission_sha256']},ensure_ascii=False,indent=2),flush=True)
 print(json.dumps(dict(completion_year=rep['completion_year'],construction_cost_no_future_leaks=rep['construction_cost'],uncovered_iron_count=rep['uncovered_iron_count'])),flush=True)

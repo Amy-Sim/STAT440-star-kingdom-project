@@ -1,58 +1,58 @@
-> 提出後のユーザー提供結果：public表示 **$77.22M**。基準は3版とも元の$77.22M版。出典は `../official_results.json`。以下の試算記録に残る「未取得」は提出前時点の状態。
+> User provided results after submission: public display **$77.22M**. The standard for all three editions is the original $77.22M edition. Source: `../official_results.json`. ``Not acquired'' in the trial calculation records below is the status as of before submission.
 
-# 将来スキップされやすい円を厳しく除外する版
+# Version that strictly excludes circles that are likely to be skipped in the future
 
-候補：**`submission_skip_guard.csv`**。
-基準は最高点$77.22M版。予測と元の施工順の方針を変えず、3円統合の採用条件だけを厳しくした。
-今回の公式スコアは未取得。
+Candidate: **`submission_skip_guard.csv`**.
+The baseline is the best-scoring $77.22M version. Only triple-merge acceptance conditions were tightened; predictors and ordering policy are unchanged.
+No official score was obtained for this candidate.
 
-## 追加した条件
+## Added condition
 
-細管齢・旧5年管齢の2モデル、それぞれハザード0.5・1・2倍の6条件を全て調べる。
-施工予定年までに円内の未交換管が全て漏水済みとなる確率の上限を計算する。
-円内の漏水が独立とは仮定せず、各管の累積漏水確率の最小値を上限として使う。
+Evaluate all six settings: fine-age and old five-year-age models, each at hazard multipliers 0.5/1/2.
+Calculate an upper bound on the probability that every unreplaced pipe in a circle leaks before its scheduled year.
+Do not assume independent leaks within a circle; use the minimum individual cumulative leak probability as an upper bound.
 
-- 元の各円の空円化確率の上限が **10%以下**。
-- 組み合わせ中のどれかが空になる確率の上限（各上限の和）が **15%以下**。
-- 元の円がスキップされる場合を不利に見積もり、統合円は必ず有料施工すると見ても、
-  予測上の固定工事費節約が **$25以上**残る。
-- この全条件を6つの漏水シナリオ全てで満たすことを求める。
+- The upper limit of the probability of each original circle becoming an empty circle is **10% or less**.
+- The upper limit of the probability that one of the combinations will be empty (sum of each upper limit) is **15% or less**.
+- Even if you estimate the case where the original circle is skipped unfavorably and assume that the integrated circle will always be constructed for a fee,
+  At least **$25** in predicted fixed construction savings remains.
+- All conditions are required to be met in all six leak scenarios.
 
-確率の上限は予測された管別確率を条件としたもの。真の将来確率や全工事費の保証ではない。
-予定が早まって漏水前に管を交換すると、修理費が減る代わりに交換長の費用が増えることもある。
-予測確率の校正誤差も残る。
+Probability bounds are conditional on predicted per-pipe probabilities, not guarantees of true future probabilities or total construction costs.
+Earlier replacement can prevent leak repairs while increasing replacement-length costs.
+Probability calibration error also remains.
 
-## 結果
+## Results
 
-従来の節約条件まで通る候補32組のうち19組を追加条件で除外した。
-残り13組から重複しない **9組の3円統合**を採用。円数は19,352→**19,334**。
-3組は、どの2円だけでも固定費節約がなく、3円なら節約できる組み合わせだった。
+Of 32 candidates passing the original savings rules, 19 were excluded by the additional conditions.
+From 13 remaining candidates, accept **nine disjoint triple merges**. Circle count falls from 19,352 to**19,334**.
+The 3rd set was a combination in which there was no fixed cost savings for any 2 circles, but 3 circles if savings.
 
-未来漏水ゼロの工事費：$180,290,222.26→**$180,287,050.52**。
-削減は **$3,171.74** と小さい。完了は2045年、交換遅延0本、前倒し10本。
-元の全包含管を覆うこと、基準ファイルが変わっていないことを確認する。
-高スキップ率の除外、複数の小さなスキップ率の合算、ゼロリスクでの採用など5件のテストに合格。
+No-leak construction costs: $180,290,222.26 → **$180,287,050.52**.
+Savings were small: **$3,171.74**. Completion was in 2045, with no delayed pipes and 10 advanced pipes.
+Check coverage of all originally contained pipes and verify that the baseline file is unchanged.
+Five tests passed, including high-skip rejection, aggregation of small skip probabilities, and zero-risk acceptance.
 
-## 共通乱数比較（各条件30回）
+## Common random number comparison (30 times for each condition)
 
-| 評価モデル | ハザード倍率 | 平均工事費の削減 | 平均スコア差 |
+| Evaluation model | Hazard multiplier | Mean construction savings | Mean score difference |
 |---|---:|---:|---:|
-| 細管齢 | 0.5 | $1,383 | +$22,165 |
-| 細管齢 | 1 | $2,308 | +$2,710 |
-| 細管齢 | 2 | $1,526 | +$3,634 |
-| 旧5年管齢 | 0.5 | $1,906 | +$2,548 |
-| 旧5年管齢 | 1 | $1,855 | +$2,612 |
-| 旧5年管齢 | 2 | $397 | +$1,210 |
+| Fine age bands | 0.5 | $1,383 | +$22,165 |
+| Fine age bands | 1 | $2,308 | +$2,710 |
+| Fine age bands | 2 | $1,526 | +$3,634 |
+| Old 5-year age | 0.5 | $1,906 | +$2,548 |
+| Old 5-year age | 1 | $1,855 | +$2,612 |
+| Old 5-year age | 2 | $397 | +$1,210 |
 
-今回は全6条件で平均工事費が減り、平均スコアも上回った。ただし効果は小さい。
-細管齢0.5倍と旧管齢2倍のスコア差の近似95%モンテカルロ区間は0を含む。
-細管齢0.5倍の大きめの平均差は修理費の影響によるもので、頑健な2万ドル改善とは扱わない。
-全試行が改善したわけではなく、モデル誤差やprivate評価を含む保証ではない。
+Mean construction costs decreased and mean scores improved in all six settings, although the effects were small.
+Approximate 95% Monte Carlo intervals for score differences include zero for fine-age hazard 0.5 and old-age hazard 2.
+The larger fine-age hazard-0.5 mean gain is driven by repair costs; do not treat it as a robust $20,000 improvement.
+Not every trial improved; these results do not guarantee model accuracy or private performance.
 
-表示スコアは0.01M＝1万ドル単位であり、漏水ゼロの削減額はその単位より小さい。
-最高点版を残し、微調整候補として扱う。
+Displayed scores use 0.01M ($10,000) increments, larger than the no-leak savings here.
+Retain the best-scoring version and treat this as a fine-tuning candidate.
 
-共有検証は未交換鉄管を明示した予算・完了チェック。歴史的交換済みoriginal ironの
-幾何学的カバーに関する最高点版の留保は引き継ぎ、追加円は入れていない。
-同年と遅延ゼロは未来漏水ゼロの施工予定についての確認。
-費用式は `2026-10-26-area-exponent`。詳細は `merges.csv`、`report.json` と `comparison.csv`。
+Shared validation checks budget and completion for unreplaced iron. For historically replaced original iron,
+The best-scoring baseline's geometric-coverage limitation remains; no supplementary circles were added.
+Same-year execution and zero delay were checked only against the no-future-leak schedule.
+Cost model: `2026-10-26-area-exponent`. See `merges.csv`, `report.json`, and `comparison.csv`.

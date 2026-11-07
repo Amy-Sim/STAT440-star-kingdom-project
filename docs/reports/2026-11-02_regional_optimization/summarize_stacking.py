@@ -4,18 +4,18 @@ import json
 
 p=Path(__file__).resolve().parent
 base=json.loads((p/'round5/submission_log.json').read_text());nn=json.loads((p/'round6/submission_log.json').read_text())
-lines=['# パイプごとの施工円を学習するstacking：2方式と軽量NN追加版','',
-    '結論：今回の4案はいずれもG17のPublic 79,168,928.88ドルを下回ったため、既存ベストを維持する。軽量NNと近似カーネルを追加すると両方式のPublicは小幅に改善したが、既存の幾何最適化・修理順を上回る結果にはならなかった。','',
-    '|構成|ユーザー案：パイプごとの半径予測|Codex案：円候補の価値予測と更新|',
+lines=['# Stacking to learn construction circle for each pipe: 2 methods and lightweight NN additional version','',
+    'All four candidates scored below G17\'s $79,168,928.88 public result, so the existing best was retained. Adding lightweight neural networks and approximate kernels modestly improved both stacking methods, but neither surpassed the existing geometry and work order.','',
+    '|Components|User method: per-pipe radius prediction|Codex method: candidate-circle values and updates|',
     '|---|---:|---:|',
-    f"|基本3モデル|G18：{Decimal(base[0]['public_score']):,.2f}|G19：{Decimal(base[1]['public_score']):,.2f}|",
-    f"|NN＋近似カーネル追加|G20：{Decimal(nn[0]['public_score']):,.2f}|G21：{Decimal(nn[1]['public_score']):,.2f}|",'']
-for a,b in zip(base,nn):lines.append(f"- {b['candidate'].split('_')[0]}は{a['candidate'].split('_')[0]}から{Decimal(b['public_score'])-Decimal(a['public_score']):+,.2f}ドル。")
-lines+=['','管・周辺166特徴、候補には20特徴を追加した186特徴を使用。基本はExtraTrees・HistGradientBoosting・RidgeのOOF stacking。追加はMLP（32→16、約5.9千／6.5千パラメータ、学習最大1万行）とNyström近似RBFカーネル64成分＋Ridge。NNとカーネルの同時追加なので、Public差をNN単独の効果とは断定しない。','',
-    '評価用の北東地域を500mのバッファで学習地域から離して、局所的な教師値への予測を確認した。最終CSVは同じ24条件×128乱数の3,072シナリオでG17と比較。4案とも全シナリオで被覆・予算・期限を満たしたが、24条件すべてで平均スコアがG17より低かった。両手法を比較提出するというユーザー承認に従い、全案を提出した。','',
-    '教師値は「いま施工する／3年後に単管で施工する」という局所的な近似費用から作ったもので、最適計画の実測正解ではない。今回の結果は、局所的な近似精度の改善が、地表費・重複・年次予算・将来漏水を含む全体計画の改善には直結しないことを示す。改善を続けるなら、完成計画の総費用差を教師にする設計を検討する。','',
-    '[基本stackingの実装・内部値・公式内訳](round5/README.ja.md) / [軽量モデル追加版](round6/README.ja.md)','',
-    '![Publicと内部の比較](stacking_comparison.png)','',
-    '生成コードは元の作業フォルダの既存ソース・入力予測スナップショットを参照する。CSVと学習済みモデルは保存済みだが、コードの再実行にはその作業フォルダ構成が必要。']
-(p/'STACKING_COMPARISON.ja.md').write_text('\n'.join(lines)+'\n',encoding='utf8')
+    f"|Three base models|G18:{Decimal(base[0]['public_score']):,.2f}|G19:{Decimal(base[1]['public_score']):,.2f}|",
+    f"|Added neural network and approximate kernel|G20:{Decimal(nn[0]['public_score']):,.2f}|G21:{Decimal(nn[1]['public_score']):,.2f}|",'']
+for a,b in zip(base,nn):lines.append(f"- {b['candidate'].split('_')[0]}is{a['candidate'].split('_')[0]}from{Decimal(b['public_score'])-Decimal(a['public_score']):+,.2f} dollars.")
+lines+=['','Use 166 pipe/neighborhood features and 186 candidate features after adding 20 circle-specific fields. Base stacking combines ExtraTrees, HistGradientBoosting, and Ridge OOF predictions. Extensions add an MLP (32 → 16 hidden units, approximately 5.9k/6.5k parameters, at most 10,000 training rows) and a 64-component Nyström RBF approximation with Ridge. Neural networks and kernels were added together; public differences do not isolate neural-network effects.','',
+    'Hold out the northeast region with a 500 m training buffer to assess prediction of local targets. Compare final CSVs against G17 using the same 24 settings and 128 seeds (3,072 scenarios). All four plans met coverage, budget, and deadline requirements in every scenario, but mean scores were below G17 in all 24 settings. All were submitted under the user\'s explicit comparison authorization.','',
+    'Training targets approximate local costs of construction now versus individual-pipe construction three years later; they are not observed optimal plans. Better local approximation did not directly improve the full plan with surfaces, overlaps, annual budgets, and future leaks. Future work could learn differences in total completed-plan costs instead.','',
+    '[Basic stacking implementation/internal values/official breakdown ](round5/README.md) / [Lightweight model additional version ](round6/README.md)','',
+    '![Public vs. Internal ](stacking_comparison.png)','',
+    'Generation code references source files and forecast snapshots in the original workspace. CSVs and fitted models are saved, but rerunning generation requires that workspace layout.']
+(p/'STACKING_COMPARISON.md').write_text('\n'.join(lines)+'\n',encoding='utf8')
 print('Wrote four-plan stacking comparison with exact official scores.')

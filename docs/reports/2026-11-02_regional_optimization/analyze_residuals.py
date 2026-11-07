@@ -35,11 +35,11 @@ def main():
         historical_residuals_used_only_static_features=True))
     dictionary=[]
     for col in f:
-        if '_count_' in col or col.startswith('neighbors_'):definition='管の中点が指定半径内にある他管の本数（自身を除く）'
-        elif '_length_' in col:definition='管の中点が指定半径内にある他管の直線長合計m（自身を除く。境界内の実延長ではない）'
-        else:definition={'pipe_id':'管ID','x_m':'中点x座標m','y_m':'中点y座標m','material':'記録された材質。unknownは欠損8本','surface':'管に紐づく地表分類。区画面積比ではない','length_m':'両端座標の直線距離m','age_2027':'2027年基準の年齢','initial_PU':'元からPUまたは2026年までに漏水交換済み','live_iron':'2027年開始時点で未交換の鉄管','planned_year_G04':'将来漏水なしで再生したG04の施工年。未施工は2052','conditional_repair_cost_CMS001':'漏水した場合の修理費予測ドル','leak_probability_2y_F168':'2027〜2028年累積漏水確率。開始時交換済みは0','leak_probability_25y_F168':'2027〜2051年累積漏水確率。開始時交換済みは0','expected_loss_2y':'2年累積漏水確率×条件付き修理費。未施工の場合の予測値'}[col]
+        if '_count_' in col or col.startswith('neighbors_'):definition='Count of other pipe midpoints within the specified radius, excluding the focal pipe'
+        elif '_length_' in col:definition='Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)'
+        else:definition={'pipe_id':'Pipe ID','x_m':'Midpoint x coordinate (m)','y_m':'Midpoint y coordinate (m)','material':'Recorded material; unknown denotes eight missing-material pipes','surface':'Surface classification attached to a pipe, not an area fraction','length_m':'Straight endpoint-to-endpoint distance (m)','age_2027':'Age based on 2027','initial_PU':'Originally PU or replaced after a leak by the end of 2026','live_iron':'Iron pipes that have not been replaced as of the start of 2027','planned_year_G04':'G04 construction year from a no-future-leak replay; unexecuted units use 2052','conditional_repair_cost_CMS001':'Predicted dollar repair cost conditional on a leak','leak_probability_2y_F168':'Cumulative leak probability for 2027-2028. 0 for replaced at start','leak_probability_25y_F168':'Cumulative leak probability from 2027 to 2051. 0 for replaced at start','expected_loss_2y':'2-year cumulative leak probability x conditional repair cost. Forecast before planned replacement'}[col]
         dictionary.append(dict(column=col,definition=definition,availability='static_geometry' if ('_count_' in col or '_length_' in col or col in ['x_m','y_m','material','surface','length_m'] or col.startswith('neighbors_')) else '2027_planning_only'))
-    pd.DataFrame(dictionary).to_csv(HERE/'feature_dictionary_ja.csv',index=False,encoding='utf-8-sig')
+    pd.DataFrame(dictionary).to_csv(HERE/'feature_dictionary.csv',index=False,encoding='utf-8-sig')
     print(pd.DataFrame(rows).query("dimension == 'density_quartile'").to_string(index=False),flush=True)
 
 if __name__=='__main__':main()

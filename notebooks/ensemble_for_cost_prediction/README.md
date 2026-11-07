@@ -1,6 +1,6 @@
 # Repair cost model candidates for 2027
 
-[English report](report_en.md) · [日本語レポート](report_ja.md)
+[English report](report_en.md)
 
 Six CSVs are in `predictions/`: five model candidates plus one reference. Each contains all 28,926 inventory IDs absent from train.csv, with exactly `id,predicted_cost`, sorted by decreasing cost. See the reports before using the 1,686 extrapolated rows.
 

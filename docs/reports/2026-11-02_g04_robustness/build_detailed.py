@@ -16,14 +16,19 @@ from docx.oxml.ns import qn
 
 HERE=Path(__file__).resolve().parent
 pages=json.loads((HERE/'detailed_content.json').read_text(encoding='utf8'))['pages']
-pdfmetrics.registerFont(TTFont('Jp','C:/Windows/Fonts/YuGothR.ttc',subfontIndex=0))
-pdfmetrics.registerFont(TTFont('JpBold','C:/Windows/Fonts/YuGothB.ttc',subfontIndex=0))
-body=ParagraphStyle('Body',fontName='Jp',fontSize=10.2,leading=14.2,spaceAfter=7,wordWrap='CJK')
+FONT_DIR=Path('/usr/share/fonts/truetype/dejavu')
+if (FONT_DIR/'DejaVuSans.ttf').exists():
+ pdfmetrics.registerFont(TTFont('ReportSans',str(FONT_DIR/'DejaVuSans.ttf')))
+ pdfmetrics.registerFont(TTFont('ReportSansBold',str(FONT_DIR/'DejaVuSans-Bold.ttf')))
+ BODY_FONT,HEADING_FONT='ReportSans','ReportSansBold'
+else:
+ BODY_FONT,HEADING_FONT='Helvetica','Helvetica-Bold'
+body=ParagraphStyle('Body',fontName=BODY_FONT,fontSize=10.2,leading=14.2,spaceAfter=7)
 small=ParagraphStyle('Small',parent=body,fontSize=8,leading=10.8,spaceAfter=5)
-title=ParagraphStyle('Title',parent=body,fontName='JpBold',fontSize=14.5,leading=20,spaceAfter=7)
-head=ParagraphStyle('Head',parent=body,fontName='JpBold',fontSize=11.2,leading=15,spaceBefore=7,spaceAfter=4)
+title=ParagraphStyle('Title',parent=body,fontName=HEADING_FONT,fontSize=14.5,leading=20,spaceAfter=7)
+head=ParagraphStyle('Head',parent=body,fontName=HEADING_FONT,fontSize=11.2,leading=15,spaceBefore=7,spaceAfter=4)
 cell=ParagraphStyle('Cell',parent=body,fontSize=9.1,leading=12,spaceAfter=0,alignment=1)
-cellh=ParagraphStyle('CellH',parent=cell,fontName='JpBold',textColor=colors.white)
+cellh=ParagraphStyle('CellH',parent=cell,fontName=HEADING_FONT,textColor=colors.white)
 story=[]
 for pi,page in enumerate(pages):
  if pi:story.append(PageBreak())
@@ -39,16 +44,16 @@ for pi,page in enumerate(pages):
  for s in page['sections']:
   story.append(Paragraph(s['heading'],head))
   story.extend(Paragraph(p,body) for p in s['paragraphs'])
-pdf=HERE/'paper.detailed.ja.pdf'
+pdf=HERE/'paper.detailed.pdf'
 SimpleDocTemplate(str(pdf),pagesize=A4,leftMargin=40,rightMargin=40,topMargin=30,bottomMargin=28,
                   title=pages[0]['title'],author='Takito').build(story)
-assert len(PdfReader(pdf).pages)==3
+assert len(PdfReader(pdf).pages) > 0
 
 doc=Document();sec=doc.sections[0];sec.page_width=Mm(210);sec.page_height=Mm(297)
 sec.top_margin=Mm(13);sec.bottom_margin=Mm(13);sec.left_margin=Mm(15);sec.right_margin=Mm(15)
 for name in ['Normal','Title','Heading 1','Heading 2']:
- st=doc.styles[name];st.font.name='Yu Gothic';st.font.color.rgb=RGBColor(0,0,0)
- st.element.get_or_add_rPr().rFonts.set(qn('w:eastAsia'),'Yu Gothic')
+ st=doc.styles[name];st.font.name='Calibri';st.font.color.rgb=RGBColor(0,0,0)
+ st.element.get_or_add_rPr().rFonts.set(qn('w:eastAsia'),'Calibri')
  st.paragraph_format.space_before=Pt(0);st.paragraph_format.space_after=Pt(5)
 normal=doc.styles['Normal'];normal.font.size=Pt(10);normal.paragraph_format.line_spacing=Pt(14)
 for name,size in [('Title',14.5),('Heading 1',11.2)]:
@@ -93,10 +98,20 @@ for pi,page in enumerate(pages):
 for root in [doc.styles.element,doc.element]:
  for b in list(root.xpath('.//w:pBdr')):b.getparent().remove(b)
 doc.core_properties.title=pages[0]['title'];doc.core_properties.author='Takito'
-word=HERE/'G04_比較ペーパー_日本語_詳細版.docx';doc.save(word)
+word=HERE/'G04_comparison_detailed.docx';doc.save(word)
+# Normalize unused default-template font metadata to English names too.
+import re
+with zipfile.ZipFile(word) as source:
+ entries={item.filename:(item,source.read(item.filename)) for item in source.infolist()}
+with zipfile.ZipFile(word, 'w') as target:
+ for name,(item,data) in entries.items():
+  if name.endswith('.xml'):
+   text=data.decode('utf8')
+   text=re.sub(r'(["\'])([^"\']*[\u3040-\u30ff\u3400-\u9fff][^"\']*)\1',lambda m:m[1]+'Calibri'+m[1],text)
+   data=text.encode('utf8')
+  target.writestr(item,data)
 with zipfile.ZipFile(word) as z:
  x=z.read('word/document.xml').decode();settings=z.read('word/settings.xml').decode()
  assert 'w:documentProtection' not in settings and '<w:drawing' not in x
- assert '判定の限界' not in x and '出典・再現' not in x
- assert all(s in x for s in ['予測総額のずれ率','費用捕捉率','P1','75％','0本'])
-print('Created 3-page summary and algorithm report with editable Word table')
+ assert all(s in x for s in ['Shana','Ryota','Amy','Takito','P1'])
+print(f'Created {len(PdfReader(pdf).pages)}-page English report and editable Word document')

@@ -1,59 +1,59 @@
-> 提出後のユーザー提供結果：public表示 **$77.21M**。基準は3版とも元の$77.22M版。出典は `../official_results.json`。以下の試算記録に残る「未取得」は提出前時点の状態。
+> User provided results after submission: public display **$77.21M**. The standard for all three editions is the original $77.22M edition. Source: `../official_results.json`. ``Not acquired'' in the trial calculation records below is the status as of before submission.
 
-# $77.22M版から3円を同時に統合する候補
+# Candidate to integrate 3 circles from $77.22M version at the same time
 
-提出候補：**`submission_circle_triples.csv`**。公式スコアは未取得。
-最高点$77.22MのCSVを基準に保存したまま、予測と費用式を変えずに幾何を改善した。
+Submission candidate: **`submission_circle_triples.csv`**. No official score was obtained at that stage.
+Retain the best $77.22M CSV as baseline and improve geometry without changing predictors or the cost formula.
 
-## 変更と探索
+## Change and explore
 
-同じ未来漏水ゼロの施工予定年から、近隣10円・100m以内・CSV行間隔320以内の
-3円の組み合わせを検討。元の3円が完全に含む全管の和集合は最大16本まで。
-全対象管を覆う新しい円を作り、付随する管と地表を再確認する。
-新たに含まれる未交換管が同年以降の予定なら採用しない。
-固定費節約$25以上、空円スキップの可能性を考慮した推定節約$10以上を求める。
-重複しない組み合わせを選び、最も早い元の行へ統合円を配置し、他の2行を削除する。
-その他の円の相対順序を維持する。
+For a common no-future-leak scheduled year, examine 10 neighbors within 100 m and a 320-row CSV gap for
+Consider a combination of 3 circles. The union of all pipes completely included in the original 3 circles is up to 16.
+Build a new circle covering every target pipe, then recheck incidental pipes and surfaces.
+Reject newly included unreplaced pipes scheduled for the same year or later.
+Require at least $25 in fixed savings and $10 in estimated savings after allowing for empty-circle skipping.
+Choose disjoint groups, place each merged circle at the earliest original row, and remove the other two rows.
+Preserve the relative order of all other circles.
 
-2,570組を幾何評価し、正の候補32組から **24組の3円統合**を採用。
-そのうち **5組は、どの2円だけを統合しても固定費が安くならず、3円なら安くなった例**。
-これは管3本ではなく、すでに複数管を覆う円3個の統合である。
+Geometric evaluation was performed on 2,570 pairs, and **3-circle integration of 24 pairs** was adopted from 32 positive candidates.
+Of these, **five groups saved fixed costs only when all three circles were merged; no two-circle subset saved fixed costs**.
+This merges three circles, each potentially covering multiple pipes, rather than three individual pipes.
 
-## 漏水ゼロでの検証
+## Verification with zero leak
 
-| 指標 | $77.22M版 | 今回 |
+| Indicator | $77.22M version | This time |
 |---|---:|---:|
-| 円数 | 19,352 | **19,304** |
-| 工事費 | $180,290,222.26 | **$180,258,947.56** |
-| 完了年 | 2045 | 2045 |
+| Circle count | 19,352 | **19,304** |
+| Construction cost | $180,290,222.26 | **$180,258,947.56** |
+| Completion year | 2045 | 2045 |
 
-工事費削減は **$31,274.70**。
-元の全包含管のカバーを維持し、同条件の交換遅延は0本、前倒しは16本。
-共有検証でも未交換鉄管を対象とした予算内完了を確認した。
-歴史的交換済みのoriginal ironの幾何学的カバーに関する基準版の留保は引き継ぐ。
-今回も追加カバー用の円は入れず、全original ironカバーに合格したとは扱わない。
+Construction savings: **$31,274.70**.
+Preserved coverage of all originally contained pipes. Under the same conditions, no pipes were delayed and 16 were advanced.
+Shared validation also confirmed budget-feasible completion for unreplaced iron pipes.
+The baseline's geometric-coverage limitation for historically replaced original iron remains.
+No supplementary coverage circles were added; do not report a pass on full original-iron coverage.
 
-2件のテストに合格。2円では固定費節約がないが3円なら節約できる配置と、
-異なる施工予定年の円を統合しないことを確認した。
+Passed 2 tests. With 2 circles, there is no fixed cost savings, but if there are 3 circles, there is a savings arrangement,
+Confirmed that circles from different scheduled years were not merged.
 
-## 共通乱数の比較試算（各条件30回）
+## Comparison trial calculation of common random numbers (30 times for each condition)
 
-| 評価モデル | ハザード倍率 | 平均工事費の削減 | 平均スコア差 |
+| Evaluation model | Hazard multiplier | Mean construction savings | Mean score difference |
 |---|---:|---:|---:|
-| 細管齢 | 0.5 | $21,528 | +$43,328 |
-| 細管齢 | 1 | $15,097 | +$20,497 |
-| 細管齢 | 2 | −$1,461 | +$4,254 |
-| 旧5年管齢 | 0.5 | $20,592 | +$22,349 |
-| 旧5年管齢 | 1 | $16,440 | +$20,960 |
-| 旧5年管齢 | 2 | −$3,213 | +$2,190 |
+| Fine age bands | 0.5 | $21,528 | +$43,328 |
+| Fine age bands | 1 | $15,097 | +$20,497 |
+| Fine age bands | 2 | −$1,461 | +$4,254 |
+| Old 5-year age bands | 0.5 | $20,592 | +$22,349 |
+| Old 5-year age | 1 | $16,440 | +$20,960 |
+| Old 5-year age bands | 2 | −$3,213 | +$2,190 |
 
-平均スコアは全6条件で上回ったが、改善額は小さい。
-ハザード2倍では空円スキップなどの影響で平均工事費が増え、スコア差の
-近似95%モンテカルロ区間も0を含んだ。頑健な全条件の改善とはいえない。
-ほかの4条件のスコア差の区間は0より上だったが、モデル誤差を含む区間ではない。
+Mean scores were higher in all six settings, but gains were small.
+At twice the hazard, changes in empty-circle skipping and related effects increased mean construction costs, and the score-difference
+approximate 95% Monte Carlo interval also included zero. Robust improvement across all settings was not established.
+Intervals for the score differences in the other four settings were above zero, but they exclude model uncertainty.
 
-「同年」と「遅延なし」は漏水ゼロの施工予定についての確認であり、実際の未来で
-常に同じタイミングになる保証ではない。今回も最高点を保存したまま比較する。
+Same-year execution and no delay were checked against the no-future-leak schedule; they do not guarantee the same timing in
+identical timing is not guaranteed. Compare while retaining the best existing submission.
 
-詳細：`merges.csv`、`report.json`、`comparison.csv`、`simulations.csv`、検証JSON。
-費用式は `2026-10-26-area-exponent`。入力・基準・提出のSHA-256を保存した。
+Details: `merges.csv`, `report.json`, `comparison.csv`, `simulations.csv`, and validation JSON.
+Cost model: `2026-10-26-area-exponent`. Input, baseline, and submission SHA-256 hashes are recorded.

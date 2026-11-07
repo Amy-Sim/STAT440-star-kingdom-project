@@ -1,61 +1,61 @@
-# 初期3年間を重視する円の選択
+# Select a circle that emphasizes the first 3 years
 
-`early_three_years.py` は前回の提出 `outputs/multi_pipe.csv` を変更せず、
-新しい提出を `outputs_early3/early3_adaptive.csv` に保存する。
-前回CSVで公式表示が $71.40M だったというユーザー報告を比較対象の識別に使うが、
-その数値を使って予測モデルやシミュレーターを調整してはいない。
+`early_three_years.py` does not change the previous submission `outputs/multi_pipe.csv`,
+Save the new submission to `outputs_early3/early3_adaptive.csv`.
+The user's report of a $71.40M official display identifies the previous CSV comparator, but
+Those values were not used to tune the predictors or simulator.
 
-## 今回の変更
+## This change
 
-1. 材質・地表・管齢別の年間漏水確率を、0.5年刻みの管齢と滑らかな近傍平均で推定。
-   狭い管齢帯の漏水集中を、従来の5年区切りより捉えやすくする。
-   少数データの組み合わせは材質別の管齢曲線に寄せる。
-2. 2024年と2025年の時系列検証で、平滑化幅と履歴の重みを6候補から選ぶ。
-   2026年の漏水結果はこのパラメーター選択に使わず、別に性能を確認する。
-   最終提出用には2026年までの履歴を使って学習し直す。
-3. 2027〜2029年の各年について、その年から2029年末までに起こると予測される
-   漏水損失を、未交換の管だけで集計する。前年までの漏水を生き残る確率も扱う。
-4. 単独円と、最大6本の鉄管をまとめる近隣の節約候補を同時に比較する。
-   「今回新たに守れる管の予想漏水損失 ÷ 今回の工事費」が最大の円を順に採用する。
-   新しい円を採用したら、影響する全候補の費用と便益を再計算する。
-   すでに交換した管のリスクを重複して加点しない。
-5. 大きくまとめる効率が悪ければ、単独円がそのまま選ばれる。
-   3年間の初期選択後は、1〜3本をまとめる小さな設計グループを基本とし、
-   節約額と半径を考慮して残りの工事を組む。
+1. Estimate the annual leak probability by material, ground surface, and pipe age using pipe ages in 0.5-year increments and smooth neighborhood averages.
+   Capture narrow age-band leak concentrations more effectively than the previous five-year bands.
+   Sparse groups shrink toward material-specific age curves.
+2. Select the smoothing width and history weight from 6 candidates for time series verification in 2024 and 2025.
+   The leak results for 2026 will not be used to select this parameter, and the performance will be checked separately.
+   Refit for final submission using history through 2026.
+3. For each year between 2027 and 2029, what is expected to occur between that year and the end of 2029?
+   Aggregate leak losses only for unreplaced pipes, accounting for survival through earlier years.
+4. Simultaneously compare single circle and nearby savings candidates that combine up to 6 iron pipes.
+   Select circles in descending order of expected newly avoidable leak loss divided by current construction cost.
+   After accepting a new circle, recalculate benefits and costs for every affected candidate.
+   Do not count the risk of already replaced pipes again.
+5. If it is inefficient to group them together, a single circle will be selected as is.
+   After 3 years of initial selection, we will basically form a small design group that brings together 1 to 3 designs.
+   Schedule remaining work considering savings and radius.
 
-年予算は1,000万、残額は翌年繰越。計画の年境界の残額によって、CSV実行時に
-翌年用の円が少し早く実行される場合がある。提出後の実際の年別配置は、
-シリアライズ済みCSVを再読込して計算した `early3_adaptive_annual.csv` を参照する。
-将来の漏水による自然な交換があれば実行時期はさらに変わる。
+The annual budget is $10M with unused funds carried forward. Depending on budget remaining at planned year boundaries, CSV execution may
+works planned for the next year can execute slightly earlier. Actual post-submission annual allocation is
+See `early3_adaptive_annual.csv`, calculated by reading back the serialized CSV.
+Natural replacement after future leaks can further change execution timing.
 
-「半径が必ず1行ずつ小さくなる」という制約は設けていない。
-その制約で危険な孤立管を後回しにしないためである。
-大きな円はリスクと費用の効率がよいときに選び、後半は小さなグループを残す方針。
-実際の年別半径も出力し、傾向を結果で確認する。
+There is no constraint requiring the radius to decrease from one row to the next.
+This avoids deferring dangerous isolated pipes because of that constraint.
+Choose larger circles when risk/cost efficiency supports them, leaving smaller groups for later years.
+Export actual annual radius summaries and inspect the resulting trend.
 
-## 比較と確認
+## Compare and check
 
-主候補 `early3_adaptive.csv` に加え、前回の円をそのまま使い、予測と並び順だけを
-変えた `early3_reorder_only.csv` も比較する。
-旧モデルと新モデルの双方で、ハザード0.5倍・1倍・2倍の共通乱数比較を実施する。
-初期3年間の修理費と25年間のスコアを別に記録する。
-新モデル自身による自己評価だけで改善を判断しない。
+Besides the main `early3_adaptive.csv` candidate, a comparison retains the previous circles and changes only forecasts and order;
+also compare `early3_reorder_only.csv`, which changes only those predictions and ordering.
+Run paired comparisons under both old and new leak models at hazard multipliers 0.5, 1, and 2.
+Record first-three-year repair costs separately from the 25-year score.
+Do not judge improvement solely from the new model's self-evaluation.
 
-初期3年間の修理費評価も、漏水タイミングは全期間と同じ乱数を使い、
-2030年以降の漏水費用をゼロにした別計算で取り出す。
-工事は各年初め、漏水はその後、という前回と同じ仮定。
-予算は工事費に適用し、修理費はスコアから差し引く。
+First-three-year repair evaluation uses the same leak times as full-period evaluation,
+Extracted using a separate calculation with leak costs after 2030 set to zero.
+As in the preceding experiment, construction occurs at the start of each year, followed by leaks.
+The budget applies to construction costs; repair costs are deducted from the score.
 
-2026年検証で上位10%の漏水捕捉率が改善しても、2027〜2029年の性能保証ではない。
-確率の校正と高リスク順位の精度は別であり、ログ損失や予測平均も併記する。
-公式問題文の不足に由来するルールの留保は前回READMEと同じ。
+Even if the top 10% leak capture rate improves in the 2026 verification, it does not guarantee performance from 2027 to 2029.
+Calibration and high-risk ranking are distinct; also report log loss and mean predicted probability.
+Reservations about missing official specification details are unchanged from the previous README.
 
-## 再実行
+## Rerun
 
 ```sh
 python -m unittest discover -v
 python early_three_years.py --sims 30
 ```
 
-出力CSVの形式、管の包含、全未交換鉄管のカバー、予算内完了を再確認する。
-前回の提出、結果、GitHub引き渡しZIPは上書きしない。
+Recheck exported CSV structure, pipe containment, coverage of all unreplaced iron, and budget-feasible completion.
+Do not overwrite previous submissions, results, or the GitHub handoff ZIP.

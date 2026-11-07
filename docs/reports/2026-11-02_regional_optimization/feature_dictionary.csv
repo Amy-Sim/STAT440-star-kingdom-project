@@ -1,0 +1,155 @@
+﻿column,definition,availability
+pipe_id,Pipe ID,2027_planning_only
+x_m,Midpoint x coordinate (m),static_geometry
+y_m,Midpoint y coordinate (m),static_geometry
+material,Recorded material; unknown denotes eight missing-material pipes,static_geometry
+surface,"Surface classification attached to a pipe, not an area fraction",static_geometry
+length_m,Straight endpoint-to-endpoint distance (m),static_geometry
+age_2027,Age based on 2027,2027_planning_only
+initial_PU,Originally PU or replaced after a leak by the end of 2026,2027_planning_only
+live_iron,Iron pipes that have not been replaced as of the start of 2027,2027_planning_only
+planned_year_G04,G04 construction year from a no-future-leak replay; unexecuted units use 2052,2027_planning_only
+conditional_repair_cost_CMS001,Predicted dollar repair cost conditional on a leak,2027_planning_only
+leak_probability_2y_F168,Cumulative leak probability for 2027-2028. 0 for replaced at start,2027_planning_only
+leak_probability_25y_F168,Cumulative leak probability from 2027 to 2051. 0 for replaced at start,2027_planning_only
+expected_loss_2y,2-year cumulative leak probability x conditional repair cost. Forecast before planned replacement,2027_planning_only
+neighbors_25m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+material_brass_count_25m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+material_brass_length_25m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+material_cast iron_count_25m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+material_cast iron_length_25m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+material_copper_count_25m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+material_copper_length_25m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+material_gray iron_count_25m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+material_gray iron_length_25m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+material_polyurethane_count_25m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+material_polyurethane_length_25m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+material_unknown_count_25m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+material_unknown_length_25m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+material_wrought iron_count_25m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+material_wrought iron_length_25m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+surface_grassland_count_25m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+surface_grassland_length_25m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+surface_farmland_count_25m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+surface_farmland_length_25m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+surface_swamp_count_25m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+surface_swamp_length_25m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+surface_road_count_25m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+surface_road_length_25m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+surface_structure_count_25m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+surface_structure_length_25m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+surface_water_count_25m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+surface_water_length_25m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+all_count_25m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+all_length_25m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+initial_PU_count_25m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+initial_PU_length_25m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+live_iron_count_25m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+live_iron_length_25m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+live_noniron_count_25m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+live_noniron_length_25m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+neighbors_50m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+material_brass_count_50m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+material_brass_length_50m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+material_cast iron_count_50m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+material_cast iron_length_50m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+material_copper_count_50m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+material_copper_length_50m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+material_gray iron_count_50m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+material_gray iron_length_50m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+material_polyurethane_count_50m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+material_polyurethane_length_50m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+material_unknown_count_50m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+material_unknown_length_50m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+material_wrought iron_count_50m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+material_wrought iron_length_50m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+surface_grassland_count_50m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+surface_grassland_length_50m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+surface_farmland_count_50m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+surface_farmland_length_50m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+surface_swamp_count_50m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+surface_swamp_length_50m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+surface_road_count_50m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+surface_road_length_50m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+surface_structure_count_50m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+surface_structure_length_50m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+surface_water_count_50m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+surface_water_length_50m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+all_count_50m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+all_length_50m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+initial_PU_count_50m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+initial_PU_length_50m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+live_iron_count_50m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+live_iron_length_50m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+live_noniron_count_50m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+live_noniron_length_50m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+neighbors_100m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+material_brass_count_100m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+material_brass_length_100m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+material_cast iron_count_100m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+material_cast iron_length_100m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+material_copper_count_100m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+material_copper_length_100m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+material_gray iron_count_100m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+material_gray iron_length_100m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+material_polyurethane_count_100m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+material_polyurethane_length_100m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+material_unknown_count_100m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+material_unknown_length_100m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+material_wrought iron_count_100m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+material_wrought iron_length_100m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+surface_grassland_count_100m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+surface_grassland_length_100m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+surface_farmland_count_100m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+surface_farmland_length_100m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+surface_swamp_count_100m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+surface_swamp_length_100m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+surface_road_count_100m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+surface_road_length_100m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+surface_structure_count_100m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+surface_structure_length_100m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+surface_water_count_100m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+surface_water_length_100m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+all_count_100m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+all_length_100m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+initial_PU_count_100m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+initial_PU_length_100m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+live_iron_count_100m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+live_iron_length_100m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+live_noniron_count_100m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+live_noniron_length_100m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+neighbors_250m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+material_brass_count_250m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+material_brass_length_250m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+material_cast iron_count_250m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+material_cast iron_length_250m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+material_copper_count_250m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+material_copper_length_250m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+material_gray iron_count_250m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+material_gray iron_length_250m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+material_polyurethane_count_250m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+material_polyurethane_length_250m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+material_unknown_count_250m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+material_unknown_length_250m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+material_wrought iron_count_250m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+material_wrought iron_length_250m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+surface_grassland_count_250m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+surface_grassland_length_250m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+surface_farmland_count_250m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+surface_farmland_length_250m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+surface_swamp_count_250m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+surface_swamp_length_250m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+surface_road_count_250m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+surface_road_length_250m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+surface_structure_count_250m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+surface_structure_length_250m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+surface_water_count_250m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+surface_water_length_250m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+all_count_250m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+all_length_250m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+initial_PU_count_250m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+initial_PU_length_250m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+live_iron_count_250m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+live_iron_length_250m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry
+live_noniron_count_250m,"Count of other pipe midpoints within the specified radius, excluding the focal pipe",static_geometry
+live_noniron_length_250m,"Total straight length of other pipes whose midpoints lie within the radius, excluding the focal pipe; not clipped physical length inside the boundary (m)",static_geometry

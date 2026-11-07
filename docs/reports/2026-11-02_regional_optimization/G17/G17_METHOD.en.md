@@ -1,10 +1,8 @@
 # G17: how the $79.17M replacement plan was built
 
-[日本語](G17_METHOD.ja.md) · [Submission CSV](G17_single_merge.csv) · [Official annual results](evidence/official_G17.csv)
+[Submission CSV](G17_single_merge.csv) · [Official annual results](evidence/official_G17.csv)
 
-This document explains the exact **G17** version, with Public score **$79,168,928.88**. It is the plan referred to as the 79.17M best model at that stage; it does not describe subsequent candidates. Its pipeline is:
-
-**Pipe records → F168 leak timing + CMS001 conditional repair cost → cost-aware work order → circle movement/splitting/merging → fixed submission CSV.**
+This document explains the exact **G17** version, with Public score**$79,168,928.88**. It is the plan referred to as the 79.17M best model at that stage; it does not describe subsequent candidates. Its pipeline is:**Pipe records → F168 leak timing + CMS001 conditional repair cost → cost-aware work order → circle movement/splitting/merging → fixed submission CSV.**
 
 The two predictors answer different questions. F168 asks “when might this pipe leak?” CMS001 asks “if it leaks, how expensive will the repair be?” The geometry optimizer then asks “which pipes should one work circle replace, and where should that circle be?”
 
@@ -43,9 +41,7 @@ predicted repair cost = sum(effective_weights × base dollar predictions)
 
 Sparse/unseen groups use the global vector. Select `tau` from `0, 50, 200, 1000, 1e9` using earlier forward validations; use the predefined fallback when there is insufficient earlier validation.
 
-**Final 2027 deployment:** refit bases on 2019–2026 events; fit weights using 8,592 OOF events from 2023–2026. There are 18 eligible local groups and `tau = 50`. Global weights are **68.6270% CatBoost, 31.3730% corrected log RF, 0% corrected log LightGBM**. Local groups can use LightGBM, so the global percentages do not describe every pipe.
-
-**Illustration:** with 100 earlier events and `tau = 50`, a group's effective vector is two-thirds local and one-third global. This avoids relying entirely on a small group's fitted weights. These are illustrative group counts, not a particular recorded pipe.
+**Final 2027 deployment:** refit bases on 2019–2026 events; fit weights using 8,592 OOF events from 2023–2026. There are 18 eligible local groups and `tau = 50`. Global weights are**68.6270% CatBoost, 31.3730% corrected log RF, 0% corrected log LightGBM**. Local groups can use LightGBM, so the global percentages do not describe every pipe.**Illustration:** with 100 earlier events and `tau = 50`, a group's effective vector is two-thirds local and one-third global. This avoids relying entirely on a small group's fitted weights. These are illustrative group counts, not a particular recorded pipe.
 
 ## 3. Predictor B: F168 leak timing
 
@@ -68,7 +64,7 @@ Selected feature sets differ by base. They include material, surface, length, ag
 
 ### Step B2 — learn the combination from historical forward predictions
 
-F168 uses the `optuna_base` recipes and **StandardScaler → Ridge**, rather than equal weighting. For 2027, the meta-training observations are base next-year predictions and realized leak indicators from 2020–2026. Tune the Ridge penalty by training on earlier meta-years and validating on the latest available meta-year; refit on all available meta-years afterward. The final penalty is **alpha = 7308.877234445037**.
+F168 uses the `optuna_base` recipes and **StandardScaler → Ridge**, rather than equal weighting. For 2027, the meta-training observations are base next-year predictions and realized leak indicators from 2020–2026. Tune the Ridge penalty by training on earlier meta-years and validating on the latest available meta-year; refit on all available meta-years afterward. The final penalty is**alpha = 7308.877234445037**.
 
 Ridge coefficients are not constrained to be positive or sum to one. This is different from CMS001's convex weights. F168 does not apply the old manual installation-year probability overrides.
 
@@ -184,7 +180,7 @@ Merging loses some opportunities to skip separate circles for free, so checking 
 
 ### Step D4 — the exact extra merge in G17
 
-G17 takes the second recorded merge from the G13 development search and applies only that merge to G08. The G08 active-prefix row indices are **6354 and 7575 (zero-based)**, both planned for 2030. The old radii are approximately **1.897 m and 10.539 m**. The merged grassland circle contains seven target pipes and has radius **10.539 m**: the larger circle can cover the combined targets without enlargement. The local expected fixed-cost saving was about **$113.66**.
+G17 takes the second recorded merge from the G13 development search and applies only that merge to G08. The G08 active-prefix row indices are **6354 and 7575 (zero-based)**, both planned for 2030. The old radii are approximately**1.897 m and 10.539 m**. The merged grassland circle contains seven target pipes and has radius**10.539 m**: the larger circle can cover the combined targets without enlargement. The local expected fixed-cost saving was about**$113.66**.
 
 The submitted G17 Public score exceeds G08 by **$123.56**. Their official repair expenditure is identical; this observed improvement comes from construction expenditure. The confirmation simulations did not establish consistent internal superiority over G08, so this small Public improvement should not be read as proof of future dominance.
 
@@ -204,9 +200,9 @@ Append the original required iron-coverage circles after the active works. Check
 
 Implementation/evidence pointers in this repository:
 
-- [G17 submission record and internal comparison](evidence/EXPERIMENT_RECORD.ja.md), [development summary](evidence/round4_development_summary.csv), [confirmation summary](evidence/G17_confirmation_summary.csv).
+- [G17 submission record and internal comparison](evidence/EXPERIMENT_RECORD.md), [development summary](evidence/round4_development_summary.csv), [confirmation summary](evidence/G17_confirmation_summary.csv).
 - [G17 generation record](evidence/generation.json), [shared regional geometry helpers](../common.py), [regional merge search](../regional_merge.py), [larger-circle search](../large_circle_round2/larger_circles.py). The local assembly source is `output/2026-11-02_regional_optimization/run_round4.py`.
-- [Exact inherited order and initial geometry formulas](../../2026-11-02_g04_robustness/ALGORITHM_DETAILS.ja.md); original generator sources are named in that report.
+- [Exact inherited order and initial geometry formulas](../../2026-11-02_g04_robustness/ALGORITHM_DETAILS.md); original generator sources are named in that report.
 - CMS001 source: `notebooks/ensemble_for_cost_prediction/latest_conditional_stack/` on branch `takito/latest-model-articles-2026-10-28` ([method](https://github.com/reinesana/STAT440-star-kingdom-project/blob/takito/latest-model-articles-2026-10-28/notebooks/ensemble_for_cost_prediction/latest_conditional_stack/METHOD.en.md)).
 - [F168 base-model evidence](https://github.com/reinesana/STAT440-star-kingdom-project/blob/8359301/docs/reports/2026-10-28_timing_winner/evidence/base_models_2027.json) and [Ridge mapping](https://github.com/reinesana/STAT440-star-kingdom-project/blob/8359301/docs/reports/2026-10-28_timing_winner/evidence/stacking_2027.json).
 

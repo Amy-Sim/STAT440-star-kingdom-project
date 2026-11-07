@@ -21,31 +21,31 @@ def main():
     (out/'submission_log.json').write_text(json.dumps(rows,indent=2,ensure_ascii=False),encoding='utf8')
     pd.DataFrame(rows).to_csv(out/'official_results.csv',index=False)
     nn=out.name=='round6'
-    lines=['# パイプ別半径予測と円候補の価値予測：stackingの比較','',
-        '既存のPublic最高はG17の79,168,928.88ドル。今回は2手法を比較するため、内部評価が悪化しても被覆・予算・期限を満たせば各1案を提出することを、ユーザーが明示的に承認した。既存のベスト提出は削除していない。','',
-        '|案|発案・方式|Public score（ドル）|G17との差（ドル）|内部の平均差（ドル）|内部で平均改善した条件|',
+    lines=['# Radius prediction by pipe and value prediction of circle candidates: Comparison of stacking','',
+        'G17 held the highest existing public score at $79,168,928.88. The user explicitly authorized one submission per method for comparison, even with worse internal results, provided coverage, budget, and deadline requirements passed. The best existing submission was retained.','',
+        '|Candidate|Origin and method|Public score( dollars)|Difference from G17( dollars)|Mean internal difference( dollars)|Internal settings with positive mean gain|',
         '|---|---|---:|---:|---:|---:|']
     for r in rows:
-        short=r['candidate'].split('_')[0];role='ユーザー：管ごとの半径予測' if short in ['G18','G20'] else 'Codex：円候補の価値予測＋更新'
+        short=r['candidate'].split('_')[0];role='User: per-pipe radius prediction' if short in ['G18','G20'] else 'Codex: circle candidate value prediction + update'
         lines.append(f"|{short}|{role}|{float(r['public_score']):,.2f}|{float(r['delta_vs_G17']):+,.2f}|{r['internal_mean_gain']:+,.2f}|{r['internal_positive_settings']}/24|")
-    lines+=['','## 実装した2つの方式','',
-        '管・周辺特徴は166項目。25/50/100/250mでの材質・地表別の他管本数と延長、交換済み割合、座標、管の長さ・向き・年齢、CMS001修理費、F168漏水確率などを使った。教師データの公式Public年間内訳の使用はない。','',
-        '半径方式：近隣1/2/4/8管の円と既存円を比較し、局所的な期待費用が最も良い半径を学習目標にした。stackingで管ごとの半径倍率を予測し、元の優先順に管を取り上げ、管の両端を含む円で採用する。中心は中点と垂直方向への数候補から選び、交換済み管は飛ばす。高すぎる円は単管円へ投影する。','',
-        '候補方式：同じ近隣円候補に、半径・中心の移動量・含有管・全地表・交換長・予測費用と確率など20項目を加えた186項目を使う。stackingで局所的な工事の価値を予測し、予定年の範囲内で候補を順位付けする。採用するたびに周囲の候補の未交換管、交換長、残存価値を更新する。残存価値は予測した初期価値を未交換管の危険度比で配分する近似で、毎回stackingを再学習する方式ではない。高すぎる円は単管円へ投影する。','',
-        '両方式とも既存の全円を末尾に残す。施工部分で元計画の交換対象をすべて交換するため、末尾は交換済み管だけとなり無料で幾何カバーを満たす。生成CSVを読み直し、全鉄管被覆・年次予算と繰越・2051年までの完了を検証した。','',
-        '## 学習と評価','']
-    lines.append('基本モデルはExtraTrees、HistGradientBoosting、標準化したRidge。500m区画による3分割のOOF予測をRidgeメタモデルで結合した。')
+    lines+=['','## Two methods implemented','',
+        'The 166 pipe/neighborhood features include other-pipe counts/lengths by material and surface within 25/50/100/250 m, replaced fractions, coordinates, pipe length/orientation/age, CMS001 costs, and F168 probabilities. Official public annual breakdowns were not used to construct training targets.','',
+        'The radius method compares circles enclosing 1/2/4/8 neighboring pipes with existing circles; the radius with the best local expected cost is the learning target. Stacking predicts per-pipe radius multipliers. Pipes are processed in the original priority order, using circles that contain both endpoints. Centers are selected from the midpoint and several perpendicular offsets; replaced pipes are skipped. Overly expensive circles fall back to single-pipe circles.','',
+        'The candidate-value method uses 186 features: the same neighborhood inputs plus 20 circle-specific features, including radius, center displacement, contained pipes, all surfaces, replacement length, predicted costs, and probabilities. Stacking predicts local work value and ranks candidates within scheduled-year groups. Each acceptance updates neighboring candidates\' unreplaced pipes, lengths, and remaining values. Remaining value approximates the initial prediction using the unreplaced-risk fraction; the stack is not retrained at every step. Overly expensive circles fall back to single-pipe circles.','',
+        'Both methods retain all existing circles as a suffix. The construction prefix replaces the original plan\'s entire target set, so the suffix contains only replaced pipes and meets geometric coverage at zero cost. The exported CSV was reloaded and checked for complete iron coverage, annual budget and carryover, and completion by 2051.','',
+        '## Learning and evaluation','']
+    lines.append('Base models are ExtraTrees, HistGradientBoosting, and standardized Ridge. Ridge combines three-fold OOF predictions split by 500 m cells.')
     if nn:
-        lines.append('追加モデルは軽量MLP（32→16ユニット、最大10,000学習行、最大100反復、早期終了）と、Nyström近似RBFカーネル（64成分）＋Ridge。標準化は各学習分割の内側で行う。')
-        lines.append('最終NNのパラメータ数は半径5,889・候補価値6,529。半径NNは59反復で停止、候補価値NNは100反復の計算上限に到達した。候補価値NNの完全収束は確認していない。NNとカーネルを同時追加しているため、Public差をNN単独の効果とは解釈しない。')
-    lines+=['','北東地域を評価用に残し、学習側はその境界から500m以上離した。これは既存予測を使った局所的な教師への再現精度であり、実際の将来工事費の独立テストではない。確認後に全地域で最終モデルを学習した。','',
-        '教師は「予定年にまとめて施工」と「3年後に単管で施工」の期待費用の差から作った。3年後の単管地表費は、その管自身の地表と最小半径による近似であり、最適な施工計画の実測正解ではない。この近似と、局所価値から予算制約下の全体計画への変換には誤差がある。','',
-        '完成した固定CSVは、2種類の予測系統、漏水率3段階、費用のばらつき2段階、地域内の漏水相関2段階の24条件×128乱数＝3,072シナリオでG17と比較した。入力乱数は各候補で共通。内部表の参照腕名G05はコード上のキーで、実際の比較元はprotocolに記録したG17である。','',
-        '## 結論','',
-        '今回の結果だけでstacking全般の有効性を否定することはできない。ただし、局所的な半径・候補価値の近似を学習するだけでは、既存の幾何最適化と予算・漏水を考慮した修理順を上回るとは限らない。Public最高と内部評価を併記して判断する。','',
-        '提出CSV・学習済みモデル・生成コード・特徴量一覧・地域外の近似精度・全体シミュレーション集計・公式年間内訳を同じフォルダに保存した。']
-    for r in rows:lines+=['',f"公式内訳 [{r['candidate'].split('_')[0]}]({r['result_url']})"]
-    (out/'README.ja.md').write_text('\n'.join(lines)+'\n',encoding='utf8')
+        lines.append('Extensions add a lightweight MLP (32 → 16 hidden units, at most 10,000 training rows and 100 iterations, with early stopping) plus a 64-component Nyström RBF approximation with Ridge. Standardization is fitted within each training split.')
+        lines.append('Final neural networks contain 5,889 radius-model parameters and 6,529 candidate-value parameters. The radius network stopped after 59 iterations; the candidate-value network reached its 100-iteration cap, so convergence is unconfirmed. Neural networks and kernels were added together; public differences cannot be attributed to neural networks alone.')
+    lines+=['','The northeast region was held out, with training locations at least 500 m from its boundary. This measures approximation to local targets derived from existing forecasts, not independent accuracy on future construction costs. Final models were then fitted across all regions.','',
+        'Targets compare expected costs of grouped construction in the scheduled year with individual-pipe work three years later. The later single-pipe surface cost approximates only that pipe\'s surface and minimum radius; it is not an observed optimal-plan target. Both this approximation and conversion of local values into a budget-constrained global plan introduce error.','',
+        'Compare the frozen CSVs against G17 across 24 settings: two forecast families, three leak rates, two cost-dispersion levels, and two regional-correlation levels, each with 128 common-random-number scenarios (3,072 total). G05 is a legacy internal reference-arm key; the actual comparator is G17, as recorded in the protocol.','',
+        '## Conclusion','',
+        'These results do not rule out stacking in general. Learning local approximations to radii or candidate values need not outperform existing geometry optimization and work ordering that account for budgets and leaks. Consider public and internal results together.','',
+        'The folder contains submission CSVs, fitted models, generation code, feature lists, held-out-region approximation metrics, full-plan simulation summaries, and official annual breakdowns.']
+    for r in rows:lines+=['',f"Official breakdown [{r['candidate'].split('_')[0]}]({r['result_url']})"]
+    (out/'README.md').write_text('\n'.join(lines)+'\n',encoding='utf8')
     print(pd.DataFrame(rows)[['candidate','public_score','delta_vs_G17','internal_mean_gain']].to_string(index=False))
 
 if __name__=='__main__':main()
